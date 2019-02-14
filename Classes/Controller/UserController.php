@@ -1,82 +1,91 @@
 <?php
+namespace T3forum\T3forum\Controller;
 
-namespace Mittwald\Typo3Forum\Controller;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Exception\Authentication\NotLoggedInException;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Forum;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Topic;
-use Mittwald\Typo3Forum\Domain\Model\SubscribeableInterface;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
-use Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage;
-use Mittwald\Typo3Forum\Domain\Model\User\PrivateMessageText;
+use T3forum\T3forum\Domain\Exception\Authentication\NotLoggedInException;
+use T3forum\T3forum\Domain\Factory\User\PrivateMessageFactory;
+use T3forum\T3forum\Domain\Model\Forum\Forum;
+use T3forum\T3forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Model\SubscribeableInterface;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\PrivateMessage;
+use T3forum\T3forum\Domain\Model\User\PrivateMessageText;
+use T3forum\T3forum\Domain\Repository\Forum\ForumRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Domain\Repository\User\NotificationRepository;
+use T3forum\T3forum\Domain\Repository\User\PrivateMessageRepository;
+use T3forum\T3forum\Domain\Repository\User\RankRepository;
+use T3forum\T3forum\Domain\Repository\User\UserfieldRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class UserController extends AbstractUserAccessController
 {
-
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     * @var ForumRepository
      * @inject
      */
     protected $forumRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\PrivateMessageRepository
+     * @var PrivateMessageRepository
      * @inject
      */
     protected $privateMessageRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\NotificationRepository
+     * @var NotificationRepository
      * @inject
      */
     protected $notificationRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\User\PrivateMessageFactory
+     * @var PrivateMessageFactory
      * @inject
      */
     protected $privateMessageFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\RankRepository
+     * @var RankRepository
      * @inject
      */
     protected $rankRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var TopicRepository
      * @inject
      */
     protected $topicRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\UserfieldRepository
+     * @var UserfieldRepository
      * @inject
      */
     protected $userfieldRepository = null;
@@ -137,8 +146,8 @@ class UserController extends AbstractUserAccessController
     /**
      * Lists all posts of a specific user. If no user is specified, this action lists all
      * posts of the current user.
-     * @param FrontendUser $user
      *
+     * @param FrontendUser $user
      * @throws NotLoggedInException
      */
     public function listPostsAction(FrontendUser $user = null)
@@ -157,8 +166,8 @@ class UserController extends AbstractUserAccessController
     /**
      * Lists all topics of a specific user. If no user is specified, this action lists all
      * topics of the current user.
-     * @param FrontendUser $user
      *
+     * @param FrontendUser $user
      * @throws NotLoggedInException
      */
     public function listFavoritesAction(FrontendUser $user = null)
@@ -177,8 +186,8 @@ class UserController extends AbstractUserAccessController
     /**
      * Lists all topics of a specific user. If no user is specified, this action lists all
      * topics of the current user.
-     * @param FrontendUser $user
      *
+     * @param FrontendUser $user
      * @throws NotLoggedInException
      */
     public function listTopicsAction(FrontendUser $user = null)
@@ -197,8 +206,8 @@ class UserController extends AbstractUserAccessController
     /**
      * Lists all questions of a specific user. If no user is specified, this action lists all
      * posts of the current user.
-     * @param FrontendUser $user
      *
+     * @param FrontendUser $user
      * @throws NotLoggedInException
      */
     public function listQuestionsAction(FrontendUser $user = null)
@@ -217,8 +226,8 @@ class UserController extends AbstractUserAccessController
     /**
      * Lists all messages of a specific user. If no user is specified, this action lists all
      * messages of the current user.
-     * @param FrontendUser $opponent The dialog with which user should be shown. If null get first dialog.
      *
+     * @param FrontendUser $opponent The dialog with which user should be shown. If null get first dialog.
      * @throws NotLoggedInException
      */
     public function listMessagesAction(FrontendUser $opponent = null)
@@ -234,7 +243,10 @@ class UserController extends AbstractUserAccessController
 
         if (!empty($userList)) {
             if ($opponent === null) {
-                $dialog = $this->privateMessageRepository->findMessagesBetweenUser($userList[0]->getFeuser(), $userList[0]->getOpponent());
+                $dialog = $this->privateMessageRepository->findMessagesBetweenUser(
+                    $userList[0]->getFeuser(),
+                    $userList[0]->getOpponent()
+                );
                 $partner = $userList[0]->getOpponent();
             } else {
                 $dialog = $this->privateMessageRepository->findMessagesBetweenUser($user, $opponent);
@@ -261,8 +273,8 @@ class UserController extends AbstractUserAccessController
 
     /**
      * Shows the form for creating a new message
-     * @param FrontendUser $recipient
      *
+     * @param FrontendUser $recipient
      * @throws NotLoggedInException
      * @return void
      */
@@ -282,9 +294,9 @@ class UserController extends AbstractUserAccessController
 
     /**
      * Create a new message
+     *
      * @param string $recipient
      * @param string $text
-     *
      * @throws NotLoggedInException
      * @validate $recipient \Mittwald\Typo3Forum\Domain\Validator\User\PrivateMessageRecipientValidator
      */
@@ -298,8 +310,20 @@ class UserController extends AbstractUserAccessController
         /** @var PrivateMessageText $message */
         $message = $this->objectManager->get(PrivateMessageText::class);
         $message->setMessageText($text);
-        $pmFeUser = $this->privateMessageFactory->createPrivateMessage($user, $recipient, $message, PrivateMessage::TYPE_SENDER, 1);
-        $pmRecipient = $this->privateMessageFactory->createPrivateMessage($recipient, $user, $message, PrivateMessage::TYPE_RECIPIENT, 0);
+        $pmFeUser = $this->privateMessageFactory->createPrivateMessage(
+            $user,
+            $recipient,
+            $message,
+            PrivateMessage::TYPE_SENDER,
+            1
+        );
+        $pmRecipient = $this->privateMessageFactory->createPrivateMessage(
+            $recipient,
+            $user,
+            $message,
+            PrivateMessage::TYPE_RECIPIENT,
+            0
+        );
         $this->privateMessageRepository->add($pmFeUser);
         $this->privateMessageRepository->add($pmRecipient);
         $this->redirect('listMessages');
@@ -338,10 +362,9 @@ class UserController extends AbstractUserAccessController
      * disableUserAction
      *
      * @param FrontendUser $user
-     *
-     * @return void
      * @throws NotLoggedInException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
+     * @return void
      */
     public function disableUserAction(FrontendUser $user = null)
     {
@@ -361,7 +384,7 @@ class UserController extends AbstractUserAccessController
 
         $user->setDisable(true);
         $this->frontendUserRepository->update($user);
-        $this->redirect('show', 'User', 'typo3forum', ['user' => $user]);
+        $this->redirect('show', 'User', 't3forum', ['user' => $user]);
     }
 
     /**
@@ -392,24 +415,29 @@ class UserController extends AbstractUserAccessController
     /**
      * Subscribes the current user to a forum or a topic.
      *
-     * @param Forum $forum The forum that is to be subscribed. Either this value or the $topic parameter must be != NULL.
-     * @param Topic $topic The topic that is to be subscribed. Either this value or the $forum parameter must be != NULL.
+     * @param Forum $forum The forum that is to be subscribed. Either this value or parameter $topic must be != NULL.
+     * @param Topic $topic The topic that is to be subscribed. Either this value or parameter $forum must be != NULL.
      * @param bool $unsubscribe TRUE to unsubscribe the forum or topic instead.
-     *
-     * @return void
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
      * @throws NotLoggedInException
      * @throws InvalidArgumentValueException
+     * @return void
      */
     public function subscribeAction(Forum $forum = null, Topic $topic = null, $unsubscribe = false)
     {
         // Validate arguments
         if ($forum === null && $topic === null) {
-            throw new InvalidArgumentValueException('You need to subscribe a Forum or Topic!', 1285059341);
+            throw new InvalidArgumentValueException(
+                'You need to subscribe a Forum or Topic!',
+                1285059341
+            );
         }
         $user = $this->getCurrentUser();
         if (!is_object($user) || $user->isAnonymous()) {
-            throw new NotLoggedInException('You need to be logged in to subscribe or unsubscribe an object.', 1335121482);
+            throw new NotLoggedInException(
+                'You need to be logged in to subscribe or unsubscribe an object.',
+                1335121482
+            );
         }
 
         // Create subscription
@@ -433,22 +461,28 @@ class UserController extends AbstractUserAccessController
     /**
      * Fav Subscribes the current user to a forum or a topic.
      *
-     * @param Forum $forum The forum that is to be subscribed. Either this value or the $topic parameter must be != NULL.
-     * @param Topic $topic The topic that is to be subscribed. Either this value or the $forum parameter must be != NULL.
+     * @param Forum $forum The forum that is to be subscribed. Either this value or parameter $topic must be != NULL.
+     * @param Topic $topic The topic that is to be subscribed. Either this value or parameter $forum must be != NULL.
      * @param bool $unsubscribe TRUE to unsubscribe the forum or topic instead.
-     * @return void
      * @throws InvalidArgumentValueException
      * @throws NotLoggedInException
+     * @return void
      */
     public function favSubscribeAction(Forum $forum = null, Topic $topic = null, $unsubscribe = false)
     {
         // Validate arguments
         if ($forum === null && $topic === null) {
-            throw new InvalidArgumentValueException('You need to subscribe a Forum or Topic!', 1285059341);
+            throw new InvalidArgumentValueException(
+                'You need to subscribe a Forum or Topic!',
+                1285059341
+            );
         }
         $user = $this->getCurrentUser();
         if ($user->isAnonymous()) {
-            throw new NotLoggedInException('You need to be logged in to subscribe or unsubscribe an object.', 1335121482);
+            throw new NotLoggedInException(
+                'You need to be logged in to subscribe or unsubscribe an object.',
+                1335121482
+            );
         }
 
         // Create subscription
@@ -494,8 +528,8 @@ class UserController extends AbstractUserAccessController
     /**
      * Displays a dashboard for the current user
      *
-     * @return void
      * @throws \Mittwald\Typo3Forum\Domain\Exception\Authentication\NotLoggedInException
+     * @return void
      */
     public function dashboardAction()
     {
@@ -563,7 +597,7 @@ class UserController extends AbstractUserAccessController
         $type = array_pop(explode($delimiter, $class));
         $userAction = ($unsubscribe ? 'Unsubscribe' : 'Subscribe');
         $key = 'User_' . $userAction . '_' . $type . '_Success';
-        $subscriptionFlashMessage = LocalizationUtility::translate($key, 'Typo3Forum', [$object->getTitle()]);
+        $subscriptionFlashMessage = LocalizationUtility::translate($key, 'T3forum', [$object->getTitle()]);
         return $subscriptionFlashMessage;
     }
 }

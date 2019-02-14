@@ -1,50 +1,54 @@
 <?php
+namespace T3forum\T3forum\Controller;
 
-namespace Mittwald\Typo3Forum\Controller;
-
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use Mittwald\Typo3Forum\Domain\Exception\Authentication\NotLoggedInException;
 use Mittwald\Typo3Forum\Domain\Model\Forum\Tag;
+use Mittwald\Typo3Forum\Domain\Repository\Forum\TagRepository;
+use Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository;
 
 class TagController extends AbstractUserAccessController
 {
-
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TagRepository
+     * @var TagRepository
      * @inject
      */
     protected $tagRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
      * Listing all tags of this forum.
+     *
      * @param int $mine
      */
     public function listAction($mine = 0)
@@ -64,6 +68,7 @@ class TagController extends AbstractUserAccessController
 
     /**
      * Show all topics of a given tag
+     *
      * @param Tag $tag
      */
     public function showAction(Tag $tag)
@@ -114,6 +119,7 @@ class TagController extends AbstractUserAccessController
 
     /**
      * List all subscribed tags of a user
+     *
      * @throws NotLoggedInException
      */
     public function listUserTagsAction()

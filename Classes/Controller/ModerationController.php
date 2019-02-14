@@ -1,89 +1,106 @@
 <?php
+namespace T3forum\T3forum\Controller;
 
-namespace Mittwald\Typo3Forum\Controller;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Model\Forum\Forum;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Topic;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\PostReport;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\Report;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\ReportComment;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\UserReport;
-use Mittwald\Typo3Forum\Utility\Localization;
+use T3forum\T3forum\Domain\Factory\Forum\TopicFactory;
+use T3forum\T3forum\Domain\Factory\Forum\TopicFactory;
+use T3forum\T3forum\Domain\Model\Forum\Forum;
+use T3forum\T3forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Model\Moderation\PostReport;
+use T3forum\T3forum\Domain\Model\Moderation\Report;
+use T3forum\T3forum\Domain\Model\Moderation\ReportComment;
+use T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus;
+use T3forum\T3forum\Domain\Model\Moderation\UserReport;
+use T3forum\T3forum\Domain\Repository\Forum\ForumRepository;
+use T3forum\T3forum\Domain\Repository\Forum\PostRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Domain\Repository\Moderation\PostReportRepository;
+use T3forum\T3forum\Domain\Repository\Moderation\ReportRepository;
+use T3forum\T3forum\Domain\Repository\Moderation\UserReportRepository;
+use T3forum\T3forum\Domain\Repository\Moderation\UserReportRepository;
+use T3forum\T3forum\Utility\Localization;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentValueException;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 
+/**
+ *
+ */
 class ModerationController extends AbstractUserAccessController
 {
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     * @var ForumRepository
      * @inject
      */
     protected $forumRepository;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
+     * @var PersistenceManagerInterface
      * @inject
      */
     protected $persistenceManager;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\PostReportRepository
+     * @var PostReportRepository
      * @inject
      */
     protected $postReportRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository
+     * @var PostRepository
      * @inject
      */
     protected $postRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\ReportRepository
+     * @var ReportRepository
      * @inject
      */
     protected $reportRepository = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Forum\TopicFactory
+     * @var TopicFactory
      * @inject
      */
     protected $topicFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\UserReportRepository
+     * @var UserReportRepository
      * @inject
      */
     protected $userReportRepository = null;
@@ -168,18 +185,17 @@ class ModerationController extends AbstractUserAccessController
     }
 
     /**
-     * createPostReportCommentAction
+     * Create post report comment action
      *
      * @param PostReport|NULL $report
-     * @param ReportComment   $comment
+     * @param ReportComment $comment
      *
      * @return void
      * @throws InvalidArgumentValueException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
      */
     public function createPostReportCommentAction(PostReport $report = null, ReportComment $comment)
     {
-
         // Assert authorization
         $this->authenticationService->assertModerationAuthorization($report->getTopic()->getForum());
 
@@ -201,25 +217,26 @@ class ModerationController extends AbstractUserAccessController
     }
 
     /**
-     * Sets the workflow status of a report.
+     * Sets the workflow status of a report
      *
      * @param UserReport $report
      * @param ReportWorkflowStatus $status
      * @param string $redirect
-     *
+     * @throws IllegalObjectTypeException
      * @return void
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
-    public function updateUserReportStatusAction(UserReport $report, ReportWorkflowStatus $status, $redirect = 'indexReport')
-    {
-
+    public function updateUserReportStatusAction(
+        UserReport $report,
+        ReportWorkflowStatus $status,
+        $redirect = 'indexReport'
+    ) {
         // Set status and update the report. Add a comment to the report that
         // documents the status change.
         $report->setWorkflowStatus($status);
         /** @var ReportComment $comment */
         $comment = GeneralUtility::makeInstance(ReportComment::class);
         $comment->setAuthor($this->getCurrentUser());
-        $comment->setText(Localization::translate('Report_Edit_SetStatus', 'Typo3Forum', [$status->getName()]));
+        $comment->setText(Localization::translate('Report_Edit_SetStatus', 'T3forum', [$status->getName()]));
         $report->addComment($comment);
         $this->reportRepository->update($report);
 
@@ -241,9 +258,11 @@ class ModerationController extends AbstractUserAccessController
      * @param ReportWorkflowStatus $status
      * @param string $redirect
      */
-    public function updatePostReportStatusAction(PostReport $report, ReportWorkflowStatus $status, $redirect = 'indexReport')
-    {
-
+    public function updatePostReportStatusAction(
+        PostReport $report,
+        ReportWorkflowStatus $status,
+        $redirect = 'indexReport'
+    ) {
         // Assert authorization
         $this->authenticationService->assertModerationAuthorization($report->getTopic()->getForum());
 
@@ -253,8 +272,7 @@ class ModerationController extends AbstractUserAccessController
         /** @var ReportComment $comment */
         $comment = GeneralUtility::makeInstance(ReportComment::class);
         $comment->setAuthor($this->getCurrentUser());
-        $comment->setText(Localization::translate('Report_Edit_SetStatus', 'Typo3Forum',
-            [$status->getName()]));
+        $comment->setText(Localization::translate('Report_Edit_SetStatus', 'T3forum', [$status->getName()]));
         $report->addComment($comment);
         $this->reportRepository->update($report);
 
@@ -297,7 +315,7 @@ class ModerationController extends AbstractUserAccessController
         }
 
         $this->controllerContext->getFlashMessageQueue()->enqueue(
-            new FlashMessage(Localization::translate('Moderation_UpdateTopic_Success', 'Typo3Forum'))
+            new FlashMessage(Localization::translate('Moderation_UpdateTopic_Success', 'T3forum'))
         );
         $this->clearCacheForCurrentPage();
         $this->redirect('show', 'Topic', null, ['topic' => $topic]);
@@ -307,7 +325,6 @@ class ModerationController extends AbstractUserAccessController
      * Delete a topic from repository!
      *
      * @param Topic $topic The topic that is be deleted.
-     *
      * @return void
      */
     public function topicConformDeleteAction(Topic $topic)
@@ -318,7 +335,7 @@ class ModerationController extends AbstractUserAccessController
         }
         $this->topicRepository->remove($topic);
         $this->controllerContext->getFlashMessageQueue()->enqueue(
-            new FlashMessage(Localization::translate('Moderation_DeleteTopic_Success', 'Typo3Forum'))
+            new FlashMessage(Localization::translate('Moderation_DeleteTopic_Success', 'T3forum'))
         );
         $this->clearCacheForCurrentPage();
 

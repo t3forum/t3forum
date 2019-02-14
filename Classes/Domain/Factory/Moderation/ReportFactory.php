@@ -1,51 +1,51 @@
 <?php
+namespace T3forum\T3forum\Domain\Factory\Moderation;
 
-namespace Mittwald\Typo3Forum\Domain\Factory\Moderation;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Factory\AbstractFactory;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\PostReport;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\ReportComment;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\UserReport;
+use T3forum\T3forum\Domain\Factory\AbstractFactory;
+use T3forum\T3forum\Domain\Model\Moderation\PostReport;
+use T3forum\T3forum\Domain\Model\Moderation\ReportComment;
+use T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus;
+use T3forum\T3forum\Domain\Model\Moderation\UserReport;
+use T3forum\T3forum\Domain\Repository\Moderation\ReportWorkflowStatusRepository;
 
 class ReportFactory extends AbstractFactory
 {
-
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\ReportWorkflowStatusRepository
+     * @var ReportWorkflowStatusRepository
      * @inject
      */
     protected $workflowStatusRepository;
 
     /**
-     *
      * Creates a new User report.
      *
      * @param ReportComment $firstComment The first report comment for this report.
-     *
      * @return UserReport
      *
      */
@@ -63,11 +63,9 @@ class ReportFactory extends AbstractFactory
     }
 
     /**
-     *
      * Creates a new User report.
      *
      * @param ReportComment $firstComment The first report comment for this report.
-     *
      * @return object
      */
     public function createPostReport(ReportComment $firstComment)

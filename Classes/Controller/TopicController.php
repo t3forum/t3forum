@@ -1,107 +1,124 @@
 <?php
-namespace Mittwald\Typo3Forum\Controller;
+namespace T3forum\T3forum\Controller;
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-use Mittwald\Typo3Forum\Domain\Exception\Authentication\NoAccessException;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Forum;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Post;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Topic;
-use Mittwald\Typo3Forum\Utility\Configuration;
-
+use T3forum\T3forum\Domain\Exception\Authentication\NoAccessException;
+use T3forum\T3forum\Domain\Factory\Forum\PostFactory;
+use T3forum\T3forum\Domain\Factory\Forum\TopicFactory;
+use T3forum\T3forum\Domain\Model\Forum\Forum;
+use T3forum\T3forum\Domain\Model\Forum\Post;
+use T3forum\T3forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Repository\Forum\AdRepository;
+use T3forum\T3forum\Domain\Repository\Forum\CriteriaRepository;
+use T3forum\T3forum\Domain\Repository\Forum\ForumRepository;
+use T3forum\T3forum\Domain\Repository\Forum\PostRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TagRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Service\AttachmentService;
+use T3forum\T3forum\Service\SessionHandlingService;
+use T3forum\T3forum\Service\TagService;
+use T3forum\T3forum\Utility\Configuration;
+use T3forum\T3forum\Utility\configuration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ *
+ */
 class TopicController extends AbstractUserAccessController
 {
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\AdRepository
+     * @var AdRepository
      * @inject
      */
     protected $adRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\AttachmentService
+     * @var AttachmentService
      * @inject
      */
     protected $attachmentService;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\CriteriaRepository
+     * @var CriteriaRepository
      * @inject
      */
     protected $criteraRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     * @var ForumRepository
      * @inject
      */
     protected $forumRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Forum\PostFactory
+     * @var PostFactory
      * @inject
      */
     protected $postFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository
+     * @var PostRepository
      * @inject
      */
     protected $postRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\SessionHandlingService
+     * @var SessionHandlingService
      * @inject
      */
     protected $sessionHandling;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TagRepository
+     * @var TagRepository
      * @inject
      */
     protected $tagRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\TagService
+     * @var TagService
      * @inject
      */
     protected $tagService = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Forum\TopicFactory
+     * @var TopicFactory
      * @inject
      */
     protected $topicFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Utility\configuration
+     * @var configuration
      */
     private $configuration;
 
@@ -239,8 +256,8 @@ class TopicController extends AbstractUserAccessController
     /**
      * Creates a new topic.
      *
-     * @validate $post \Mittwald\Typo3Forum\Domain\Validator\Forum\PostValidator
-     * @validate $attachments \Mittwald\Typo3Forum\Domain\Validator\Forum\AttachmentPlainValidator
+     * @validate $post \T3forum\T3forum\Domain\Validator\Forum\PostValidator
+     * @validate $attachments \T3forum\T3forum\Domain\Validator\Forum\AttachmentPlainValidator
      * @validate $subject NotEmpty
      *
      * @access public
@@ -307,9 +324,9 @@ class TopicController extends AbstractUserAccessController
         $uriBuilder = $this->controllerContext->getUriBuilder();
         $uri = $uriBuilder->setTargetPageUid($this->settings['pids']['Forum'])
             ->setArguments([
-                'tx_typo3forum_pi1[forum]' => $forum->getUid(),
-                'tx_typo3forum_pi1[controller]' => 'Forum',
-                'tx_typo3forum_pi1[action]' => 'show'
+                'tx_t3forum_pi1[forum]' => $forum->getUid(),
+                'tx_t3forum_pi1[controller]' => 'Forum',
+                'tx_t3forum_pi1[action]' => 'show'
             ])->build();
         $this->purgeUrl('http://' . $_SERVER['HTTP_HOST'] . '/' . $uri);
 

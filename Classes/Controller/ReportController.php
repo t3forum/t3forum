@@ -1,62 +1,70 @@
 <?php
+namespace T3forum\T3forum\Controller;
 
-namespace Mittwald\Typo3Forum\Controller;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Model\Forum\Post;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\PostReport;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\Report;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\ReportComment;
-use Mittwald\Typo3Forum\Domain\Model\Moderation\UserReport;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Factory\Moderation\ReportFactory;
+use T3forum\T3forum\Domain\Model\Forum\Post;
+use T3forum\T3forum\Domain\Model\Moderation\PostReport;
+use T3forum\T3forum\Domain\Model\Moderation\Report;
+use T3forum\T3forum\Domain\Model\Moderation\ReportComment;
+use T3forum\T3forum\Domain\Model\Moderation\UserReport;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Repository\Moderation\PostReportRepository;
+use T3forum\T3forum\Domain\Repository\Moderation\ReportRepository;
+use T3forum\T3forum\Domain\Repository\Moderation\UserReportRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
+/**
+ *
+ */
 class ReportController extends AbstractUserAccessController
 {
-
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\PostReportRepository
+     * @var PostReportRepository
      * @inject
      */
     protected $postReportRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Moderation\ReportFactory
+     * @var ReportFactory
      * @inject
      */
     protected $reportFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\ReportRepository
+     * @var ReportRepository
      * @inject
      */
     protected $reportRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Moderation\UserReportRepository
+     * @var UserReportRepository
      * @inject
      */
     protected $userReportRepository;
@@ -102,7 +110,6 @@ class ReportController extends AbstractUserAccessController
      */
     public function createUserReportAction(FrontendUser $user, ReportComment $firstComment = null)
     {
-
         /** @var UserReport $report */
         $report = $this->reportFactory->createUserReport($firstComment);
         $report->setUser($user);
@@ -117,7 +124,7 @@ class ReportController extends AbstractUserAccessController
 
         // Display success message and redirect to topic->show action.
         $this->controllerContext->getFlashMessageQueue()->enqueue(
-            new FlashMessage(LocalizationUtility::translate('Report_New_Success', 'Typo3Forum'))
+            new FlashMessage(LocalizationUtility::translate('Report_New_Success', 'T3forum'))
         );
         $this->redirect(
             'show',
@@ -153,7 +160,7 @@ class ReportController extends AbstractUserAccessController
 
         // Display success message and redirect to topic->show action.
         $this->controllerContext->getFlashMessageQueue()->enqueue(
-            new FlashMessage(LocalizationUtility::translate('Report_New_Success', 'Typo3Forum'))
+            new FlashMessage(LocalizationUtility::translate('Report_New_Success', 'T3forum'))
         );
         $this->redirect(
             'show',

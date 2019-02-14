@@ -1,58 +1,64 @@
 <?php
+namespace T3forum\T3forum\Domain\Factory\Forum;
 
-namespace Mittwald\Typo3Forum\Domain\Factory\Forum;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Exception\Authentication\NotLoggedInException;
-use Mittwald\Typo3Forum\Domain\Factory\AbstractFactory;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Post;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Exception\Authentication\NotLoggedInException;
+use T3forum\T3forum\Domain\Factory\AbstractFactory;
+use T3forum\T3forum\Domain\Factory\Forum\TopicFactory;
+use T3forum\T3forum\Domain\Model\Forum\Post;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Repository\Forum\PostRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 class PostFactory extends AbstractFactory
 {
-
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository
+     * @var PostRepository
      * @inject
      */
     protected $postRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Forum\TopicFactory
+     * @var TopicFactory
      * @inject
      */
     protected $topicFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
      * Creates an empty post
+     *
      * @return Post An empty post.
      */
     public function createEmptyPost()
@@ -63,8 +69,7 @@ class PostFactory extends AbstractFactory
     /**
      * Creates a new post that quotes an already existing post.
      *
-     * @param Post $quotedPost The post that is to be quoted. The post text of this post will be wrapped in [quote] bb codes.
-     *
+     * @param Post $quotedPost Post that is to be quoted. Text of this post will be wrapped in [quote] bb codes.
      * @return Post The new post.
      */
     public function createPostWithQuote(Post $quotedPost)
@@ -72,18 +77,16 @@ class PostFactory extends AbstractFactory
         /** @var $post Post */
         $post = $this->getClassInstance();
         $post->setText('[quote=' . $quotedPost->getUid() . ']' . $quotedPost->getText() . '[/quote]');
-
         return $post;
     }
 
     /**
      * Assigns a user to a forum post and increases the user's post count.
      *
-     * @param Post         $post The post to which a user is to be assigned.
-     * @param FrontendUser $user The user that is to be assigned to the post. If this value is NULL, the currently logged in user will be used instead.
-     *
+     * @param Post $post The post to which a user is to be assigned.
+     * @param FrontendUser $user User to be assigned to the post. If NULL, the currently logged in user is used.
      * @throws NotLoggedInException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
      */
     public function assignUserToPost(Post $post, FrontendUser $user = null)
     {
@@ -113,7 +116,6 @@ class PostFactory extends AbstractFactory
     }
 
     /**
-     *
      * Deletes a post and decreases the user's post count by 1.
      *
      * @param Post $post

@@ -1,29 +1,31 @@
 <?php
+namespace T3forum\T3forum\Ajax;
 
-namespace Mittwald\Typo3Forum\Ajax;
-
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\TypoScript\ExtendedTemplateService;
@@ -39,11 +41,10 @@ use TYPO3\CMS\Frontend\Utility\EidUtility;
 
 final class Dispatcher implements SingletonInterface
 {
-
     /**
      * @var string
      */
-    protected $extensionKey = 'Typo3Forum';
+    protected $extensionKey = 'T3forum';
 
     /**
      * An instance of the extbase bootstrapping class.
@@ -84,10 +85,9 @@ final class Dispatcher implements SingletonInterface
      */
     protected function initializeTsfe()
     {
-        // @see https://github.com/mittwald/typo3_forum/commit/fddad2f0f960e025d0e31776c8e9de73ad6c6b94
         $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
             TypoScriptFrontendController::class,
-            null, // $GLOBALS['TYPO3_CONF_VARS']
+            null,
             GeneralUtility::_GP('id'),
             GeneralUtility::_GP('type'),
             true,
@@ -162,7 +162,7 @@ final class Dispatcher implements SingletonInterface
         $this->extbaseBootstap->initialize([
             'extensionName' => $this->extensionKey,
             'pluginName' => 'Ajax',
-            'vendorName' => 'Mittwald'
+            'vendorName' => 'T3forum'
         ]);
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
     }
@@ -185,10 +185,6 @@ final class Dispatcher implements SingletonInterface
         return $typoscriptParser->setup;
     }
 
-    /*
-     * DISPATCHING METHODS
-     */
-
     /**
      * Initializes this class and starts the dispatching process.
      * @return string
@@ -208,7 +204,7 @@ final class Dispatcher implements SingletonInterface
         return $this->extbaseBootstap->run('', [
             'extensionName' => $this->extensionKey,
             'pluginName' => 'Ajax',
-            'vendorName' => 'Mittwald'
+            'vendorName' => 'T3forum'
         ]);
     }
 }

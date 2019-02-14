@@ -1,35 +1,40 @@
 <?php
+namespace T3forum\T3forum\Controller;
 
-namespace Mittwald\Typo3Forum\Controller;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Exception\AbstractException;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
-use Mittwald\Typo3Forum\Utility\Localization;
+use T3forum\T3forum\Domain\Exception\AbstractException;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Repository\User\FrontendUserRepository;
+use T3forum\T3forum\Service\Authentication\AuthenticationServiceInterface;
+use T3forum\T3forum\Utility\Localization;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 abstract class AbstractController extends ActionController
 {
@@ -40,28 +45,28 @@ abstract class AbstractController extends ActionController
     /**
      * An authentication service. Handles the authentication mechanism.
      *
-     * @var \Mittwald\Typo3Forum\Service\Authentication\AuthenticationServiceInterface
+     * @var AuthenticationServiceInterface
      * @inject
      */
     protected $authenticationService;
 
     /**
      * The non-namespaced class name of this controller (e.g. ForumController
-     * instead of \Mittwald\Typo3Forum\Controller\ForumController).
+     * instead of \T3forum\T3forum\Controller\ForumController).
      *
      * @var string
      */
     protected $className;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\FrontendUserRepository
+     * @var FrontendUserRepository
      * @inject
      */
     protected $frontendUserRepository;
 
     /**
      * An array with controller-specific settings. This is read from
-     * plugin.tx_typo3forum.settings.[controller-name].
+     * plugin.tx_t3forum.settings.[controller-name].
      *
      * @var array
      */
@@ -70,7 +75,7 @@ abstract class AbstractController extends ActionController
     /**
      * The global SignalSlot-Dispatcher.
      *
-     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+     * @var Dispatcher
      * @inject
      */
     protected $signalSlotDispatcher;
@@ -83,10 +88,6 @@ abstract class AbstractController extends ActionController
      */
     protected $context = self::CONTEXT_WEB;
 
-    /*
-     * METHODS
-     */
-
     /**
      *
      * Handles an exception. This methods modifies the controller context for the
@@ -94,9 +95,7 @@ abstract class AbstractController extends ActionController
      * of the controller.
      *
      * @param AbstractException $e The exception that is to be handled
-     *
      * @return void
-     *
      */
     protected function handleError(AbstractException $e)
     {
@@ -104,21 +103,19 @@ abstract class AbstractController extends ActionController
         $controllerContext->getRequest()->setControllerName('Default');
         $controllerContext->getRequest()->setControllerActionName('error');
         $this->view->setControllerContext($controllerContext);
-
         $content = $this->view->assign('exception', $e)->render('error');
         $this->response->appendContent($content);
     }
 
     /**
-     *
      * Calls a controller action. This method wraps the callActionMethod method of
      * the parent Tx_Extbase_MVC_Controller_ActionController class. It catches all
      * Exceptions that might be thrown inside one of the action methods.
      * This method ONLY catches exceptions that belong to the typo3_forum extension.
      * All other exceptions are not caught.
      *
+     * @throws AbstractException
      * @return void
-     *
      */
     protected function callActionMethod()
     {
@@ -130,12 +127,10 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     *
      * Initializes all action methods. This method does basic initialization tasks,
      * like instantiating required repositories and services.
      *
      * @return void
-     *
      */
     protected function initializeAction()
     {
@@ -152,12 +147,10 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     *
      * Gets the currently logged in frontend user. This method is only a convenience
      * wrapper for the findCurrent-Method of the frontend user repository class.
      *
      * @return FrontendUser The frontend user that is currently logged in, or NULL if no user is logged in.
-     *
      */
     protected function getCurrentUser()
     {
@@ -165,11 +158,9 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     *
      * Disable default error flash messages (who actually wants to see those?)
      *
      * @return bool Always FALSE.
-     *
      */
     protected function getErrorFlashMessage()
     {
@@ -177,16 +168,13 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     *
      * Clears the cache for the current page. Unfortunately, the
      * "enableAutomaticCacheClearing" feature provided by Extbase does only
      * clear the cache of the record's storage page, but not of the page the
-     * record is displayed on (see http://forge.typo3.org/issues/35057 for
-     * more information).
+     * record is displayed on.
+     * @see http://forge.typo3.org/issues/35057
      *
-     * @see    http://forge.typo3.org/issues/35057
      * @return void
-     *
      */
     protected function clearCacheForCurrentPage()
     {
@@ -200,17 +188,23 @@ abstract class AbstractController extends ActionController
      *
      *     this->flashMessageContainer->add(Tx_Extbase_Utility_Localization(...));
      *
-     * @param string $key The language key that is to be used for the
-     *                                  flash messages.
+     * @param string $key The language key that is to be used for the flash messages.
      * @param array $arguments Arguments for the flash message.
      * @param string $titleKey Optional language key for the message's title.
      * @param int $severity Message severity (see \TYPO3\CMS\Core\Messaging\FlashMessage::*)
-     *
      * @return void
      */
-    protected function addLocalizedFlashmessage($key, array $arguments = [], $titleKey = null, $severity = FlashMessage::OK)
-    {
-        $message = new FlashMessage(Localization::translate($key, 'Typo3Forum', $arguments), Localization::translate($titleKey, 'Typo3Forum'), $severity);
+    protected function addLocalizedFlashmessage(
+        $key,
+        array $arguments = [],
+        $titleKey = null,
+        $severity = FlashMessage::OK
+    ) {
+        $message = new FlashMessage(
+            Localization::translate($key, 'T3Forum', $arguments),
+            Localization::translate($titleKey, 'T3Forum'),
+            $severity
+        );
         $this->controllerContext->getFlashMessageQueue()->enqueue($message);
     }
 
@@ -223,8 +217,15 @@ abstract class AbstractController extends ActionController
      * @param int $delay
      * @param int $statusCode
      */
-    protected function redirect($actionName, $controllerName = null, $extensionName = null, array $arguments = null, $pageUid = null, $delay = 0, $statusCode = 303)
-    {
+    protected function redirect(
+        $actionName,
+        $controllerName = null,
+        $extensionName = null,
+        array $arguments = null,
+        $pageUid = null,
+        $delay = 0,
+        $statusCode = 303
+    ) {
         if ($this->context === self::CONTEXT_WEB && $this->request->getFormat() === 'html') {
             parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
         }
@@ -238,7 +239,6 @@ abstract class AbstractController extends ActionController
         if ($this->context === self::CONTEXT_WEB) {
             return parent::resolveViewObjectName();
         }
-
         return null;
     }
 

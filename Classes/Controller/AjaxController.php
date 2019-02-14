@@ -1,95 +1,108 @@
 <?php
+namespace T3forum\T3forum\Controller;
 
-namespace Mittwald\Typo3Forum\Controller;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Model\Forum\Post;
+use T3forum\T3forum\Configuration\ConfigurationBuilder;
+use T3forum\T3forum\Domain\Factory\Forum\PostFactory;
+use T3forum\T3forum\Domain\Model\Forum\Post;
+use T3forum\T3forum\Domain\Repository\Forum\AdRepository;
+use T3forum\T3forum\Domain\Repository\Forum\AttachmentRepository;
+use T3forum\T3forum\Domain\Repository\Forum\ForumRepository;
+use T3forum\T3forum\Domain\Repository\Forum\PostRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Service\AttachmentService;
+use T3forum\T3forum\Service\SessionHandlingService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
+/**
+ *
+ */
 class AjaxController extends AbstractUserAccessController
 {
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\AdRepository
+     * @var AdRepository
      * @inject
      */
     protected $adRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\AttachmentRepository
+     * @var AttachmentRepository
      * @inject
      */
     protected $attachmentRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     * @var ForumRepository
      * @inject
      */
     protected $forumRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Configuration\ConfigurationBuilder
+     * @var ConfigurationBuilder
      * @inject
      */
     protected $configurationBuilder;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Forum\PostFactory
+     * @var PostFactory
      * @inject
      */
     protected $postFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository
+     * @var PostRepository
      * @inject
      */
     protected $postRepository;
 
     /**
-     * Whole TypoScript typo3_forum settings
+     * Entire TypoScript t3forum settings
      * @var array
      */
     protected $settings;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\SessionHandlingService
+     * @var SessionHandlingService
      * @inject
      */
     protected $sessionHandlingService;
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\AttachmentService
+     * @var AttachmentService
      * @inject
      */
     protected $attachmentService = null;
@@ -125,8 +138,6 @@ class AjaxController extends AbstractUserAccessController
         $displayedForumMenus = '',
         $displayedAds = ''
     ) {
-        //DebuggerUtility::var_dump($_POST,__METHOD__ . '::$_POST');
-        // json array
         $content = [];
         if (!empty($displayedUser)) {
             $content['onlineUser'] = $this->_getOnlineUser($displayedUser);
@@ -163,7 +174,6 @@ class AjaxController extends AbstractUserAccessController
     }
 
     /**
-     * @TODO
      * @return void
      */
     public function loginboxAction()
@@ -182,7 +192,6 @@ class AjaxController extends AbstractUserAccessController
 
     /**
      * @param string $templateSubPath    filepath starting from templateRootPath
-     *
      * @return string
      */
     private function getStandaloneView($templateSubPath)
@@ -202,7 +211,11 @@ class AjaxController extends AbstractUserAccessController
     {
         $data = [];
         $standaloneView = $this->getStandaloneView('/Ajax/Onlinebox.html');
-        $users = $this->frontendUserRepository->findByFilter((int)$this->settings['widgets']['onlinebox']['limit'], [], true);
+        $users = $this->frontendUserRepository->findByFilter(
+            intval($this->settings['widgets']['onlinebox']['limit']),
+            [],
+            true
+        );
         $standaloneView->assign('users', $users);
         $data['count'] = $this->frontendUserRepository->countByFilter(true);
         $data['html'] = $this->view->render('Onlinebox');
@@ -360,7 +373,10 @@ class AjaxController extends AbstractUserAccessController
         } else {
             $adDateTime = $this->sessionHandlingService->get('adTime');
         }
-        if ($actDatetime->getTimestamp() - $adDateTime->getTimestamp() > $this->settings['ads']['timeInterval'] && $count > 2) {
+
+        $actTimestamp = $actDatetime->getTimestamp();
+        $adTimestamp = $adDateTime->getTimestamp();
+        if ($actTimestamp - $adTimestamp > $this->settings['ads']['timeInterval'] && $count > 2) {
             $this->sessionHandlingService->set('adTime', $actDatetime);
             if ((int)$meta->mode === 0) {
                 $ads = $this->adRepository->findForForumView(1);

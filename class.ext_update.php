@@ -1,35 +1,39 @@
 <?php
-/**
+namespace T3forum\T3forum;
+
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
  *
  * COPYRIGHT NOTICE
  *
- *  (c) 2016 Mittwald CM Service GmbH & Co KG
- *  All rights reserved
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published
- *  by the Free Software Foundation; either version 2 of the License,
- *  or (at your option) any later version.
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
  *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  This copyright notice MUST APPEAR in all copies of the script!
- *
+ * This copyright notice MUST APPEAR in all copies of the script!
  */
-use Mittwald\Typo3Forum\Service\Migration\AttachmentMigrationService;
-use Mittwald\Typo3Forum\Service\Migration\ForumMigrationService;
-use Mittwald\Typo3Forum\Service\Migration\PostsMigrationService;
-use Mittwald\Typo3Forum\Service\Migration\PrivateMessageMigrationService;
-use Mittwald\Typo3Forum\Service\Migration\TopicsMigrationService;
-use Mittwald\Typo3Forum\Service\Migration\UserGroupMigrationService;
-use Mittwald\Typo3Forum\Service\Migration\UserMigrationService;
+
+use T3forum\T3forum\Service\Migration\AttachmentMigrationService;
+use T3forum\T3forum\Service\Migration\ForumMigrationService;
+use T3forum\T3forum\Service\Migration\PostsMigrationService;
+use T3forum\T3forum\Service\Migration\PrivateMessageMigrationService;
+use T3forum\T3forum\Service\Migration\TopicsMigrationService;
+use T3forum\T3forum\Service\Migration\UserGroupMigrationService;
+use T3forum\T3forum\Service\Migration\UserMigrationService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -40,7 +44,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 class ext_update
 {
     /**
-     * @var \Mittwald\Typo3Forum\Service\Migration\AbstractMigrationService[]
+     * @var \T3forum\T3forum\Service\Migration\AbstractMigrationService[]
      */
     private $services = [];
 
@@ -112,7 +116,7 @@ class ext_update
         $partial = $this->objectManager->get(\TYPO3\CMS\Fluid\View\StandaloneView::class);
         $partial->setTemplatePathAndFilename(
             GeneralUtility::getFileAbsFileName(
-                'EXT:typo3_forum/Resources/Private/Templates/Backend/Update/Form.html'
+                'EXT:t3forum/Resources/Private/Templates/Backend/Update/Form.html'
             )
         );
         $partial->assign(
