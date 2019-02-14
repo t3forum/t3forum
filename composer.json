@@ -1,0 +1,68 @@
+{
+	"name": "wdb/typo3-forum",
+	"description": "Forum extension",
+	"license": "GPL-2",
+	"type": "typo3-cms-extension",
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://composer.typo3.org/"
+		}
+	],
+	"require": {
+		"typo3/cms-core": "^8.7",
+		"typo3-ter/static-info-tables": "^6.3"
+	},
+	"require-dev": {
+		"namelesscoder/typo3-repository-client": "^1.2",
+		"mikey179/vfsStream": "^1.4",
+		"phpunit/phpunit": "^4.7 || ^5.0"
+	},
+	"replace": {
+		"typo3_forum": "self.version",
+		"wdb/typo3-forum": "self.version"
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin",
+		"preferred-install": {
+			"typo3/cms": "source"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Mittwald\\Typo3Forum\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Mittwald\\Typo3Forum\\Tests\\": "Tests",
+			"TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/",
+			"TYPO3\\CMS\\Fluid\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/fluid/Tests/"
+		}
+	},
+    "suggest": {
+        "secure_downloads": "^3.0"
+    },
+    "conflict": {
+        "mittwald/typo3_forum": ">=1.0",
+        "mittwald/typo3-forum": ">=1.0",
+        "typo3-ter/typo3-forum": ">=1.0",
+        "typo3-ter/typo3_forum": ">=1.0"
+    },
+	"scripts": {
+		"post-autoload-dump": [
+			"mkdir -p .Build/Web/typo3conf/ext/",
+			"[ -L .Build/Web/typo3conf/ext/typo3_forum ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/typo3_forum"
+		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		},
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
+		}
+	}
+}

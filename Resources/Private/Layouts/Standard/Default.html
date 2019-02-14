@@ -1,0 +1,21 @@
+<div class="tx-typo3forum-pi1">
+
+	<f:flashMessages queueIdentifier="DefaultBootstrapTemplate" as="flashMessages">
+       <f:for each="{flashMessages}" as="flashMessage">
+          <div class="alert alert-success">
+             <f:if condition="{flashMessage.title}">
+                <strong>{flashMessage.title}</strong><br>
+             </f:if>
+             <p>{flashMessage.message -> f:format.html()}</p>
+          </div>
+       </f:for>
+    </f:flashMessages>
+
+    <f:render section="main"/>
+
+    <div>
+        <f:render section="menu"/>
+    </div>
+</div>
+
+<f:render partial="AjaxURL" />

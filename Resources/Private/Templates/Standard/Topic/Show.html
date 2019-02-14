@@ -1,0 +1,41 @@
+{namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
+<f:layout name="default" />
+
+
+
+	<!-- MAIN section -->
+<f:section name="main">
+    <!-- template: Standard/Topic/Show.html -->
+
+	<h2 class="topic_entry" data-uid="{topic.uid}">{topic.subject}</h2>
+
+	<mmf:forum.rootline rootline="{topic.rootline}" />
+
+    <!-- widget.paginate -->
+    <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{settings.topicController.show.pagebrowser}">
+		<f:for each="{posts}" as="post">
+			<f:render partial="Post/Single" arguments="{post:post}" />
+		</f:for>
+	</f:widget.paginate>
+    
+    <f:comment>
+    <f:widget.paginate objects="{blogs}" as="paginatedBlogs" configuration="{itemsPerPage: 5, insertAbove: 1, insertBelow: 0, maximumNumberOfLinks: 10}">
+       <f:for each="{paginatedBlogs}" as="blog">
+          <h2>{blog.title}</h2>
+          <p>{blog.text}</p>
+       </f:for>
+    </f:widget.paginate>
+    </f:comment>
+    <!-- /widget.paginate -->
+
+    <!-- /template: Standard/Topic/Show.html -->
+</f:section>
+
+
+
+	<!-- MENU section -->
+<f:section name="menu">
+    <!-- template: Standard/Topic/Show.html, section: menu -->
+	<f:render partial="Topic/Menu" arguments="{topic: topic}" />
+    <!-- /template: Standard/Topic/Show.html, section: menu -->
+</f:section>

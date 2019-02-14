@@ -1,0 +1,8 @@
+<f:comment>@TODO: remove lines with 'replace(/&amp;/g, "&");' with a BE and smarter solution</f:comment>
+<script>
+    currentPageUid = "{f:cObject(typoscriptObjectPath: 'lib.pageUid')}";
+    typo3_forum_ajaxUrl = "{f:uri.action(action: 'main', controller: 'Ajax', arguments:{format:'json'}, additionalParams:{eID:'typo3_forum'})}";
+    typo3_forum_ajaxUrl = typo3_forum_ajaxUrl.replace(/&amp;/g, "&");
+    typo3_forum_ajaxUrl_helpful = "{f:uri.action(action: '__typo3_forum_action__', controller: 'Post', arguments:{post:'__typo3_forum_post__'}, additionalParams:{eID:'__typo3_forum_eid__'})}";
+    typo3_forum_ajaxUrl_helpful = typo3_forum_ajaxUrl_helpful.replace(/&amp;/g, "&");
+</script>
