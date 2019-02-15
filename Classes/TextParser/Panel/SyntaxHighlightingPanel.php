@@ -1,37 +1,45 @@
 <?php
+namespace T3forum\T3forum\TextParser\Panel;
 
-namespace Mittwald\Typo3Forum\TextParser\Panel;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+use Mittwald\Typo3Forum\TextParser\Panel\AbstractPanel;
+use Mittwald\Typo3Forum\Domain\Repository\Format\SyntaxHighlightingRepository;
+use Mittwald\Typo3Forum\Domain\Model\Format\SyntaxHighlighting;
 
-class SyntaxHighlightingPanel extends \Mittwald\Typo3Forum\TextParser\Panel\AbstractPanel
+/**
+ *
+ */
+class SyntaxHighlightingPanel extends AbstractPanel
 {
-
     /**
      * @TODO: what to do?
      *
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Format\SyntaxHighlightingRepository
+     * @var SyntaxHighlightingRepository
      * @inject
      */
     protected $syntaxHighlightingRepository = null;
@@ -39,7 +47,7 @@ class SyntaxHighlightingPanel extends \Mittwald\Typo3Forum\TextParser\Panel\Abst
     /**
      * @TODO: what to do?
      *
-     * @var array<\Mittwald\Typo3Forum\Domain\Model\Format\SyntaxHighlighting>
+     * @var array<SyntaxHighlighting>
      */
     protected $syntaxHighlightings = null;
 
@@ -50,6 +58,7 @@ class SyntaxHighlightingPanel extends \Mittwald\Typo3Forum\TextParser\Panel\Abst
 
     /**
      * @TODO: what to do?
+     *
      * @return array<array>
      */
     public function getItems()

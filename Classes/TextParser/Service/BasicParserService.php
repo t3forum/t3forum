@@ -1,43 +1,46 @@
 <?php
+namespace T3forum\T3forum\TextParser\Service;
 
-namespace Mittwald\Typo3Forum\TextParser\Service;
-
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BasicParserService extends AbstractTextParserService
 {
-
     /**
      * The text.
+     *
      * @var string
      */
     protected $text;
 
     /**
      * Protected parts of the parsed text. In these parts, no parsing will be done.
+     *
      * @var array
      */
     private $protectedParts = [];
@@ -77,7 +80,7 @@ class BasicParserService extends AbstractTextParserService
             $ret = substr($url, -1);
             $url = substr($url, 0, strlen($url) - 1);
         }
-        return $matches[1] . "<a href=\"$url\" rel=\"nofollow\">$url</a>" . $ret;
+        return $matches[1] . '<a href="' . $url . '" rel="nofollow">' . $url . '</a>' . $ret;
     }
 
     /**
@@ -98,7 +101,7 @@ class BasicParserService extends AbstractTextParserService
             $ret = substr($dest, -1);
             $dest = substr($dest, 0, strlen($dest) - 1);
         }
-        return $matches[1] . "<a href=\"$dest\" rel=\"nofollow\">$dest</a>" . $ret;
+        return $matches[1] . '<a href="' . $dest . '" rel="nofollow">' . $dest . '</a>' . $ret;
     }
 
     /**
@@ -108,7 +111,7 @@ class BasicParserService extends AbstractTextParserService
     protected function makeEmailClickable($matches)
     {
         $email = $matches[2] . '@' . $matches[3];
-        return $matches[1] . "<a href=\"mailto:$email\">$email</a>";
+        return $matches[1] . '<a href="mailto:' . $email . '">' . $email . '</a>';
     }
 
     /**
@@ -118,9 +121,21 @@ class BasicParserService extends AbstractTextParserService
     {
         $ret = ' ' . $this->text;
         // in testing, using arrays here was found to be faster
-        $ret = preg_replace_callback('#([\s>])([\w]+?://[\w\\x80-\\xff\#$%&~/.\-;:=,?@\[\]+]*)#is', [&$this, 'makeUrlClickable'], $ret);
-        $ret = preg_replace_callback('#([\s>])((www|ftp)\.[\w\\x80-\\xff\#$%&~/.\-;:=,?@\[\]+]*)#is', [&$this, 'makeWebFtpClickable'], $ret);
-        $ret = preg_replace_callback('#([\s>])([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})#i', [&$this, 'makeEmailClickable'], $ret);
+        $ret = preg_replace_callback(
+            '#([\s>])([\w]+?://[\w\\x80-\\xff\#$%&~/.\-;:=,?@\[\]+]*)#is',
+            [&$this, 'makeUrlClickable'],
+            $ret
+        );
+        $ret = preg_replace_callback(
+            '#([\s>])((www|ftp)\.[\w\\x80-\\xff\#$%&~/.\-;:=,?@\[\]+]*)#is',
+            [&$this, 'makeWebFtpClickable'],
+            $ret
+        );
+        $ret = preg_replace_callback(
+            '#([\s>])([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})#i',
+            [&$this, 'makeEmailClickable'],
+            $ret
+        );
 
         // this one is not in an array because we need it to run last, for cleanup of accidental links within links
         $ret = preg_replace('#(<a( [^>]+?>|>))<a [^>]+?>([^>]+?)</a></a>#i', '$1$3</a>', $ret);
@@ -148,7 +163,12 @@ class BasicParserService extends AbstractTextParserService
     protected function restoreProtectedParts()
     {
         while (($s = strpos($this->text, '###MMFORUM_PROTECTED###')) !== false) {
-            $this->text = substr_replace($this->text, array_shift($this->protectedParts[0]), $s, strlen('###MMFORUM_PROTECTED###'));
+            $this->text = substr_replace(
+                $this->text,
+                array_shift($this->protectedParts[0]),
+                $s,
+                strlen('###MMFORUM_PROTECTED###')
+            );
         }
     }
 
@@ -194,7 +214,6 @@ class BasicParserService extends AbstractTextParserService
      * Removes superflous line breaks within the text.
      *
      * @param string $text The text with linebreaks.
-     *
      * @return string The text with less linebreaks.
      */
     protected function removeUnneccesaryLinebreaks($text)

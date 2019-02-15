@@ -1,45 +1,49 @@
 <?php
+namespace T3forum\T3forum\TextParser\Service;
 
-namespace Mittwald\Typo3Forum\TextParser\Service;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Utility\File;
+use T3forum\T3forum\Domain\Repository\Forum\PostRepository;
+use T3forum\T3forum\Utility\File;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class QuoteParserService extends AbstractTextParserService
 {
-
     /**
      * The post repository.
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository
+     * @var PostRepository
      * @inject
      */
     protected $postRepository;
 
     /**
      * A standalone fluid view, used to render each individual quote.
-     * @var \TYPO3\CMS\Fluid\View\StandaloneView
+     *
+     * @var StandaloneView
      * @inject
      */
     protected $view;
@@ -53,11 +57,23 @@ class QuoteParserService extends AbstractTextParserService
     public function getParsedText($text)
     {
         do {
-            $text = preg_replace_callback('/\[quote](.*?)\[\/quote\]\w*/is', [$this, 'replaceSingleCallback'], $text, -1, $c);
+            $text = preg_replace_callback(
+                '/\[quote](.*?)\[\/quote\]\w*/is',
+                [$this, 'replaceSingleCallback'],
+                $text,
+                -1,
+                $c
+            );
         } while ($c > 0);
 
         do {
-            $text = preg_replace_callback('/\[quote=([0-9]+)\](.*?)\[\/quote\]\w*/is', [$this, 'replaceCallback'], $text, -1, $c);
+            $text = preg_replace_callback(
+                '/\[quote=([0-9]+)\](.*?)\[\/quote\]\w*/is',
+                [$this, 'replaceCallback'],
+                $text,
+                -1,
+                $c
+            );
         } while ($c > 0);
 
         return $text;
