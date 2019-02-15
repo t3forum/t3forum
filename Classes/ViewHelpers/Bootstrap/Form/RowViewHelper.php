@@ -1,29 +1,31 @@
 <?php
+namespace T3forum\T3forum\ViewHelpers\Bootstrap\Form;
 
-namespace Mittwald\Typo3Forum\ViewHelpers\Bootstrap\Form;
-
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
@@ -33,7 +35,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  */
 class RowViewHelper extends AbstractTagBasedViewHelper
 {
-
     /**
      * tagName
      *
@@ -49,6 +50,9 @@ class RowViewHelper extends AbstractTagBasedViewHelper
         parent::initialize();
     }
 
+    /**
+     *
+     */
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -58,6 +62,9 @@ class RowViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('errorLLPrefix', 'string', 'Error label locallang prefix.', false);
     }
 
+    /**
+     *
+     */
     public function render()
     {
         $class = 'control-group';
@@ -80,8 +87,10 @@ class RowViewHelper extends AbstractTagBasedViewHelper
                 $class .= ' error';
                 $errorContent = '';
                 foreach ($errors as $error) {
-                    $errorText = LocalizationUtility::translate($this->arguments['errorLLPrefix'] . '_' . $error->getCode(),
-                                                                            'typo3_forum');
+                    $errorText = LocalizationUtility::translate(
+                        $this->arguments['errorLLPrefix'] . '_' . $error->getCode(),
+                        't3forum'
+                    );
                     if (!$errorText) {
                         $errorText = 'TRANSLATE: ' . $this->arguments['errorLLPrefix'] . '_' . $error->getCode();
                     }
@@ -105,7 +114,7 @@ class RowViewHelper extends AbstractTagBasedViewHelper
      * Find errors for a specific property in the given errors array
      *
      * @param string $propertyName The property name to look up
-     * @param array  $errors       An array of Tx_Fluid_Error_Error objects
+     * @param array  $errors An array of Tx_Fluid_Error_Error objects
      * @return array An array of errors for $propertyName
      */
     protected function getErrorsForProperty($propertyName, $errors)

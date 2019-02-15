@@ -17,7 +17,7 @@ namespace T3forum\T3forum\TextParser;
  * later version.
  *
  * The GNU General Public License can be found at
- * http://www.gnu.org/copyleft/gpl.html.                               *
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * This script is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
