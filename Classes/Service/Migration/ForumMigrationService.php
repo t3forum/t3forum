@@ -1,36 +1,39 @@
 <?php
+namespace T3forum\T3forum\Service\Migration;
 
-namespace Mittwald\Typo3Forum\Service\Migration;
-
-/**
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
  *
  * COPYRIGHT NOTICE
  *
- *  (c) 2017 Mittwald CM Service GmbH & Co KG
- *  All rights reserved
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published
- *  by the Free Software Foundation; either version 2 of the License,
- *  or (at your option) any later version.
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
  *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
  *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
  *
- *  This copyright notice MUST APPEAR in all copies of the script!
- *
+ * This copyright notice MUST APPEAR in all copies of the script!
  */
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ *
+ */
 class ForumMigrationService extends AbstractMigrationService
 {
-
     /**
      * @return string
      */
@@ -41,9 +44,7 @@ class ForumMigrationService extends AbstractMigrationService
                 $this->createForumRelations($row);
             }
         }
-
         $output = parent::migrate();
-
         $this->createRootForums();
 
         return $output;
@@ -102,7 +103,10 @@ class ForumMigrationService extends AbstractMigrationService
     protected function createRootForums()
     {
         if (($result = $this->databaseConnection->exec_SELECTquery(
-            'COUNT(*) AS count, pid', $this->getNewTableName(), 'forum = 0', 'pid'
+            'COUNT(*) AS count, pid',
+            $this->getNewTableName(),
+            'forum = 0',
+            'pid'
         ))
         ) {
             foreach ($result as $row) {
@@ -131,7 +135,9 @@ class ForumMigrationService extends AbstractMigrationService
         ];
 
         $this->databaseConnection->exec_UPDATEquery(
-            $this->getNewTableName(), 'pid = ' . $pid . ' AND forum = 0 AND uid <>' . $rootForumId, $updateFields
+            $this->getNewTableName(),
+            'pid = ' . $pid . ' AND forum = 0 AND uid <>' . $rootForumId,
+            $updateFields
         );
     }
 

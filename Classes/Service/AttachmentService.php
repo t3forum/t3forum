@@ -1,8 +1,33 @@
 <?php
-namespace Mittwald\Typo3Forum\Service;
+namespace T3forum\T3forum\Service;
 
-use Mittwald\Typo3Forum\Domain\Model\Forum\Attachment;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.                               *
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
+use T3forum\T3forum\Domain\Model\Forum\Attachment;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -13,20 +38,18 @@ class AttachmentService implements SingletonInterface
      * Instance of the Extbase object manager.
      *
      * @access protected
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      * @inject
      */
     protected $objectManager = null;
 
     /**
      * Converts array of sent $_FILES to an ObjectStorage wizth object(s) of type
-     * \Mittwald\Typo3Forum\Domain\Model\Forum\Attachment and moves the files
+     * \T3forum\T3forum\Domain\Model\Forum\Attachment and moves the files
      *
      * @access public
-     *
      * @param array $attachments
-     *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Attachment>
+     * @return ObjectStorage<Attachment>
      */
     public function initAttachments(array $attachments)
     {
@@ -51,7 +74,7 @@ class AttachmentService implements SingletonInterface
     }
 
     /**
-     * Converts single file of $_FILES as \Mittwald\Typo3Forum\Domain\Model\Forum\Attachment,
+     * Converts single file of $_FILES as \T3forum\T3forum\Domain\Model\Forum\Attachment,
      * saves this Attachment in ObjectStorage and moves the file to final location in file system
      *
      * @see initAttachments(array $attachments)
@@ -68,9 +91,9 @@ class AttachmentService implements SingletonInterface
                 return;
             }
         }
-        $tmp_name = $_FILES['tx_typo3forum_pi1']['tmp_name']['attachments'][$attachmentID];
+        $tmp_name = $_FILES['tx_t3forum_pi1']['tmp_name']['attachments'][$attachmentID];
 
-        /* @var \Mittwald\Typo3Forum\Domain\Model\Forum\Attachment */
+        /* @var \T3forum\T3forum\Domain\Model\Forum\Attachment */
         $attachmentObj = $this->objectManager->get(Attachment::class);
         $attachmentObj->setFilename($singleAttachment['name']);
         $attachmentObj->setRealFilename(sha1($singleAttachment['name'] . time()));
