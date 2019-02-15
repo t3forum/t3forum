@@ -1,42 +1,47 @@
 <?php
+namespace T3forum\T3forum\ViewHelpers\Form;
 
-namespace Mittwald\Typo3Forum\ViewHelpers\Form;
-
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use TYPO3\CMS\Fluid\ViewHelpers\Form\TextareaViewHelper;
+use TYPO3\CMS\Extbase\Object\InvalidClassException;
+use T3forum\T3forum\Utility\TypoScript;
+use T3forum\T3forum\TextParser\Panel\AbstractPanel;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
  * ViewHelper that renders a textarea with additional bb code buttons.
  */
 class BbCodeEditorViewHelper extends TextareaViewHelper
 {
-
     /**
      * cache
      *
-     * @var \Mittwald\Typo3Forum\Cache\Cache
+     * @var \T3forum\T3forum\Cache\Cache
      * @inject
      */
     protected $cache = null;
@@ -44,7 +49,8 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
     /**
      * Instance of the typo3_forum TypoScript reader class. This class is used
      * to read a bbcode editor's configuration from the typoscript setup.
-     * @var \Mittwald\Typo3Forum\Utility\TypoScript
+     *
+     * @var TypoScript
      * @inject
      */
     protected $typoscriptReader = null;
@@ -52,28 +58,30 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
     /**
      * Configuration array. This array is read from the typoscript setup by
      * the typoscript reader instance (see above).
+     *
      * @var array
      */
     protected $configuration = null;
 
     /**
      * Panels that contain bb code buttons.
-     * @var array<\Mittwald\Typo3Forum\TextParser\Panel\AbstractPanel>
+     *
+     * @var array<AbstractPanel>
      */
     protected $panels = [];
 
     /**
      * An Instance of the Extbase Object Manager class.
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+     *
+     * @var ObjectManagerInterface
      * @inject
      */
     protected $objectManager = null;
 
     /**
-     *
      * Initializes the view helper arguments.
-     * @return void
      *
+     * @return void
      */
     public function initializeArguments()
     {
@@ -90,11 +98,9 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
     /**
      * Loads the editor configuration
      *
-     * @param string $configurationPath The typoscript setup path in which the
-     *                                   editor configuration is stored.
-     *
+     * @param string $configurationPath The typoscript setup path in which the editor configuration is stored.
+     * @throws InvalidClassException
      * @return string
-     * @throws \TYPO3\CMS\Extbase\Object\InvalidClassException
      */
     protected function initializeJavascriptSetupFromConfiguration($configurationPath)
     {
@@ -105,33 +111,36 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
 
         foreach ($this->configuration['panels.'] as $key => $panelConfiguration) {
             $panel = $this->objectManager->get($panelConfiguration['className']);
-            if (!$panel instanceof \Mittwald\Typo3Forum\TextParser\Panel\PanelInterface) {
-                throw new \TYPO3\CMS\Extbase\Object\InvalidClassException('Expected an implementation of the \Mittwald\Typo3Forum\TextParser\Panel\PanelInterface interface!', 1315835842);
+            if (!$panel instanceof \T3forum\T3forum\TextParser\Panel\PanelInterface) {
+                throw new InvalidClassException(
+                    'Expected an implementation of the \T3forum\T3forum\TextParser\Panel\PanelInterface interface!',
+                    1315835842
+                );
             }
             $panel->setSettings($panelConfiguration);
             $this->panels[] = $panel;
         }
 
-        $this->javascriptSetup = '
-		<script language="javascript">
-		' . 'var bbcodeSettings = ' . json_encode($this->getPanelSettings()) . ';' . '$(document).ready(function()	{' . '$(\'#' . $this->arguments['id'] . '\').markItUp(bbcodeSettings);' . '}); </script>';
+        $this->javascriptSetup =
+            '<script language="javascript">' .
+            'var bbcodeSettings = ' . json_encode($this->getPanelSettings()) . ';' .
+            '$(document).ready(function()	{' .
+            '$(\'#' . $this->arguments['id'] . '\').markItUp(bbcodeSettings);' . '});' .
+            '</script>';
         $this->cache->set('bbcodeeditor-jsonconfig', $this->javascriptSetup);
         return $this->javascriptSetup;
     }
 
     /**
-     *
      * Renders the editor. This method first adds some javascript inclusions to the
      * page header, then renders the options panel and finally renders the main
      * textarea using the inherited render() method.
      *
      * @return string HTML content
-     *
      */
     public function render()
     {
         $this->initializeJavascriptSetupFromConfiguration($this->arguments['configuration']);
-
         return $this->javascriptSetup . parent::render();
     }
 
@@ -151,20 +160,18 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
             }
         }
         $settings[] = [
-            'name'      => 'Preview',
+            'name' => 'Preview',
             'className' => 'preview',
-            'call'      => 'preview'
+            'call' => 'preview'
         ];
         $editorSettings = [
-            'previewParserPath' => 'index.php?eID=typo3_forum&tx_typo3forum_ajax[controller]=Post&tx_typo3forum_ajax[action]=preview&id=' . $GLOBALS['TSFE']->id,
-            'previewParserVar'  => 'tx_typo3forum_ajax[text]',
-            'markupSet'         => $settings
+            'previewParserPath' => 'index.php?eID=t3forum&tx_t3forum_ajax[controller]=Post&tx_t3forum_ajax[action]=preview&id=' . $GLOBALS['TSFE']->id,
+            'previewParserVar' => 'tx_t3forum_ajax[text]',
+            'markupSet' => $settings
         ];
-
         if (isset($this->configuration['editorSettings.']) && is_array($this->configuration['editorSettings.'])) {
             $editorSettings = array_merge($editorSettings, $this->configuration['editorSettings.']);
         }
-
         return $editorSettings;
     }
 }

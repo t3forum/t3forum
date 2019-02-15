@@ -1,49 +1,53 @@
 <?php
+namespace T3forum\T3forum\ViewHelpers\Form;
 
-namespace Mittwald\Typo3Forum\ViewHelpers\Form;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                      *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Model\Forum\Forum;
+use T3forum\T3forum\Domain\Model\Forum\Forum;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper;
+use T3forum\T3forum\Domain\Repository\Forum\ForumRepository;
 
 /**
  * ViewHelper that renders a selectbox with a hierarchical list of all forums.
  */
 class ForumSelectViewHelper extends SelectViewHelper
 {
-
     /**
      * The forum repository.
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     *
+     * @var ForumRepository
      * @inject
      */
     protected $forumRepository = null;
 
     /**
      * Initializses the view helper arguments.
+     *
      * @return void
      */
     public function initializeArguments()
@@ -58,6 +62,7 @@ class ForumSelectViewHelper extends SelectViewHelper
 
     /**
      * Loads the option rows for this select field.
+     *
      * @return array All option rows.
      */
     protected function getOptions()
@@ -95,7 +100,7 @@ class ForumSelectViewHelper extends SelectViewHelper
     /**
      * Recursively renders all option tags.
      *
-     * @param   array $options All option rows.
+     * @param array $options All option rows.
      * @param int $nestingLevel The current nesting level. Required for correct formatting.
      * @return string
      */
