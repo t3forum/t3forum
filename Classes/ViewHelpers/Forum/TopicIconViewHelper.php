@@ -1,32 +1,35 @@
 <?php
+namespace T3forum\T3forum\ViewHelpers\Forum;
 
-namespace Mittwald\Typo3Forum\ViewHelpers\Forum;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/* *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Model\Forum\ShadowTopic;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Model\Forum\ShadowTopic;
+use T3forum\T3forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Repository\User\FrontendUserRepository;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Fluid\ViewHelpers\CObjectViewHelper;
 
@@ -39,16 +42,16 @@ class TopicIconViewHelper extends AbstractViewHelper
 
     /**
      * The frontend user repository.
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\FrontendUserRepository
+     *
+     * @var FrontendUserRepository
      * @inject
      */
     protected $frontendUserRepository = null;
 
     /**
-     *
      * Initializes the view helper arguments.
-     * @return void
      *
+     * @return void
      */
     public function initializeArguments()
     {
@@ -62,7 +65,6 @@ class TopicIconViewHelper extends AbstractViewHelper
     }
 
     /**
-     *
      * Renders the topic icon.
      *
      * @param Topic $topic The topic for which the icon is to be rendered.
@@ -72,7 +74,7 @@ class TopicIconViewHelper extends AbstractViewHelper
     public function render(Topic $topic = null, $width = null)
     {
         $data = $this->getDataArray($topic);
-        $typoscriptObjectPath = 'plugin.tx_typo3forum.renderer.icons.topic' . ($data['new'] ? '_new' : '');
+        $typoscriptObjectPath = 'plugin.tx_t3forum.renderer.icons.topic' . ($data['new'] ? '_new' : '');
 
         $cObjectViewHelper = $this->getCObjectViewHelper();
         $cObjectViewHelper->setArguments([
@@ -83,12 +85,11 @@ class TopicIconViewHelper extends AbstractViewHelper
     }
 
     /**
-     *
      * Generates a data array that will be passed to the typoscript object for
      * rendering the icon.
+     *
      * @param Topic $topic The topic for which the icon is to be displayed.
      * @return array The data array for the typoscript object.
-     *
      */
     protected function getDataArray(Topic $topic = null)
     {
@@ -114,6 +115,6 @@ class TopicIconViewHelper extends AbstractViewHelper
      */
     protected function getCObjectViewHelper()
     {
-        return $this->objectManager->get(\TYPO3\CMS\Fluid\ViewHelpers\CObjectViewHelper::class);
+        return $this->objectManager->get(CObjectViewHelper::class);
     }
 }

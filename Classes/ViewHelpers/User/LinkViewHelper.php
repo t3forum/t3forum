@@ -1,37 +1,40 @@
 <?php
+namespace T3forum\T3forum\ViewHelpers\User;
 
-namespace Mittwald\Typo3Forum\ViewHelpers\User;
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
-
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUserGroup;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUserGroup;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Exception;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 
 class LinkViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var array
      */
@@ -40,7 +43,7 @@ class LinkViewHelper extends AbstractViewHelper
     /**
      * Initialize viewHelper and add given settings
      *
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
+     * @throws InvalidVariableException
      */
     public function initialize()
     {
@@ -51,7 +54,7 @@ class LinkViewHelper extends AbstractViewHelper
     /**
      * Initialize required arguments
      *
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws Exception
      */
     public function initializeArguments()
     {
@@ -66,7 +69,7 @@ class LinkViewHelper extends AbstractViewHelper
      * @param bool $showOnline
      * @return string
      */
-    public function render(\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $user = null, $showOnlineStatus = true, $showOnline = false)
+    public function render(FrontendUser $user = null, $showOnlineStatus = true, $showOnline = false)
     {
         // if user anonymous: show only the username
         if ($user->isAnonymous()) {
@@ -74,7 +77,15 @@ class LinkViewHelper extends AbstractViewHelper
         }
         // use uribuilder to genreate the uri for the userprofile
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->setTargetPageUid($this->settings['pids']['UserShow'])->setArguments(['tx_typo3forum_pi1[user]' => $user->getUid(), 'tx_typo3forum_pi1[controller]' => 'User', 'tx_typo3forum_pi1[action]' => 'show'])->build();
+        $uri = $uriBuilder->setTargetPageUid($this->settings['pids']['UserShow'])
+            ->setArguments(
+                [
+                    'tx_typo3forum_pi1[user]' => $user->getUid(),
+                    'tx_typo3forum_pi1[controller]' => 'User',
+                    'tx_typo3forum_pi1[action]' => 'show'
+                ]
+            )
+            ->build();
 
         $class = 'user-link';
 
@@ -94,7 +105,9 @@ class LinkViewHelper extends AbstractViewHelper
             foreach ($user->getUsergroup() as $group) {
                 /** @var FrontendUserGroup $group */
                 if ($group->getUserMod() === 1) {
-                    $moderatorMark = '<img src="' . $this->settings['moderatorMark']['image'] . '" title="' . $this->settings['moderatorMark']['title'] . '" />';
+                    $moderatorMark = '
+                        <img src="' . $this->settings['moderatorMark']['image'] . '" title="' .
+                        $this->settings['moderatorMark']['title'] . '" />';
                     break;
                 }
             }
@@ -106,9 +119,13 @@ class LinkViewHelper extends AbstractViewHelper
             } else {
                 $onlineStatus = 'user_onlinepoint iconset-8-user-offline';
             }
-            $link = '<a href="' . $uri . '" class="' . $class . '" title="' . $fullUsername . '">' . $username . ' <i class="' . $onlineStatus . '" data-uid="' . $user->getUid() . '"></i> ' . $moderatorMark . '</a>';
+            $link = '<a href="' . $uri . '" class="' . $class . '" title="' . $fullUsername . '">' .
+                $username . ' <i class="' . $onlineStatus . '" data-uid="' . $user->getUid() . '"></i> ' .
+                $moderatorMark . '</a>';
         } else {
-            $link = '<a href="' . $uri . '" class="' . $class . '" title="' . $fullUsername . '">' . $username . ' ' . $moderatorMark . '</a>';
+            $link = '<a href="' . $uri . '" class="' . $class . '" title="' . $fullUsername . '">' .
+                $username . ' ' .
+                $moderatorMark . '</a>';
         }
 
         return $link;
