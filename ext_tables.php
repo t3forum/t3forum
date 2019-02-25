@@ -31,23 +31,23 @@ defined('TYPO3_MODE') or die();
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'T3forum.T3forum',
     'Pi1',
-    'Typo3 Forum'
+    'TYPO3 Forum'
 );
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'T3forum.T3forum',
     'Widget',
-    'Typo3 Forum Widgets'
+    'TYPO3 Forum Widgets'
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
     $_EXTKEY,
     'Configuration/TypoScript',
-    'Typo3 Forum'
+    'TYPO3 Forum'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
     $_EXTKEY,
     'Configuration/TypoScript/Bootstrap',
-    'Typo3 Forum Bootstrap Template'
+    'TYPO3 Forum Bootstrap Template'
 );
 
 $pluginSignature = strtolower(\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY));
