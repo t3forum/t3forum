@@ -48,6 +48,6 @@ class Localization
      */
     public static function translate($key, $default = null, $arguments = [])
     {
-        return LocalizationUtility::translate($key, 'Typo3Forum', $arguments) ?: $default;
+        return LocalizationUtility::translate($key, 'T3forum', $arguments) ?: $default;
     }
 }

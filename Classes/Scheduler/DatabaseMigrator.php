@@ -229,7 +229,7 @@ class DatabaseMigrator extends AbstractTask
             foreach ($this->legacyFeUsersTypes as $legacyFeUsersType) {
                 $newFeUsersType = str_replace(
                     ['Tx_MmForum', '_'],
-                    ['Mittwald\Typo3Forum', '\\'],
+                    ['T3forum\T3forum', '\\'],
                     $legacyFeUsersType
                 );
                 if ($user['tx_extbase_type'] === $legacyFeUsersType) {
