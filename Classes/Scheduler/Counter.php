@@ -1,29 +1,31 @@
 <?php
-
 namespace T3forum\T3forum\Scheduler;
 
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -34,11 +36,10 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 /**
  * A turtle with maths skills checks all counter columns of any user and update them on a error.
  *
- * @author  Ruven Fehling <r.fehling@mittwald.de>
+ * @author Ruven Fehling <r.fehling@mittwald.de>
  */
 class Counter extends AbstractTask
 {
-
     /**
      * @var int
      */
@@ -94,7 +95,9 @@ class Counter extends AbstractTask
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /** @var ConfigurationManagerInterface $configurationManager */
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
-        $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $this->settings = $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
         $this->settings = $this->settings['plugin.']['tx_t3forum.']['settings.'];
     }
 
@@ -107,7 +110,6 @@ class Counter extends AbstractTask
             return false;
         }
         $this->setSettings();
-
         $this->updateTopic();
         $this->updateUser();
         return true;
@@ -132,7 +134,8 @@ class Counter extends AbstractTask
         $lastCounterArray = [];
         foreach ($topicCount as $topicUid => $postCount) {
             if ($lastCounter != $postCount) {
-                $query = 'UPDATE tx_t3forum_domain_model_forum_topic SET post_count = ' . (int)$lastCounter . ' WHERE uid IN (' . implode(',', $lastCounterArray) . ')';
+                $query = 'UPDATE tx_t3forum_domain_model_forum_topic SET post_count = ' . (int)$lastCounter
+                    . ' WHERE uid IN (' . implode(',', $lastCounterArray) . ')';
                 $GLOBALS['TYPO3_DB']->sql_query($query);
                 $lastCounterArray = [];
             }
@@ -281,8 +284,10 @@ class Counter extends AbstractTask
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
             $query = $GLOBALS['TYPO3_DB']->UPDATEquery(
-                'tx_t3forum_domain_model_user_rank', 'uid=' . (int)$row['tx_t3forum_rank'],
-                ['user_count' => (int)$row['counter']]);
+                'tx_t3forum_domain_model_user_rank',
+                'uid=' . (int)$row['tx_t3forum_rank'],
+                ['user_count' => (int)$row['counter']]
+            );
             $GLOBALS['TYPO3_DB']->sql_query($query);
         }
     }

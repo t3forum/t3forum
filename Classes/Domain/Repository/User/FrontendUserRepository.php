@@ -1,39 +1,38 @@
 <?php
-
 namespace T3forum\T3forum\Domain\Repository\User;
 
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser;
 use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use T3forum\T3forum\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
-// use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-
 /**
- *
  * Repository class for frontend suers.
  *
  * @author     Martin Helmich <m.helmich@mittwald.de>
@@ -48,7 +47,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 class FrontendUserRepository extends AbstractRepository
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\FrontendConfigurationManager
      * @inject
@@ -67,17 +65,15 @@ class FrontendUserRepository extends AbstractRepository
     }
 
     /**
-     *
      * Finds users for a specific filterset. Page navigation is possible.
      *
      * @param int $limit
-     * @param array   $orderings
+     * @param array $orderings
      * @param bool $onlyOnline
-     * @param array   $uids
+     * @param array $uids
      *
      * @return Array<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      *                               The selected subset of posts
-     *
      */
     public function findByFilter($limit = 0, $orderings = [], $onlyOnline = false, $uids = [])
     {
@@ -98,26 +94,24 @@ class FrontendUserRepository extends AbstractRepository
         if (!empty($constraints)) {
             $query->matching($query->logicalAnd($constraints));
         }
-
-        // $this->debugSql($query, __METHOD__);
-
         return $query->execute();
     }
 
+    /**
+     *
+     */
     public function countByFilter($onlyOnline = false)
     {
         $query = $this->createQuery();
         if (!empty($onlyOnline)) {
             $query->matching($query->greaterThan('is_online', time() - $this->settings['widgets']['onlinebox']['timeInterval']));
         }
-
-        // $this->debugSql($query, __METHOD__);
-
         return $query->execute()->count();
     }
 
     /**
      * Returns an anonymous frontend user.
+     *
      * @return AnonymousFrontendUser An anonymous frontend user.
      */
     public function findAnonymous()
@@ -144,9 +138,6 @@ class FrontendUserRepository extends AbstractRepository
         } else {
             $query->setOrderings([$filter => $order]);
         }
-
-        // $this->debugSql($query, __METHOD__);
-
         return $query->execute();
     }
 
@@ -165,7 +156,6 @@ class FrontendUserRepository extends AbstractRepository
      * Finds users for the top $limit view.
      *
      * @param int $limit
-     *
      * @return FrontendUser[] The Top $limit User of this forum.
      */
     public function findTopUserByPoints($limit = 50)
@@ -176,9 +166,6 @@ class FrontendUserRepository extends AbstractRepository
             'username' => QueryInterface::ORDER_ASCENDING,
         ]);
         $query->setLimit($limit);
-
-        // $this->debugSql($query, __METHOD__);
-
         return $query->execute();
     }
 }

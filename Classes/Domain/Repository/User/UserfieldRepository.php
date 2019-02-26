@@ -1,34 +1,35 @@
 <?php
-
 namespace T3forum\T3forum\Domain\Repository\User;
 
-/*                                                                    - *
- *  COPYRIGHT NOTICE                                                    *
- *                                                                      *
- *  (c) 2015 Mittwald CM Service GmbH & Co KG                           *
- *           All rights reserved                                        *
- *                                                                      *
- *  This script is part of the TYPO3 project. The TYPO3 project is      *
- *  free software; you can redistribute it and/or modify                *
- *  it under the terms of the GNU General Public License as published   *
- *  by the Free Software Foundation; either version 2 of the License,   *
- *  or (at your option) any later version.                              *
- *                                                                      *
- *  The GNU General Public License can be found at                      *
- *  http://www.gnu.org/copyleft/gpl.html.                               *
- *                                                                      *
- *  This script is distributed in the hope that it will be useful,      *
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of      *
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       *
- *  GNU General Public License for more details.                        *
- *                                                                      *
- *  This copyright notice MUST APPEAR in all copies of the script!      *
- *                                                                      */
+/*
+ * TYPO3 Forum Extension (EXT:t3forum)
+ * https://github.com/t3forum
+ *
+ * COPYRIGHT NOTICE
+ *
+ * This extension was originally developed by
+ * Mittwald CM Service GmbH & Co KG (https://www.mittwald.de)
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is free
+ * software; you can redistribute it and/or modify it under the terms of
+ * the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any
+ * later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
 
 use T3forum\T3forum\Domain\Repository\AbstractRepository;
 
 /**
- *
  * Repository class for additional userfields. Unlike other repositories,
  * this one creates part of its data not from the database, but load it
  * from the extension's typoscript configuration instead.
@@ -40,9 +41,9 @@ use T3forum\T3forum\Domain\Repository\AbstractRepository;
  */
 class UserfieldRepository extends AbstractRepository
 {
-
     /**
      * ConfigurationManagerInterface
+     *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      * @inject
      */
@@ -65,10 +66,6 @@ class UserfieldRepository extends AbstractRepository
         $this->objectType = 'T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield';
     }
 
-    /*
-     * REPOSITORY METHODS
-     */
-
     /**
      * Finds all userfields. This method loads all userfields from the database
      * and merges the result with the core userfields that are loaded from the
@@ -81,9 +78,6 @@ class UserfieldRepository extends AbstractRepository
     public function findAll()
     {
         $query = $this->createQueryWithFallbackStoragePage();
-
-        // $this->debugSql($query, __METHOD__);
-
         return array_merge($this->findCoreUserfields(), $query->execute()->toArray());
     }
 
