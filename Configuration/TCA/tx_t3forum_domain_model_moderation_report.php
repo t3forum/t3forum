@@ -53,8 +53,8 @@ return [
     ],
     'types' => [
         '1' => ['showitem' => 'type,reporter,moderator,workflow_status,comments'],
-        'Mittwald\Typo3Forum\Domain\Model\Moderation\UserReport' => ['showitem' => 'type,reporter,moderator,workflow_status,comments, feuser'],
-        'Mittwald\Typo3Forum\Domain\Model\Moderation\PostReport' => ['showitem' => 'type,reporter,moderator,workflow_status,comments, post'],
+        'T3forum\T3forum\Domain\Model\Moderation\UserReport' => ['showitem' => 'type,reporter,moderator,workflow_status,comments, feuser'],
+        'T3forum\T3forum\Domain\Model\Moderation\PostReport' => ['showitem' => 'type,reporter,moderator,workflow_status,comments, post'],
     ],
     'columns' => [
         'hidden' => [
@@ -78,8 +78,8 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$lllPath . 'type.userReport', 'Mittwald\Typo3Forum\Domain\Model\Moderation\UserReport'],
-                    [$lllPath . 'type.postReport', 'Mittwald\Typo3Forum\Domain\Model\Moderation\PostReport'],
+                    [$lllPath . 'type.userReport', 'T3forum\T3forum\Domain\Model\Moderation\UserReport'],
+                    [$lllPath . 'type.postReport', 'T3forum\T3forum\Domain\Model\Moderation\PostReport'],
                 ],
             ],
         ],

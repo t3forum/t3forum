@@ -49,7 +49,7 @@ return [
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_typo3forum_domain_model_user_privatemessage_text',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\PrivateMessageText',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\PrivateMessageText',
                 'maxitems' => 1,
                 'appearance' => [
                     'collapseAll' => 1,
@@ -64,7 +64,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\FrontendUser',
                 'maxitems' => 1
             ],
         ],
@@ -74,7 +74,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\FrontendUser',
                 'maxitems' => 1
             ],
         ],
@@ -83,8 +83,8 @@ return [
             'config' => [
                 'type' => 'radio',
                 'items' => [
-                    ['sender', \Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage::TYPE_SENDER],
-                    ['recipient', \Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage::TYPE_RECIPIENT],
+                    ['sender', \T3forum\T3forum\Domain\Model\User\PrivateMessage::TYPE_SENDER],
+                    ['recipient', \T3forum\T3forum\Domain\Model\User\PrivateMessage::TYPE_RECIPIENT],
                 ],
                 'default' => 0,
             ],

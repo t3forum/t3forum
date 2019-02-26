@@ -125,7 +125,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\FrontendUser',
                 'foreign_table' => 'fe_users',
                 'maxitems' => 1
             ],

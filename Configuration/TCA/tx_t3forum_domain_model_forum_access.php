@@ -129,12 +129,12 @@ return [
                 'renderType' => 'selectSingle',
                 'maxitems' => 1,
                 'items' => [
-                    [$lllPath . 'operation.read', \Mittwald\Typo3Forum\Domain\Model\Forum\Access::TYPE_READ],
-                    [$lllPath . 'operation.newTopic', \Mittwald\Typo3Forum\Domain\Model\Forum\Access::TYPE_NEW_TOPIC],
-                    [$lllPath . 'operation.newPost', \Mittwald\Typo3Forum\Domain\Model\Forum\Access::TYPE_NEW_POST],
-                    [$lllPath . 'operation.editPost', \Mittwald\Typo3Forum\Domain\Model\Forum\Access::TYPE_EDIT_POST],
-                    [$lllPath . 'operation.deletePost', \Mittwald\Typo3Forum\Domain\Model\Forum\Access::TYPE_DELETE_POST],
-                    [$lllPath . 'operation.moderation', \Mittwald\Typo3Forum\Domain\Model\Forum\Access::TYPE_MODERATE],
+                    [$lllPath . 'operation.read', \T3forum\T3forum\Domain\Model\Forum\Access::TYPE_READ],
+                    [$lllPath . 'operation.newTopic', \T3forum\T3forum\Domain\Model\Forum\Access::TYPE_NEW_TOPIC],
+                    [$lllPath . 'operation.newPost', \T3forum\T3forum\Domain\Model\Forum\Access::TYPE_NEW_POST],
+                    [$lllPath . 'operation.editPost', \T3forum\T3forum\Domain\Model\Forum\Access::TYPE_EDIT_POST],
+                    [$lllPath . 'operation.deletePost', \T3forum\T3forum\Domain\Model\Forum\Access::TYPE_DELETE_POST],
+                    [$lllPath . 'operation.moderation', \T3forum\T3forum\Domain\Model\Forum\Access::TYPE_MODERATE],
                 ],
             ],
         ],
@@ -152,7 +152,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\Forum\Forum',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\Forum\Forum',
                 'foreign_table' => 'tx_typo3forum_domain_model_forum_forum',
                 'maxitems' => 1
             ],
@@ -164,7 +164,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_groups',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\FrontendUserGroup',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\FrontendUserGroup',
                 'maxitems' => 1
             ],
         ],

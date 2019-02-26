@@ -124,7 +124,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\FrontendUser',
                 'maxitems' => 1
             ],
         ],
@@ -141,7 +141,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\Forum\Topic',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\Forum\Topic',
                 'foreign_table' => 'tx_typo3forum_domain_model_forum_topic',
                 'maxitems' => 1
             ],
@@ -168,7 +168,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingleBox',
                 'foreign_table' => 'fe_users',
-                'foreign_class' => '\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser',
+                'foreign_class' => '\T3forum\T3forum\Domain\Model\User\FrontendUser',
                 'MM' => 'tx_typo3forum_domain_model_user_supportpost',
                 'MM_opposite_field' => 'tx_typo3forum_support_posts',
                 'maxitems' => PHP_INT_MAX

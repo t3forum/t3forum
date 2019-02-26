@@ -32,7 +32,7 @@
 );
 
 $lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic.';
-$modelNamespace = '\Mittwald\Typo3Forum\Domain\Model';
+$modelNamespace = '\T3forum\T3forum\Domain\Model';
 
 if (version_compare(TYPO3_branch, '8.5', '<')) {
     // for TYPO3 8.5.0 or higher
