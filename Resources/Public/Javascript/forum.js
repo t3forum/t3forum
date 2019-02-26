@@ -88,19 +88,19 @@ jQuery(document).ready(function($) {
 	/* 
 		support old layout versions
 	*/
-	if (typeof typo3_forum_ajaxUrl === 'undefined'
+	if (typeof t3forum_ajaxUrl === 'undefined'
 		&& typeof currentPageUid !== 'undefined'
 	) {
-        typo3_forum_ajaxUrl = "?id=" + currentPageUid + "&eID=typo3_forum&language=de&tx_typo3forum_ajax[controller]=Ajax&tx_typo3forum_ajax[action]=main&tx_typo3forum_ajax[format]=json";
+        t3forum_ajaxUrl = "?id=" + currentPageUid + "&eID=t3forum&language=de&tx_t3forum_ajax[controller]=Ajax&tx_t3forum_ajax[action]=main&tx_t3forum_ajax[format]=json";
     }
-    if (typeof typo3_forum_ajaxUrl_helpful === 'undefined'
+    if (typeof t3forum_ajaxUrl_helpful === 'undefined'
     	&& typeof currentPageUid !== 'undefined'
     ) {
-        typo3_forum_ajaxUrl_helpful = "index.php?id=" + currentPageUid +
-            "&eID=" + "__typo3_forum_eid__" +
-            "&tx_typo3forum_ajax[controller]=Post" +
-            "&tx_typo3forum_ajax[action]=" + "__typo3_forum_action__" +
-            "&tx_typo3forum_ajax[post]=" + "__typo3_forum_post__";
+        t3forum_ajaxUrl_helpful = "index.php?id=" + currentPageUid +
+            "&eID=" + "__t3forum_eid__" +
+            "&tx_t3forum_ajax[controller]=Post" +
+            "&tx_t3forum_ajax[action]=" + "__t3forum_action__" +
+            "&tx_t3forum_ajax[post]=" + "__t3forum_post__";
     }
     function isValidJSON(text) {
         try {
@@ -110,21 +110,21 @@ jQuery(document).ready(function($) {
             return false;
         }
     }
-    if (typeof typo3_forum_ajaxUrl !== 'undefined') {
+    if (typeof t3forum_ajaxUrl !== 'undefined') {
         $.ajax({
             type: "POST",
-            url: typo3_forum_ajaxUrl,
+            url: t3forum_ajaxUrl,
             async: true,
             data: {
-                "tx_typo3forum_ajax[displayedUser]": JSON.stringify(displayedUser),
-                "tx_typo3forum_ajax[postSummarys]": JSON.stringify(postSummarys),
-                "tx_typo3forum_ajax[topicIcons]": JSON.stringify(displayedTopicIcons),
-                "tx_typo3forum_ajax[forumIcons]": JSON.stringify(displayedForumIcons),
-                "tx_typo3forum_ajax[displayedTopics]": JSON.stringify(displayedTopics),
-                "tx_typo3forum_ajax[displayOnlinebox]": JSON.stringify(displayOnlinebox),
-                "tx_typo3forum_ajax[displayedForumMenus]": JSON.stringify(displayedForumMenus),
-                "tx_typo3forum_ajax[displayedPosts]": JSON.stringify(displayedPosts),
-                "tx_typo3forum_ajax[displayedAds]": JSON.stringify(displayedAds)
+                "tx_t3forum_ajax[displayedUser]": JSON.stringify(displayedUser),
+                "tx_t3forum_ajax[postSummarys]": JSON.stringify(postSummarys),
+                "tx_t3forum_ajax[topicIcons]": JSON.stringify(displayedTopicIcons),
+                "tx_t3forum_ajax[forumIcons]": JSON.stringify(displayedForumIcons),
+                "tx_t3forum_ajax[displayedTopics]": JSON.stringify(displayedTopics),
+                "tx_t3forum_ajax[displayOnlinebox]": JSON.stringify(displayOnlinebox),
+                "tx_t3forum_ajax[displayedForumMenus]": JSON.stringify(displayedForumMenus),
+                "tx_t3forum_ajax[displayedPosts]": JSON.stringify(displayedPosts),
+                "tx_t3forum_ajax[displayedAds]": JSON.stringify(displayedAds)
             },
             success: function (data) {
                 if (!data) {
@@ -194,7 +194,7 @@ jQuery(document).ready(function($) {
                     }
                 }
 
-                $('.tx-typo3forum-helpfull-btn').click(function () {
+                $('.tx-t3forum-helpfull-btn').click(function () {
                     var targetElement = this;
                     var counttargetVal = $('.' + $(targetElement).attr('data-counttarget')).html();
                     var countusertargetVal = $('.' + $(targetElement).attr('data-countusertarget')).html();
@@ -210,20 +210,20 @@ jQuery(document).ready(function($) {
                         type: "GET",
                         url: "index.php?id=" + currentPageUid + 
                               "&eID=" + $(this).attr('data-eid') + 
-                              "&tx_typo3forum_ajax[controller]=Post" + 
-                              "&tx_typo3forum_ajax[action]=" + type + "Supporter" + 
-                              "&tx_typo3forum_ajax[post]=" + $(this).attr('data-post') + 
+                              "&tx_t3forum_ajax[controller]=Post" + 
+                              "&tx_t3forum_ajax[action]=" + type + "Supporter" + 
+                              "&tx_t3forum_ajax[post]=" + $(this).attr('data-post') + 
                               '&no_cache=1',
                               /*
-                              typo3_forum_ajaxUrl_helpful
-                                .replace('__typo3_forum_eid__', eID)
-                                .replace('__typo3_forum_action__', action)
-                                .replace('__typo3_forum_post__',post),
+                              t3forum_ajaxUrl_helpful
+                                .replace('__t3forum_eid__', eID)
+                                .replace('__t3forum_action__', action)
+                                .replace('__t3forum_post__',post),
                               */
                         async: false,
                         beforeSend: function (msg) {
-                            $('.' + $(targetElement).attr('data-counttarget')).html('<div class="tx-typo3forum-ajax-loader"></div>');
-                            $('.' + $(targetElement).attr('data-countusertarget')).html('<div class="tx-typo3forum-ajax-loader"></div>');
+                            $('.' + $(targetElement).attr('data-counttarget')).html('<div class="tx-t3forum-ajax-loader"></div>');
+                            $('.' + $(targetElement).attr('data-countusertarget')).html('<div class="tx-t3forum-ajax-loader"></div>');
                         },
                         success: function (data) {
                             var json = $.parseJSON(data);
