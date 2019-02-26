@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Scheduler;
+namespace T3forum\T3forum\Scheduler;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Scheduler;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;

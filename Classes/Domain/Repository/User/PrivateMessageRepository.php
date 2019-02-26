@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\User;
+namespace T3forum\T3forum\Domain\Repository\User;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\User;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class PrivateMessageRepository extends Repository
@@ -38,7 +38,7 @@ class PrivateMessageRepository extends Repository
      * @param FrontendUser $userY
      * @param int $limit
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage[]
+     * @return \T3forum\T3forum\Domain\Model\User\PrivateMessage[]
      */
     public function findMessagesBetweenUser(FrontendUser $userX, FrontendUser $userY, $limit = 0)
     {
@@ -117,7 +117,7 @@ class PrivateMessageRepository extends Repository
      * @param FrontendUser $user
      * @param int $limit
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage[]
+     * @return \T3forum\T3forum\Domain\Model\User\PrivateMessage[]
      */
     public function findReceivedMessagesForUser(FrontendUser $user, $limit = 0)
     {

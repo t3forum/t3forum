@@ -27,8 +27,8 @@ namespace T3forum\T3forum\TextParser\Panel;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Mittwald\Typo3Forum\Domain\Repository\Format\BBCodeRepository;
-use Mittwald\Typo3Forum\Domain\Model\Format\BBCode;
+use T3forum\T3forum\Domain\Repository\Format\BBCodeRepository;
+use T3forum\T3forum\Domain\Model\Format\BBCode;
 
 /**
  *

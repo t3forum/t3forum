@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Moderation;
+namespace T3forum\T3forum\Domain\Model\Moderation;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -36,7 +36,7 @@ class ReportComment extends AbstractEntity
 
     /**
      * The comment author
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $author;
 
@@ -48,7 +48,7 @@ class ReportComment extends AbstractEntity
 
     /**
      * The report this comment belongs to.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Moderation\Report
+     * @var \T3forum\T3forum\Domain\Model\Moderation\Report
      */
     protected $report;
 
@@ -70,7 +70,7 @@ class ReportComment extends AbstractEntity
 
     /**
      * Gets the comment author.
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser The comment author.
+     * @return \T3forum\T3forum\Domain\Model\User\FrontendUser The comment author.
      */
     public function getAuthor()
     {
@@ -78,7 +78,7 @@ class ReportComment extends AbstractEntity
             $this->author->_loadRealInstance();
         }
         if ($this->author === null) {
-            $this->author = new \Mittwald\Typo3Forum\Domain\Model\User\AnonymousFrontendUser();
+            $this->author = new \T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser();
         }
 
         return $this->author;
@@ -87,11 +87,11 @@ class ReportComment extends AbstractEntity
     /**
      * Sets the comment's author.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $author The author.
+     * @param \T3forum\T3forum\Domain\Model\User\FrontendUser $author The author.
      *
      * @return void
      */
-    public function setAuthor(\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $author)
+    public function setAuthor(\T3forum\T3forum\Domain\Model\User\FrontendUser $author)
     {
         $this->author = $author;
     }
@@ -119,7 +119,7 @@ class ReportComment extends AbstractEntity
 
     /**
      * Gets the parent report.
-     * @return \Mittwald\Typo3Forum\Domain\Model\Moderation\Report The report.
+     * @return \T3forum\T3forum\Domain\Model\Moderation\Report The report.
      */
     public function getReport()
     {
@@ -129,11 +129,11 @@ class ReportComment extends AbstractEntity
     /**
      * Sets the comment's report.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Moderation\Report $report
+     * @param \T3forum\T3forum\Domain\Model\Moderation\Report $report
      *
      * @return void
      */
-    public function setReport(\Mittwald\Typo3Forum\Domain\Model\Moderation\Report $report)
+    public function setReport(\T3forum\T3forum\Domain\Model\Moderation\Report $report)
     {
         $this->report = $report;
     }

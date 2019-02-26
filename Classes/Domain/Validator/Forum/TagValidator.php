@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Validator\Forum;
+namespace T3forum\T3forum\Domain\Validator\Forum;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -32,7 +32,7 @@ class TagValidator extends AbstractValidator
 
     /**
      * An instance of the tag repository.
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TagRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\TagRepository
      * @inject
      */
     protected $tagRepository;

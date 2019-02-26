@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
+namespace T3forum\T3forum\Domain\Repository\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,11 +25,11 @@ namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\Forum\Forum;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Tag;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Topic;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
-use Mittwald\Typo3Forum\Domain\Repository\AbstractRepository;
+use T3forum\T3forum\Domain\Model\Forum\Forum;
+use T3forum\T3forum\Domain\Model\Forum\Tag;
+use T3forum\T3forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
@@ -58,7 +58,7 @@ class TopicRepository extends AbstractRepository
      * @param int $limit
      * @param array $orderings
      *
-     * @return Array<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic> The selected subset of posts
+     * @return Array<\T3forum\T3forum\Domain\Model\Forum\Topic> The selected subset of posts
      *
      */
     public function findByFilter($limit = null, $orderings = [])

@@ -28,8 +28,8 @@ namespace T3forum\T3forum\ViewHelpers\Ext;
  */
 
 use TYPO3\CMS\Fluid\ViewHelpers\CObjectViewHelper;
-use Mittwald\Typo3Forum\Configuration\ConfigurationBuilder;
-use Mittwald\Typo3Forum\Service\Authentication\AuthenticationServiceInterface;
+use T3forum\T3forum\Configuration\ConfigurationBuilder;
+use T3forum\T3forum\Service\Authentication\AuthenticationServiceInterface;
 
 class UserLinkViewHelper extends CObjectViewHelper
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Scheduler;
+namespace T3forum\T3forum\Scheduler;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *

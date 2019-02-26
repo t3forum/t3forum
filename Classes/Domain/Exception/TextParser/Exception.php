@@ -27,7 +27,7 @@ namespace T3forum\T3forum\Domain\Exception\TextParser;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Mittwald\Typo3Forum\Domain\Exception\AbstractException;
+use T3forum\T3forum\Domain\Exception\AbstractException;
 
 class Exception extends AbstractException
 {

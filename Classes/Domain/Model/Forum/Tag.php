@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Model\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Tag extends AbstractEntity
@@ -56,7 +56,7 @@ class Tag extends AbstractEntity
     protected $topicCount;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      */
     protected $feuser;
 
@@ -105,7 +105,7 @@ class Tag extends AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      */
     public function getFeuser()
     {

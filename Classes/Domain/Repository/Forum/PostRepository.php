@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
+namespace T3forum\T3forum\Domain\Repository\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Repository\AbstractRepository;
+use T3forum\T3forum\Domain\Repository\AbstractRepository;
 
 class PostRepository extends AbstractRepository
 {
@@ -36,7 +36,7 @@ class PostRepository extends AbstractRepository
      * @param int $limit
      * @param array   $orderings
      *
-     * @return Array<\Mittwald\Typo3Forum\Domain\Model\Forum\Post>
+     * @return Array<\T3forum\T3forum\Domain\Model\Forum\Post>
      *                               The selected subset of posts
      *
      */
@@ -60,7 +60,7 @@ class PostRepository extends AbstractRepository
      *
      * @param array $uids
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Topic[]
+     * @return \T3forum\T3forum\Domain\Model\Forum\Topic[]
      *         The selected subset of topcis
      */
     public function findByUids($uids)
@@ -83,13 +83,13 @@ class PostRepository extends AbstractRepository
      *
      * Finds posts for a specific topic. Page navigation is possible.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Topic $topic
+     * @param \T3forum\T3forum\Domain\Model\Forum\Topic $topic
      *        The topic for which the posts are to be loaded.
      *
-     * @return Array<\Mittwald\Typo3Forum\Domain\Model\Forum\Post>
+     * @return Array<\T3forum\T3forum\Domain\Model\Forum\Post>
      *        The selected subset of posts in the specified topic.
      */
-    public function findForTopic(\Mittwald\Typo3Forum\Domain\Model\Forum\Topic $topic)
+    public function findForTopic(\T3forum\T3forum\Domain\Model\Forum\Topic $topic)
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectSysLanguage(false);
@@ -107,14 +107,14 @@ class PostRepository extends AbstractRepository
     /**
      * Finds the last post in a topic.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Topic $topic
+     * @param \T3forum\T3forum\Domain\Model\Forum\Topic $topic
      *        The topic for which the last post is to be loaded.
      * @param int  $offset    If you want to get the next to last post post
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @return \T3forum\T3forum\Domain\Model\Forum\Post
      *         The last post of the specified topic.
      */
-    public function findLastByTopic(\Mittwald\Typo3Forum\Domain\Model\Forum\Topic $topic, $offset = 0)
+    public function findLastByTopic(\T3forum\T3forum\Domain\Model\Forum\Topic $topic, $offset = 0)
     {
         $query = $this->createQuery();
         $query->matching($query->equals('topic', $topic))
@@ -131,14 +131,14 @@ class PostRepository extends AbstractRepository
     /**
      * Finds the last post in a forum.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Forum $forum
+     * @param \T3forum\T3forum\Domain\Model\Forum\Forum $forum
      *        The forum for which to load the last post.
      * @param int $offset    If you want to get the next to last post post
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @return \T3forum\T3forum\Domain\Model\Forum\Post
      *         The last post of the specified forum.
      */
-    public function findLastByForum(\Mittwald\Typo3Forum\Domain\Model\Forum\Forum $forum, $offset = 0)
+    public function findLastByForum(\T3forum\T3forum\Domain\Model\Forum\Forum $forum, $offset = 0)
     {
         $query = $this->createQuery();
         $query->matching($query->equals('topic.forum', $forum))

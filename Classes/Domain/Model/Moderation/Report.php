@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Moderation;
+namespace T3forum\T3forum\Domain\Model\Moderation;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,9 +25,9 @@ namespace Mittwald\Typo3Forum\Domain\Model\Moderation;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Exception\InvalidOperationException;
-use Mittwald\Typo3Forum\Domain\Model\User\AnonymousFrontendUser;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Exception\InvalidOperationException;
+use T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -46,25 +46,25 @@ class Report extends AbstractEntity
 
     /**
      * The frontend user that created this post.
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $reporter;
 
     /**
      * The moderator that is assigned to this report.
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $moderator;
 
     /**
      * The current status of this report.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus
+     * @var \T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus
      */
     protected $workflowStatus;
 
     /**
      * A set of comments that are assigned to this report.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Moderation\ReportComment>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Moderation\ReportComment>
      */
     protected $comments;
 
@@ -161,7 +161,7 @@ class Report extends AbstractEntity
 
     /**
      * Gets all comments for this report.
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Moderation\ReportComment>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Moderation\ReportComment>
      *                             All comments for this report.
      */
     public function getComments()

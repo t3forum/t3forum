@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -32,7 +32,7 @@ class CriteriaOption extends AbstractEntity
 
     /**
      * The criteria object.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Criteria
+     * @var \T3forum\T3forum\Domain\Model\Forum\Criteria
      */
     protected $criteria;
 

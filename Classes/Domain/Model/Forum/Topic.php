@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,13 +25,13 @@ namespace Mittwald\Typo3Forum\Domain\Model\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\AccessibleInterface;
-use Mittwald\Typo3Forum\Domain\Model\ConfigurableEntityTrait;
-use Mittwald\Typo3Forum\Domain\Model\ConfigurableInterface;
-use Mittwald\Typo3Forum\Domain\Model\NotifiableInterface;
-use Mittwald\Typo3Forum\Domain\Model\ReadableInterface;
-use Mittwald\Typo3Forum\Domain\Model\SubscribeableInterface;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\AccessibleInterface;
+use T3forum\T3forum\Domain\Model\ConfigurableEntityTrait;
+use T3forum\T3forum\Domain\Model\ConfigurableInterface;
+use T3forum\T3forum\Domain\Model\NotifiableInterface;
+use T3forum\T3forum\Domain\Model\ReadableInterface;
+use T3forum\T3forum\Domain\Model\SubscribeableInterface;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -53,7 +53,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * The posts in this topic.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Post>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Post>
      * @lazy
      */
     protected $posts;
@@ -68,14 +68,14 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * The user who created the topic.
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $author;
 
     /**
      * All users who have subscribed this topic.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      * @lazy
      */
     protected $subscribers;
@@ -83,7 +83,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * All users who have subscribed this topic.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      * @lazy
      */
     protected $favSubscribers;
@@ -91,7 +91,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * The as solution marked post
      *
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @var \T3forum\T3forum\Domain\Model\Forum\Post
      * @lazy
      */
     protected $solution;
@@ -106,7 +106,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * A pointer to the last post in this topic.
      *
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @var \T3forum\T3forum\Domain\Model\Forum\Post
      *
      */
     protected $lastPost;
@@ -121,7 +121,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * The forum in which this topic is located.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Forum
+     * @var \T3forum\T3forum\Domain\Model\Forum\Forum
      */
     protected $forum;
 
@@ -152,7 +152,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * All users who have read this topic.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      * @lazy
      */
     protected $readers;
@@ -160,27 +160,27 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * Get all options of a criteria of this topic
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\CriteriaOption>
      */
     protected $criteriaOptions;
 
     /**
      * Get all tags of this topic
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Tag>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Tag>
      * @lazy
      */
     protected $tags;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
      * @var ConfigurationBuilder
-     * @var \Mittwald\Typo3Forum\Configuration\ConfigurationBuilder
+     * @var \T3forum\T3forum\Configuration\ConfigurationBuilder
      * @inject
      */
     protected $configurationBuilder;
@@ -251,7 +251,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
                 $posts = $this->posts->toArray();
                 $this->author = $posts[0]->getAuthor();
             } else {
-                $this->author = new \Mittwald\Typo3Forum\Domain\Model\User\AnonymousFrontendUser();
+                $this->author = new \T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser();
             }
         }
 
@@ -260,7 +260,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Gets all users who have subscribes to this forum.
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      */
     public function getSubscribers()
     {
@@ -287,7 +287,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Gets all posts.
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Post> posts
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Post> posts
      */
     public function getPosts()
     {
@@ -345,7 +345,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Gets the forum.
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Forum A forum
+     * @return \T3forum\T3forum\Domain\Model\Forum\Forum A forum
      */
     public function getForum()
     {
@@ -381,7 +381,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Get all criteria options
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\CriteriaOption>
      */
     public function getCriteriaOptions()
     {
@@ -390,7 +390,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Get all tags of this topic
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Tag>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Tag>
      */
     public function getTags()
     {
@@ -415,7 +415,7 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
      *
      * @param bool $withSelf TRUE to include this forum into the rootline, otherwise FALSE.
      *
-     * @return array<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @return array<\T3forum\T3forum\Domain\Model\Forum\Forum>
      */
     public function getRootline($withSelf = true)
     {
@@ -559,11 +559,11 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * Adds a criteria option to the repository.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption $option The Option to be added
+     * @param \T3forum\T3forum\Domain\Model\Forum\CriteriaOption $option The Option to be added
      *
      * @return void
      */
-    public function addCriteriaOption(\Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption $option)
+    public function addCriteriaOption(\T3forum\T3forum\Domain\Model\Forum\CriteriaOption $option)
     {
         $this->criteriaOptions->attach($option);
     }
@@ -574,12 +574,12 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
      * @param Post $post The Post to be removed
      *
      * @return void
-     * @throws \Mittwald\Typo3Forum\Domain\Exception\InvalidOperationException
+     * @throws \T3forum\T3forum\Domain\Exception\InvalidOperationException
      */
     public function removePost(Post $post)
     {
         if ($this->postCount === 1) {
-            throw new \Mittwald\Typo3Forum\Domain\Exception\InvalidOperationException('You cannot delete the last post of a topic without deleting the topic itself (use \Mittwald\Typo3Forum\Domain\Factory\Forum\TopicFactory::deleteTopic for that).', 1334603895);
+            throw new \T3forum\T3forum\Domain\Exception\InvalidOperationException('You cannot delete the last post of a topic without deleting the topic itself (use \T3forum\T3forum\Domain\Factory\Forum\TopicFactory::deleteTopic for that).', 1334603895);
         }
 
         $this->posts->detach($post);
@@ -651,11 +651,11 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * Sets the forum.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Forum $forum The forum
+     * @param \T3forum\T3forum\Domain\Model\Forum\Forum $forum The forum
      *
      * @return void
      */
-    public function setForum(\Mittwald\Typo3Forum\Domain\Model\Forum\Forum $forum)
+    public function setForum(\T3forum\T3forum\Domain\Model\Forum\Forum $forum)
     {
         $this->forum = $forum;
     }
@@ -712,11 +712,11 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * Add a tag to this topic
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Tag $tag
+     * @param \T3forum\T3forum\Domain\Model\Forum\Tag $tag
      *
      * @return void
      */
-    public function addTag(\Mittwald\Typo3Forum\Domain\Model\Forum\Tag $tag)
+    public function addTag(\T3forum\T3forum\Domain\Model\Forum\Tag $tag)
     {
         $this->tags->attach($tag);
     }
@@ -724,11 +724,11 @@ class Topic extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * Remove a tag of this topic
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Tag $tag
+     * @param \T3forum\T3forum\Domain\Model\Forum\Tag $tag
      *
      * @return void
      */
-    public function removeTag(\Mittwald\Typo3Forum\Domain\Model\Forum\Tag $tag)
+    public function removeTag(\T3forum\T3forum\Domain\Model\Forum\Tag $tag)
     {
         $this->tags->detach($tag);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,8 +25,8 @@ namespace Mittwald\Typo3Forum\Domain\Model\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\ConfigurableEntityTrait;
-use Mittwald\Typo3Forum\Domain\Model\ConfigurableInterface;
+use T3forum\T3forum\Domain\Model\ConfigurableEntityTrait;
+use T3forum\T3forum\Domain\Model\ConfigurableInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Attachment extends AbstractEntity implements ConfigurableInterface
@@ -34,7 +34,7 @@ class Attachment extends AbstractEntity implements ConfigurableInterface
     use ConfigurableEntityTrait;
     /**
      * The attachment file name.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @var \T3forum\T3forum\Domain\Model\Forum\Post
      * @lazy
      */
     protected $post;
@@ -64,7 +64,7 @@ class Attachment extends AbstractEntity implements ConfigurableInterface
     protected $downloadCount;
 
     /**
-     * @var \Mittwald\Typo3Forum\Configuration\ConfigurationBuilder
+     * @var \T3forum\T3forum\Configuration\ConfigurationBuilder
      * @inject
      */
     protected $configurationBuilder;

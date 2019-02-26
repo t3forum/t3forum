@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\User;
+namespace T3forum\T3forum\Domain\Model\User;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -42,13 +42,13 @@ class PrivateMessage extends AbstractEntity
 
     /**
      * User who read this message
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     public $feuser;
 
     /**
      * Opponent user of this message
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     public $opponent;
 
@@ -66,7 +66,7 @@ class PrivateMessage extends AbstractEntity
 
     /**
      * The message of this pm
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\PrivateMessageText
+     * @var \T3forum\T3forum\Domain\Model\User\PrivateMessageText
      */
     public $message;
 

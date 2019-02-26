@@ -27,10 +27,10 @@ namespace T3forum\T3forum\Controller;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Mittwald\Typo3Forum\Domain\Exception\Authentication\NotLoggedInException;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Tag;
-use Mittwald\Typo3Forum\Domain\Repository\Forum\TagRepository;
-use Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Domain\Exception\Authentication\NotLoggedInException;
+use T3forum\T3forum\Domain\Model\Forum\Tag;
+use T3forum\T3forum\Domain\Repository\Forum\TagRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
 
 class TagController extends AbstractUserAccessController
 {
@@ -92,7 +92,7 @@ class TagController extends AbstractUserAccessController
      * @param string $name
      * @param string $subscribe
      *
-     * @validate $name \Mittwald\Typo3Forum\Domain\Validator\Forum\TagValidator
+     * @validate $name \T3forum\T3forum\Domain\Validator\Forum\TagValidator
      * @throws NotLoggedInException
      */
     public function createAction($name = '', $subscribe = '')

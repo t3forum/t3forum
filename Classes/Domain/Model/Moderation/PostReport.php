@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Moderation;
+namespace T3forum\T3forum\Domain\Model\Moderation;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -39,13 +39,13 @@ class PostReport extends Report
 
     /**
      * A set of comments that are assigned to this report.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @var \T3forum\T3forum\Domain\Model\Forum\Post
      */
     protected $post;
 
     /**
      * Gets the topic to which the reported post belongs to.
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Topic The topic.
+     * @return \T3forum\T3forum\Domain\Model\Forum\Topic The topic.
      */
     public function getTopic()
     {
@@ -54,7 +54,7 @@ class PostReport extends Report
 
     /**
      * Gets the topic to which the reported post belongs to.
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Post The topic.
+     * @return \T3forum\T3forum\Domain\Model\Forum\Post The topic.
      */
     public function getPost()
     {
@@ -62,11 +62,11 @@ class PostReport extends Report
     }
 
     /**
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Post $post .
+     * @param \T3forum\T3forum\Domain\Model\Forum\Post $post .
      *
      * @return void
      */
-    public function setPost(\Mittwald\Typo3Forum\Domain\Model\Forum\Post $post)
+    public function setPost(\T3forum\T3forum\Domain\Model\Forum\Post $post)
     {
         $this->post = $post;
     }

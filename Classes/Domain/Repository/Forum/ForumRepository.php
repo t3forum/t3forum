@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
+namespace T3forum\T3forum\Domain\Repository\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,8 +25,8 @@ namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\Forum\Access;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\Forum\Access;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -37,7 +37,7 @@ class ForumRepository extends Repository
 {
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\Authentication\AuthenticationServiceInterface
+     * @var \T3forum\T3forum\Service\Authentication\AuthenticationServiceInterface
      * @inject
      */
     protected $authenticationService = null;
@@ -61,7 +61,7 @@ class ForumRepository extends Repository
     /**
      * Finds all forums for the index view.
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Forum[] All forums for the index view.
+     * @return \T3forum\T3forum\Domain\Model\Forum\Forum[] All forums for the index view.
      */
     public function findForIndex()
     {
@@ -71,7 +71,7 @@ class ForumRepository extends Repository
     /**
      * Finds all root forums.
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Forum[] All forums for the index view.
+     * @return \T3forum\T3forum\Domain\Model\Forum\Forum[] All forums for the index view.
      */
     public function findRootForums()
     {
@@ -107,7 +107,7 @@ class ForumRepository extends Repository
      * Finds forum for a specific filterset. Page navigation is possible.
      *
      * @param array $uids
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Topic[] The selected subset of topcis
+     * @return \T3forum\T3forum\Domain\Model\Forum\Topic[] The selected subset of topcis
      *
      */
     public function findByUids($uids)

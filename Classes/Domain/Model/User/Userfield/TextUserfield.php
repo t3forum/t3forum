@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\User\Userfield;
+namespace T3forum\T3forum\Domain\Model\User\Userfield;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *

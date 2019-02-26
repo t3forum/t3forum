@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Moderation;
+namespace T3forum\T3forum\Domain\Model\Moderation;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -41,7 +41,7 @@ class ReportWorkflowStatus extends AbstractValueObject
 
     /**
      * A list of allowed follow-up status.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus>
      */
     protected $followupStatus;
 
@@ -89,7 +89,7 @@ class ReportWorkflowStatus extends AbstractValueObject
 
     /**
      * Gets the allowed follow-up status.
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus>
      *                             The allowed follow-up status.
      */
     public function getFollowupStatus()
@@ -100,13 +100,13 @@ class ReportWorkflowStatus extends AbstractValueObject
     /**
      * Determines if a workflow status is an allowed follow-up status for this status.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus $status
+     * @param \T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus $status
      *                             The status that is to be checked.
      *
      * @return bool             TRUE, if $status is a valid follow-up status,
      *                             otherwise FALSE.
      */
-    public function hasFollowupStatus(\Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus $status)
+    public function hasFollowupStatus(\T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus $status)
     {
         return $this->followupStatus->contains($status);
     }
@@ -168,9 +168,9 @@ class ReportWorkflowStatus extends AbstractValueObject
     /**
      * Adds an additional allowed followup status.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus $followupStatus
+     * @param \T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus $followupStatus
      */
-    public function addAllowedFollowupStatus(\Mittwald\Typo3Forum\Domain\Model\Moderation\ReportWorkflowStatus $followupStatus)
+    public function addAllowedFollowupStatus(\T3forum\T3forum\Domain\Model\Moderation\ReportWorkflowStatus $followupStatus)
     {
         $this->followupStatus->attach($followupStatus);
     }

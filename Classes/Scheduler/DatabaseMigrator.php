@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Scheduler;
+namespace T3forum\T3forum\Scheduler;
 
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,9 +25,9 @@ namespace Mittwald\Typo3Forum\Domain\Model\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\AccessibleInterface;
-use Mittwald\Typo3Forum\Domain\Model\SubscribeableInterface;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\AccessibleInterface;
+use T3forum\T3forum\Domain\Model\SubscribeableInterface;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -40,20 +40,20 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * All access rules.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Access>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Access>
      */
     protected $acls;
 
     /**
      * The child forums
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Forum>
      * @lazy
      */
     protected $children;
 
     /**
      * The criterias of this forum.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Criteria>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Criteria>
      * @lazy
      */
     protected $criteria;
@@ -71,18 +71,18 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * The parent forum.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Forum
+     * @var \T3forum\T3forum\Domain\Model\Forum\Forum
      * @lazy
      */
     protected $forum;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @var \T3forum\T3forum\Domain\Model\Forum\Post
      */
     protected $lastPost;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Topic
+     * @var \T3forum\T3forum\Domain\Model\Forum\Topic
      */
     protected $lastTopic;
 
@@ -102,14 +102,14 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * All users who have read this forum.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      * @lazy
      */
     protected $readers;
 
     /**
      * All subscribers of this forum.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      * @lazy
      */
     protected $subscribers;
@@ -128,7 +128,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * The topics in this forum.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Topic>
      * @lazy
      */
     protected $topics;
@@ -137,14 +137,14 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
      * The VISIBLE child forums of this forum, i.e. all forums that the
      * currently logged in user has read access to.
      *
-     * @var \ArrayObject<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @var \ArrayObject<\T3forum\T3forum\Domain\Model\Forum\Forum>
      * @lazy
      */
     protected $visibleChildren;
 
     /**
      * An instance of the typo3_forum authentication service.
-     * @var \Mittwald\Typo3Forum\Service\Authentication\AuthenticationServiceInterface
+     * @var \T3forum\T3forum\Service\Authentication\AuthenticationServiceInterface
      * @inject
      */
     protected $authenticationService;
@@ -203,7 +203,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
      * all child forums, but performs an access check on each forum, so
      * that only forums visible to the current user are returned.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum> All visible child forums
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Forum> All visible child forums
      */
     public function getChildren()
     {
@@ -225,7 +225,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Gets all topics.
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic> All topics in this forum
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Topic> All topics in this forum
      */
     public function getTopics()
     {
@@ -244,12 +244,12 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Get all criterias of this forum.
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Criteria>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Criteria>
      */
     public function getCriteria()
     {
         $criteriaStorage = new ObjectStorage();
-        /* @var \Mittwald\Typo3Forum\Domain\Model\Forum\Criteria $criteria */
+        /* @var \T3forum\T3forum\Domain\Model\Forum\Criteria $criteria */
         $criteria = $this->getCriteriaRecursive([$this, $criteriaStorage]);
         $obj = $criteria[1];
 
@@ -281,7 +281,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
 
     /**
      * Gets all access rules.
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Access> All access rules for this forum
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Access> All access rules for this forum
      */
     public function getAcls()
     {
@@ -383,7 +383,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
     /**
      * Gets all users who have subscribed to this forum.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser> All subscribers of this forum.
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser> All subscribers of this forum.
      */
     public function getSubscribers()
     {
@@ -420,7 +420,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
      * with or without this forum itself).
      *
      * @param bool $withSelf TRUE to include this forum into the rootline, otherwise FALSE.
-     * @return array<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @return array<\T3forum\T3forum\Domain\Model\Forum\Forum>
      */
     public function getRootline($withSelf = true)
     {

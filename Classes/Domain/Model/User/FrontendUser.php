@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\User;
+namespace T3forum\T3forum\Domain\Model\User;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,14 +25,14 @@ namespace Mittwald\Typo3Forum\Domain\Model\User;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\AccessibleInterface;
-use Mittwald\Typo3Forum\Domain\Model\ConfigurableEntityTrait;
-use Mittwald\Typo3Forum\Domain\Model\ConfigurableInterface;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Access;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Forum;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Topic;
-use Mittwald\Typo3Forum\Domain\Model\ReadableInterface;
-use Mittwald\Typo3Forum\Domain\Model\SubscribeableInterface;
+use T3forum\T3forum\Domain\Model\AccessibleInterface;
+use T3forum\T3forum\Domain\Model\ConfigurableEntityTrait;
+use T3forum\T3forum\Domain\Model\ConfigurableInterface;
+use T3forum\T3forum\Domain\Model\Forum\Access;
+use T3forum\T3forum\Domain\Model\Forum\Forum;
+use T3forum\T3forum\Domain\Model\Forum\Topic;
+use T3forum\T3forum\Domain\Model\ReadableInterface;
+use T3forum\T3forum\Domain\Model\SubscribeableInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -50,7 +50,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * The rank repository
      *
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\RankRepository
+     * @var \T3forum\T3forum\Domain\Repository\User\RankRepository
      * @inject
      */
     protected $rankRepository = null;
@@ -137,7 +137,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Fav Subscribed topics.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Topic>
      * @lazy
      */
     protected $topicFavSubscriptions;
@@ -145,7 +145,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Fav Subscribed forums.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Forum>
      * @lazy
      */
     protected $forumFavSubscriptions;
@@ -153,7 +153,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Subscribed topics.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Topic>
      * @lazy
      */
     protected $topicSubscriptions;
@@ -161,7 +161,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Subscribed forums.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Forum>
      * @lazy
      */
     protected $forumSubscriptions;
@@ -176,14 +176,14 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Userfield values.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\Userfield\Value>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\Userfield\Value>
      */
     protected $userfieldValues;
 
     /**
      * Read topics.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Topic>
      * @lazy
      */
     protected $readTopics;
@@ -191,7 +191,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Read forum.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Forum>
      * @lazy
      */
     protected $readForum;
@@ -199,7 +199,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Read topics.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Post>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Post>
      * @lazy
      */
     protected $supportPosts;
@@ -240,7 +240,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * The rank of this user
      *
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\Rank
+     * @var \T3forum\T3forum\Domain\Model\User\Rank
      */
     protected $rank;
 
@@ -264,7 +264,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * The private messages of this user.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\PrivateMessage>
      * @lazy
      */
     protected $privateMessages;
@@ -279,7 +279,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     protected $contact = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUserGroup>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUserGroup>
      */
     protected $usergroup;
 
@@ -417,7 +417,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Gets the private messages of this user.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\PrivateMessage>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\User\PrivateMessage>
      */
     public function getPrivateMessages()
     {
@@ -427,7 +427,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Gets the subscribed topics.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Topic> The subscribed topics.
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Topic> The subscribed topics.
      */
     public function getTopicSubscriptions()
     {
@@ -447,7 +447,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Gets the subscribed forums.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Forum>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Forum>
      *                             The subscribed forums.
      */
     public function getForumSubscriptions()
@@ -458,7 +458,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Gets the subscribed forums.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Post>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Post>
      *                             The subscribed forums.
      */
     public function getSupportPosts()
@@ -597,7 +597,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     /**
      * Gets the userfield values for this user.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\Userfield\Value>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\User\Userfield\Value>
      */
     public function getUserfieldValues()
     {
@@ -605,7 +605,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
     }
 
     /**
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\Userfield\Value>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\User\Userfield\Value>
      */
     public function getInterests()
     {

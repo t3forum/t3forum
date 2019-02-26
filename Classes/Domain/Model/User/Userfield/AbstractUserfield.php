@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\User\Userfield;
+namespace T3forum\T3forum\Domain\Model\User\Userfield;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -71,13 +71,13 @@ abstract class AbstractUserfield extends AbstractValueObject
     /**
      * Determines the value for this userfield and a specific user.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $user
+     * @param \T3forum\T3forum\Domain\Model\User\FrontendUser $user
      *                             The user for which the value of this userfield is
      *                             to be determined.
      *
      * @return string              The userfield value.
      */
-    public function getValueForUser(\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $user)
+    public function getValueForUser(\T3forum\T3forum\Domain\Model\User\FrontendUser $user)
     {
         if ($this->isMappedToUserObject()) {
             $propertyNames = explode('|', $this->getUserObjectPropertyName());

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Moderation;
+namespace T3forum\T3forum\Domain\Repository\Moderation;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\Moderation;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Repository\AbstractRepository;
+use T3forum\T3forum\Domain\Repository\AbstractRepository;
 
 /**
  * Repository class for report objects.

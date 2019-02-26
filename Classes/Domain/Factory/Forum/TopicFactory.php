@@ -27,11 +27,11 @@ namespace T3forum\T3forum\Domain\Factory\Forum;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Mittwald\Typo3Forum\Domain\Factory\Forum\PostFactory;
-use Mittwald\Typo3Forum\Domain\Repository\Forum\CriteriaOptionRepository;
-use Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository;
-use Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository;
-use Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository;
+use T3forum\T3forum\Domain\Factory\Forum\PostFactory;
+use T3forum\T3forum\Domain\Repository\Forum\CriteriaOptionRepository;
+use T3forum\T3forum\Domain\Repository\Forum\ForumRepository;
+use T3forum\T3forum\Domain\Repository\Forum\PostRepository;
+use T3forum\T3forum\Domain\Repository\Forum\TopicRepository;
 use T3forum\T3forum\Domain\Factory\AbstractFactory;
 use T3forum\T3forum\Domain\Model\Forum\CriteriaOption;
 use T3forum\T3forum\Domain\Model\Forum\Forum;

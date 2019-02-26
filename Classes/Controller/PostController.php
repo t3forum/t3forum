@@ -50,43 +50,43 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 class PostController extends AbstractUserAccessController
 {
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\AttachmentRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\AttachmentRepository
      * @inject
      */
     protected $attachmentRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Service\AttachmentService
+     * @var \T3forum\T3forum\Service\AttachmentService
      * @inject
      */
     protected $attachmentService = null;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\ForumRepository
      * @inject
      */
     protected $forumRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\PostRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\PostRepository
      * @inject
      */
     protected $postRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Factory\Forum\PostFactory
+     * @var \T3forum\T3forum\Domain\Factory\Forum\PostFactory
      * @inject
      */
     protected $postFactory;
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\TopicRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\TopicRepository
      * @inject
      */
     protected $topicRepository;
 
     /**
-     * @var \Mittwald\Typo3Forum\Utility\configuration
+     * @var \T3forum\T3forum\Utility\configuration
      */
     private $configuration;
 
@@ -283,8 +283,8 @@ class PostController extends AbstractUserAccessController
     /**
      * Creates a new post.
      *
-     * @validate $post \Mittwald\Typo3Forum\Domain\Validator\Forum\PostValidator
-     * @validate $attachments \Mittwald\Typo3Forum\Domain\Validator\Forum\AttachmentPlainValidator
+     * @validate $post \T3forum\T3forum\Domain\Validator\Forum\PostValidator
+     * @validate $attachments \T3forum\T3forum\Domain\Validator\Forum\AttachmentPlainValidator
      *
      * @access public
      * @param Topic $topic The topic in which the new post is to be created.
@@ -486,7 +486,7 @@ class PostController extends AbstractUserAccessController
      * Downloads an attachment and increase the download counter
      *
      * @access public
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Attachment $attachment
+     * @param \T3forum\T3forum\Domain\Model\Forum\Attachment $attachment
      */
     public function downloadAttachmentAction($attachment)
     {

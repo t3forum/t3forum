@@ -27,9 +27,9 @@ namespace T3forum\T3forum\TextParser\Panel;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Mittwald\Typo3Forum\TextParser\Panel\AbstractPanel;
-use Mittwald\Typo3Forum\Domain\Repository\Format\SyntaxHighlightingRepository;
-use Mittwald\Typo3Forum\Domain\Model\Format\SyntaxHighlighting;
+use T3forum\T3forum\TextParser\Panel\AbstractPanel;
+use T3forum\T3forum\Domain\Repository\Format\SyntaxHighlightingRepository;
+use T3forum\T3forum\Domain\Model\Format\SyntaxHighlighting;
 
 /**
  *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\User;
+namespace T3forum\T3forum\Domain\Repository\User;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\User;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Repository\AbstractRepository;
+use T3forum\T3forum\Domain\Repository\AbstractRepository;
 
 /**
  *
@@ -50,7 +50,7 @@ class UserfieldRepository extends AbstractRepository
     /**
      * A list of core userfields.
      *
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield
+     * @var \T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield
      */
     private $coreUserfields = null;
 
@@ -62,7 +62,7 @@ class UserfieldRepository extends AbstractRepository
     public function __construct(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         parent::__construct($objectManager);
-        $this->objectType = 'Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield';
+        $this->objectType = 'T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield';
     }
 
     /*
@@ -74,7 +74,7 @@ class UserfieldRepository extends AbstractRepository
      * and merges the result with the core userfields that are loaded from the
      * typoscript setup.
      *
-     * @return \Traversable<\Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield>
+     * @return \Traversable<\T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield>
      *                             All userfields, both from the database and
      *                             the core typoscript setup.
      */
@@ -91,7 +91,7 @@ class UserfieldRepository extends AbstractRepository
      * Finds all core userfields. These are stored in the typoscript setting
      * plugin.tx_typo3forum.settings.userfields.core_fields.
      *
-     * @return array|\Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield
+     * @return array|\T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield
      *                             The core userfields that are generated from the
      *                             typoscript configuration.
      * @throws \TYPO3\CMS\Extbase\Object\UnknownClassException
@@ -110,8 +110,8 @@ class UserfieldRepository extends AbstractRepository
 
                 $object = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($className);
 
-                if (!$object instanceof \Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield) {
-                    throw new \TYPO3\CMS\Extbase\Object\UnknownClassException("The class $className is not a subclass of \Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield", 1287756386);
+                if (!$object instanceof \T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield) {
+                    throw new \TYPO3\CMS\Extbase\Object\UnknownClassException("The class $className is not a subclass of \T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield", 1287756386);
                 }
 
                 foreach ($coreFieldValues['properties'] as $propertyName => $propertyValue) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Format;
+namespace T3forum\T3forum\Domain\Repository\Format;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Repository\AbstractRepository;
+use T3forum\T3forum\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**

@@ -27,9 +27,9 @@ namespace T3forum\T3forum\ViewHelpers\User;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Mittwald\Typo3Forum\Domain\Model\SubscribeableInterface;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
-use Mittwald\Typo3Forum\Domain\Repository\User\FrontendUserRepository;
+use T3forum\T3forum\Domain\Model\SubscribeableInterface;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Repository\User\FrontendUserRepository;
 use TYPO3Fluid\Fluid\ViewHelpers\IfViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

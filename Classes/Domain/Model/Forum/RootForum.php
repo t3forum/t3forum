@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -24,7 +24,7 @@ namespace Mittwald\Typo3Forum\Domain\Model\Forum;
  *                                                                      *
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -36,7 +36,7 @@ class RootForum extends Forum implements SingletonInterface
 {
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\Forum\ForumRepository
+     * @var \T3forum\T3forum\Domain\Repository\Forum\ForumRepository
      * @inject
      */
     protected $forumRepository = null;

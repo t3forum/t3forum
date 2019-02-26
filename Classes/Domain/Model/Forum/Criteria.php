@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -38,13 +38,13 @@ class Criteria extends AbstractEntity
 
     /**
      * The options of a criteria
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\CriteriaOption>
      */
     protected $options;
 
     /**
      * The default option
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption
+     * @var \T3forum\T3forum\Domain\Model\Forum\CriteriaOption
      */
     protected $defaultOption;
 
@@ -71,7 +71,7 @@ class Criteria extends AbstractEntity
 
     /**
      * Get all options of this criteria.
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\CriteriaOption>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\CriteriaOption>
      *            All options of criteria.
      */
     public function getOptions()

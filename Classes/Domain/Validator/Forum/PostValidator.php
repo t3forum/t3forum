@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Validator\Forum;
+namespace T3forum\T3forum\Domain\Validator\Forum;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -34,7 +34,7 @@ class PostValidator extends AbstractValidator
      * Check if $value is valid. If it is not valid, needs to add an error
      * to Result.
      *
-     * @param \Mittwald\Typo3Forum\Domain\Model\Forum\Post $post
+     * @param \T3forum\T3forum\Domain\Model\Forum\Post $post
      * @return bool
      */
     protected function isValid($post)

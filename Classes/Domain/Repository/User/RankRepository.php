@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\User;
+namespace T3forum\T3forum\Domain\Repository\User;
 
 /*                                                                    - *
 *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\User;
 *  This copyright notice MUST APPEAR in all copies of the script!      *
 *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -37,7 +37,7 @@ class RankRepository extends Repository
      *
      * @param FrontendUser $user
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\Rank[]
+     * @return \T3forum\T3forum\Domain\Model\User\Rank[]
      */
     public function findRankByUser(FrontendUser $user)
     {
@@ -57,7 +57,7 @@ class RankRepository extends Repository
      * @param int $points
      *
      * @deprecated
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\Rank[]
+     * @return \T3forum\T3forum\Domain\Model\User\Rank[]
      */
     public function findRankByPoints($points)
     {
@@ -76,7 +76,7 @@ class RankRepository extends Repository
      *
      * @param int $points
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\Rank
+     * @return \T3forum\T3forum\Domain\Model\User\Rank
      */
     public function findOneRankByPoints($points)
     {
@@ -100,7 +100,7 @@ class RankRepository extends Repository
     /**
      * Find all rankings for the ranking overview
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\Rank[]
+     * @return \T3forum\T3forum\Domain\Model\User\Rank[]
      */
     public function findAllForRankingOverview()
     {

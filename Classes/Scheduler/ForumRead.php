@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Scheduler;
+namespace T3forum\T3forum\Scheduler;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -103,7 +103,7 @@ class ForumRead extends AbstractTask
 					  FROM fe_users AS fe
 					  LEFT JOIN tx_typo3forum_domain_model_user_readtopic AS rt ON rt.uid_local = fe.uid
 								AND rt.uid_foreign IN (' . implode(',', $topics) . ')
-					  WHERE fe.disable=0 AND fe.deleted=0 AND fe.tx_extbase_type="\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser"
+					  WHERE fe.disable=0 AND fe.deleted=0 AND fe.tx_extbase_type="\T3forum\T3forum\Domain\Model\User\FrontendUser"
 						AND fe.pid=' . (int)$this->getUserPid() . ' AND fe.lastlogin > ' . (time() - $limit) . '
 						GROUP BY fe.uid';
             $userRes = $GLOBALS['TYPO3_DB']->sql_query($query);

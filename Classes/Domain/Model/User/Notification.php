@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\User;
+namespace T3forum\T3forum\Domain\Model\User;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,8 +25,8 @@ namespace Mittwald\Typo3Forum\Domain\Model\User;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\Forum\Post;
-use Mittwald\Typo3Forum\Domain\Model\Forum\Tag;
+use T3forum\T3forum\Domain\Model\Forum\Post;
+use T3forum\T3forum\Domain\Model\Forum\Tag;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 
@@ -41,19 +41,19 @@ class Notification extends AbstractEntity
 
     /**
      * User who is related with this notification
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     public $feuser;
 
     /**
      * Post which is related with this notification
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Post
+     * @var \T3forum\T3forum\Domain\Model\Forum\Post
      */
     public $post;
 
     /**
      * Tag which is related with this notification
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Tag
+     * @var \T3forum\T3forum\Domain\Model\Forum\Tag
      */
     public $tag;
 

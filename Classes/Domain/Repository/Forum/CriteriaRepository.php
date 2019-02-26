@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
+namespace T3forum\T3forum\Domain\Repository\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *

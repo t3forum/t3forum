@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
+namespace T3forum\T3forum\Domain\Repository\Forum;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Repository\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class TagRepository extends Repository
@@ -33,7 +33,7 @@ class TagRepository extends Repository
 
     /**
      * Find all ordered by topic count
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Tag[]
+     * @return \T3forum\T3forum\Domain\Model\Forum\Tag[]
      */
     public function findAllOrderedByCounter()
     {
@@ -50,7 +50,7 @@ class TagRepository extends Repository
      *
      * @param $name
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Tag[]
+     * @return \T3forum\T3forum\Domain\Model\Forum\Tag[]
      */
     public function findTagWithSpecificName($name)
     {
@@ -68,7 +68,7 @@ class TagRepository extends Repository
      *
      * @param string $name
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Tag[]
+     * @return \T3forum\T3forum\Domain\Model\Forum\Tag[]
      */
     public function findTagLikeAName($name)
     {
@@ -92,7 +92,7 @@ class TagRepository extends Repository
      *
      * @param FrontendUser $user
      *
-     * @return \Mittwald\Typo3Forum\Domain\Model\Forum\Tag[]
+     * @return \T3forum\T3forum\Domain\Model\Forum\Tag[]
      */
     public function findTagsOfUser(FrontendUser $user)
     {

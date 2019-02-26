@@ -298,7 +298,7 @@ class UserController extends AbstractUserAccessController
      * @param string $recipient
      * @param string $text
      * @throws NotLoggedInException
-     * @validate $recipient \Mittwald\Typo3Forum\Domain\Validator\User\PrivateMessageRecipientValidator
+     * @validate $recipient \T3forum\T3forum\Domain\Validator\User\PrivateMessageRecipientValidator
      */
     public function createMessageAction($recipient, $text)
     {
@@ -528,7 +528,7 @@ class UserController extends AbstractUserAccessController
     /**
      * Displays a dashboard for the current user
      *
-     * @throws \Mittwald\Typo3Forum\Domain\Exception\Authentication\NotLoggedInException
+     * @throws \T3forum\T3forum\Domain\Exception\Authentication\NotLoggedInException
      * @return void
      */
     public function dashboardAction()

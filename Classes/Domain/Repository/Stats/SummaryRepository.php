@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\Stats;
+namespace T3forum\T3forum\Domain\Repository\Stats;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -39,7 +39,7 @@ class SummaryRepository extends Repository
 
     /**
      * Get the latest items of the summary
-     * @return \Mittwald\Typo3Forum\Domain\Model\Stats\Summary[]
+     * @return \T3forum\T3forum\Domain\Model\Stats\Summary[]
      */
     public function findLatestSummaryItems()
     {

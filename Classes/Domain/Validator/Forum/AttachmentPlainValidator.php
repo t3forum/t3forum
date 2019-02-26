@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Validator\Forum;
+namespace T3forum\T3forum\Domain\Validator\Forum;
 
 /*                                                                    - *
 *  COPYRIGHT NOTICE                                                    *
@@ -25,7 +25,7 @@ namespace Mittwald\Typo3Forum\Domain\Validator\Forum;
 *  This copyright notice MUST APPEAR in all copies of the script!      *
 *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\Forum\Attachment;
+use T3forum\T3forum\Domain\Model\Forum\Attachment;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class AttachmentPlainValidator extends AbstractValidator

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository;
+namespace T3forum\T3forum\Domain\Repository;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -49,7 +49,7 @@ abstract class AbstractRepository extends Repository
 {
 
     /**
-     * @var \Mittwald\Typo3Forum\Configuration\ConfigurationBuilder
+     * @var \T3forum\T3forum\Configuration\ConfigurationBuilder
      * @inject
      */
     protected $configurationBuilder;

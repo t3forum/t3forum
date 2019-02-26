@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Repository\User;
+namespace T3forum\T3forum\Domain\Repository\User;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -25,9 +25,9 @@ namespace Mittwald\Typo3Forum\Domain\Repository\User;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\User\AnonymousFrontendUser;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
-use Mittwald\Typo3Forum\Domain\Repository\AbstractRepository;
+use T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Repository\AbstractRepository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 // use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -75,7 +75,7 @@ class FrontendUserRepository extends AbstractRepository
      * @param bool $onlyOnline
      * @param array   $uids
      *
-     * @return Array<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @return Array<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      *                               The selected subset of posts
      *
      */

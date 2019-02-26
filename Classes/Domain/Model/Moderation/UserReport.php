@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\Moderation;
+namespace T3forum\T3forum\Domain\Model\Moderation;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -39,13 +39,13 @@ class UserReport extends Report
 
     /**
      * A set of comments that are assigned to this report.
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $feuser;
 
     /**
      * Gets the topic to which the reported post belongs to.
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser Frontend User
+     * @return \T3forum\T3forum\Domain\Model\User\FrontendUser Frontend User
      */
     public function getUser()
     {
@@ -53,18 +53,18 @@ class UserReport extends Report
             $this->feuser->_loadRealInstance();
         }
         if ($this->feuser === null) {
-            $this->feuser = new \Mittwald\Typo3Forum\Domain\Model\User\AnonymousFrontendUser();
+            $this->feuser = new \T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser();
         }
 
         return $this->feuser;
     }
 
     /**
-     * @param \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $user .
+     * @param \T3forum\T3forum\Domain\Model\User\FrontendUser $user .
      *
      * @return void
      */
-    public function setUser(\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser $user)
+    public function setUser(\T3forum\T3forum\Domain\Model\User\FrontendUser $user)
     {
         $this->feuser = $user;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Scheduler;
+namespace T3forum\T3forum\Scheduler;
 
 /*                                                                    - *
  *  COPYRIGHT NOTICE                                                    *
@@ -191,7 +191,7 @@ class Notification extends AbstractTask
                         'pid' => $this->getNotificationPid(),
                         'feuser' => (int)$user['author'],
                         'post' => (int)$postRow['uid'],
-                        'type' => '\Mittwald\Typo3Forum\Domain\Model\Forum\Post',
+                        'type' => '\T3forum\T3forum\Domain\Model\Forum\Post',
                         'user_read' => (($this->getLastExecutedCron() == 0) ? 1 : 0)
 
                     ];
@@ -245,7 +245,7 @@ class Notification extends AbstractTask
                         'feuser' => (int)$userUid,
                         'post' => (int)$postRow['uid'],
                         'tag' => (int)$tagsRow['tagUid'],
-                        'type' => '\Mittwald\Typo3Forum\Domain\Model\Forum\Tag',
+                        'type' => '\T3forum\T3forum\Domain\Model\Forum\Tag',
                         'user_read' => (($this->getLastExecutedCron() == 0) ? 1 : 0)
 
                     ];

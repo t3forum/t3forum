@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Model\User\Userfield;
+namespace T3forum\T3forum\Domain\Model\User\Userfield;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -36,13 +36,13 @@ class Value extends AbstractValueObject
 
     /**
      * The userfield.
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield
+     * @var \T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield
      */
     protected $userfield;
 
     /**
      * The user.
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $user;
 
@@ -55,7 +55,7 @@ class Value extends AbstractValueObject
     /**
      *
      * Gets the userfield.
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\Userfield\AbstractUserfield The userfield.
+     * @return \T3forum\T3forum\Domain\Model\User\Userfield\AbstractUserfield The userfield.
      *
      */
     public function getUserfield()
@@ -66,7 +66,7 @@ class Value extends AbstractValueObject
     /**
      *
      * Gets the user.
-     * @return \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser The user
+     * @return \T3forum\T3forum\Domain\Model\User\FrontendUser The user
      *
      */
     public function getUser()

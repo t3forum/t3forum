@@ -1,6 +1,6 @@
 <?php
 
-namespace Mittwald\Typo3Forum\Domain\Validator\User;
+namespace T3forum\T3forum\Domain\Validator\User;
 
 /*                                                                      *
  *  COPYRIGHT NOTICE                                                    *
@@ -43,7 +43,7 @@ class PrivateMessageRecipientValidator extends AbstractValidator
 {
 
     /**
-     * @var \Mittwald\Typo3Forum\Domain\Repository\User\FrontendUserRepository
+     * @var \T3forum\T3forum\Domain\Repository\User\FrontendUserRepository
      * @inject
      */
     protected $userRepository = null;

@@ -1,5 +1,5 @@
 <?php
-namespace Mittwald\Typo3Forum\Domain\Model\Forum;
+namespace T3forum\T3forum\Domain\Model\Forum;
 
 /* *
  *  COPYRIGHT NOTICE                                                    *
@@ -24,10 +24,10 @@ namespace Mittwald\Typo3Forum\Domain\Model\Forum;
  *  This copyright notice MUST APPEAR in all copies of the script!      *
  *                                                                      */
 
-use Mittwald\Typo3Forum\Domain\Model\AccessibleInterface;
-use Mittwald\Typo3Forum\Domain\Model\NotifiableInterface;
-use Mittwald\Typo3Forum\Domain\Model\User\AnonymousFrontendUser;
-use Mittwald\Typo3Forum\Domain\Model\User\FrontendUser;
+use T3forum\T3forum\Domain\Model\AccessibleInterface;
+use T3forum\T3forum\Domain\Model\NotifiableInterface;
+use T3forum\T3forum\Domain\Model\User\AnonymousFrontendUser;
+use T3forum\T3forum\Domain\Model\User\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -59,7 +59,7 @@ class Post extends AbstractEntity implements AccessibleInterface, NotifiableInte
     /**
      * The post author.
      *
-     * @var \Mittwald\Typo3Forum\Domain\Model\User\FrontendUser
+     * @var \T3forum\T3forum\Domain\Model\User\FrontendUser
      */
     protected $author;
 
@@ -71,7 +71,7 @@ class Post extends AbstractEntity implements AccessibleInterface, NotifiableInte
 
     /**
      * The topic.
-     * @var \Mittwald\Typo3Forum\Domain\Model\Forum\Topic
+     * @var \T3forum\T3forum\Domain\Model\Forum\Topic
      */
     protected $topic;
 
@@ -83,14 +83,14 @@ class Post extends AbstractEntity implements AccessibleInterface, NotifiableInte
 
     /**
      * All subscribers of this forum.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser>
      * @lazy
      */
     protected $supporters;
 
     /**
      * Attachments.
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Attachment>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Attachment>
      * @lazy
      */
     protected $attachments;
@@ -143,7 +143,7 @@ class Post extends AbstractEntity implements AccessibleInterface, NotifiableInte
     /**
      * Gets all users who have subscribed to this forum.
      *
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\User\FrontendUser> All subscribers of this forum.
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\User\FrontendUser> All subscribers of this forum.
      */
     public function getSupporters()
     {
@@ -258,7 +258,7 @@ class Post extends AbstractEntity implements AccessibleInterface, NotifiableInte
 
     /**
      * Gets the post's attachments.
-     * @return ObjectStorage<\Mittwald\Typo3Forum\Domain\Model\Forum\Attachment>
+     * @return ObjectStorage<\T3forum\T3forum\Domain\Model\Forum\Attachment>
      */
     public function getAttachments()
     {
