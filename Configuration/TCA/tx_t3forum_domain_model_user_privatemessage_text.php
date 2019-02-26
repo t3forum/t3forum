@@ -26,22 +26,26 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$pluginSignature = strtolower(
-    \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase('t3forum')
-) . '_pi1';
+$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_privatemessage_text.';
 
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:t3forum/Configuration/FlexForms/Pi1.xml'
-);
-
-$pluginSignature = strtolower(
-    \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase('t3forum')
-) . '_widget';
-
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    $pluginSignature,
-    'FILE:EXT:t3forum/Configuration/FlexForms/Widgets.xml'
-);
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_privatemessage_text',
+        'label' => 'uid',
+        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/User/pm.png',
+    ],
+    'interface' => [
+        'showRecordFieldList' => 'message_text',
+    ],
+    'types' => [
+        '1' => ['showitem' => 'message_text']
+    ],
+    'columns' => [
+        'message_text' => [
+            'label' => $lllPath . 'message_text',
+            'config' => [
+                'type' => 'text',
+            ],
+        ],
+    ]
+];
