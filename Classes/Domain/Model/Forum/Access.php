@@ -190,7 +190,7 @@ class Access extends AbstractValueObject
         if ($this->loginLevel === self::LOGIN_LEVEL_SPECIFIC) {
             if (!$this->affectedGroup instanceof FrontendUserGroup) {
                 $exceptionMessage = 'access record #' . $this->getUid() .
-                    ' is of login level type "specific", but has not valid affected user group',
+                    ' is of login level type "specific", but has not valid affected user group';
                 throw new \Exception($exceptionMessage, 1436527735);
             }
             if ($user !== null) {
