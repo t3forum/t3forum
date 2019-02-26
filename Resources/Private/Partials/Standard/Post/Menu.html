@@ -5,7 +5,7 @@
         <mmf:authentication.ifAccess object="{post.topic}" accessType="newPost">
             <li>
                 <f:link.action controller="Post" action="new" arguments="{topic: post.topic, quote: post}">
-                    <i class="tx-typo3forum-icon-16-quote"></i>
+                    <i class="tx-t3forum-icon-16-quote"></i>
                     <f:translate key="Button_Quote"/>
                 </f:link.action>
             </li>
@@ -13,7 +13,7 @@
         <mmf:authentication.ifLoggedIn>
             <li>
                 <f:link.action controller="Report" action="newPostReport" arguments="{post: post}">
-                    <i class="tx-typo3forum-icon-16-report-new"></i>
+                    <i class="tx-t3forum-icon-16-report-new"></i>
                     <f:translate key="Button_Report"/>
                 </f:link.action>
             </li>
@@ -21,7 +21,7 @@
         <mmf:authentication.ifAccess object="{post}" accessType="editPost">
             <li>
                 <f:link.action controller="Post" action="edit" arguments="{post: post}">
-                    <i class="tx-typo3forum-icon-16-post-edit"></i>
+                    <i class="tx-t3forum-icon-16-post-edit"></i>
                     <f:translate key="Button_Edit"/>
                 </f:link.action>
             </li>
@@ -29,7 +29,7 @@
         <mmf:authentication.ifAccess object="{post}" accessType="deletePost">
             <li>
                 <f:link.action controller="Post" action="confirmDelete" arguments="{post: post}">
-                    <i class="tx-typo3forum-icon-16-post-delete"></i>
+                    <i class="tx-t3forum-icon-16-post-delete"></i>
                     <f:translate key="Button_Delete"/>
                 </f:link.action>
             </li>

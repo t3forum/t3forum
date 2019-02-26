@@ -1,6 +1,6 @@
 {namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
 
-<div class="tx-typo3forum-topic-box">
+<div class="tx-t3forum-topic-box">
     <div>
         <f:if condition="{topics.0} == {NULL}">
             <f:then>
@@ -17,7 +17,7 @@
                         <div class="item">
                             <mmf:user.avatar user="{topic.author}" width="40"
                                              alt="{topic.author.username}"
-                                             class="tx-typo3forum-topic-show-post-user-icon"/>
+                                             class="tx-t3forum-topic-show-post-user-icon"/>
                             <h4>
 
                                 <f:link.action controller="Topic" action="show" arguments="{topic: topic}"

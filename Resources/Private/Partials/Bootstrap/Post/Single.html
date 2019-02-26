@@ -1,7 +1,7 @@
 {namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
 
 <div class="well">
-	<div class="tx-typo3forum-topic-show-post-menu">
+	<div class="tx-t3forum-topic-show-post-menu">
 		<f:render partial="Post/Menu" arguments="{post: post}"/>
 	</div>
 	<f:if condition="{post.author.anonymous}">
@@ -12,13 +12,13 @@
 			<f:render partial="User/InformationRow" arguments="{user: post.author}"/>
 		</f:else>
 	</f:if>
-	<div class="tx-typo3forum-topic-show-post-text">
+	<div class="tx-t3forum-topic-show-post-text">
 
         <f:format.html><mmf:format.textParser post="{post}"/></f:format.html>
 
 		<f:if condition="{post.attachments}">
-			<div class="tx-typo3forum-topic-show-post-attachments">
-				<div class="tx-typo3forum-topic-show-post-attachments-header">
+			<div class="tx-t3forum-topic-show-post-attachments">
+				<div class="tx-t3forum-topic-show-post-attachments-header">
 					<f:translate key="Post_Show_Attachments"/>
 					(
 					<f:count subject="{post.attachments}"/>
@@ -46,11 +46,11 @@
 		</f:if>
 	</div>
 	<f:if condition="{post.author.signature}">
-		<div class="tx-typo3forum-topic-show-post-signature">
+		<div class="tx-t3forum-topic-show-post-signature">
 			<f:format.html><mmf:format.textParser content="{post.author.signature}"/></f:format.html>
 		</div>
 	</f:if>
-	<div class="tx-typo3forum-topic-show-post-date">
+	<div class="tx-t3forum-topic-show-post-date">
 		<f:format.date format="{settings.format.dateTimeFormat}">{post.timestamp}</f:format.date>
 	</div>
 </div>

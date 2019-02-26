@@ -1,6 +1,6 @@
 {namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
 
-<div class="tx-typo3forum-message-box">
+<div class="tx-t3forum-message-box">
 	<div class="row-fluid">
 		<f:if condition="{notifications.0} == {NULL}">
 			<f:then>
@@ -14,7 +14,7 @@
 							<div class="row-fluid">
 								<mmf:user.avatar user="{notification.post.author}" width="40"
 												 alt="{notification.post.author.username}"
-												 class="tx-typo3forum-topic-show-post-user-icon img-polaroid img-rounded pull-left"/>
+												 class="tx-t3forum-topic-show-post-user-icon img-polaroid img-rounded pull-left"/>
 							</div>
 							<f:format.html><mmf:user.link user="{notification.post.author}"/></f:format.html>
 						</div>

@@ -1,5 +1,5 @@
 {namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
-<div class="tx-typo3forum-post-latest-box">
+<div class="tx-t3forum-post-latest-box">
     <div>
         <f:if condition="{posts.0} == {NULL}">
             <f:then>
@@ -11,7 +11,7 @@
                         <div class="item">
                             <mmf:user.avatar user="{post.author}" width="40"
                                              alt="{post.author.username}"
-                                             class="tx-typo3forum-topic-show-post-user-icon"/>
+                                             class="tx-t3forum-topic-show-post-user-icon"/>
 
                             <f:format.date format="d.m.Y H:i">{post.timestamp}</f:format.date>
                             -

@@ -3,7 +3,7 @@
 <!-- partial: Standard/Post/Single.html -->
 <div>
 
-    <div class="tx-typo3forum-topic-show-post-menu">
+    <div class="tx-t3forum-topic-show-post-menu">
         <!-- partial: Standard/Post/Menu.html -->
         <f:render partial="Post/Menu" arguments="{post: post}"/>
         <!-- /partial: Standard/Post/Menu.html -->
@@ -18,13 +18,13 @@
         </f:else>
     </f:if>
 
-    <div class="tx-typo3forum-topic-show-post-text">
+    <div class="tx-t3forum-topic-show-post-text">
 
         <f:format.html><mmf:format.textParser post="{post}"/></f:format.html>
 
         <f:if condition="{post.attachments}">
-            <div class="tx-typo3forum-topic-show-post-attachments">
-                <div class="tx-typo3forum-topic-show-post-attachments-header">
+            <div class="tx-t3forum-topic-show-post-attachments">
+                <div class="tx-t3forum-topic-show-post-attachments-header">
                     <f:translate key="Post_Show_Attachments"/>
                     (
                     <f:count subject="{post.attachments}"/>
@@ -55,11 +55,11 @@
     </div>
     
     <f:if condition="{post.author.signature}">
-        <div class="tx-typo3forum-topic-show-post-signature">
+        <div class="tx-t3forum-topic-show-post-signature">
 			<f:format.html><mmf:format.textParser content="{post.author.signature}"/></f:format.html>
         </div>
     </f:if>
-    <div class="tx-typo3forum-topic-show-post-date">
+    <div class="tx-t3forum-topic-show-post-date">
         <f:format.date format="{settings.format.dateTimeFormat}">{post.timestamp}</f:format.date>
     </div>
     <f:comment></f:comment>

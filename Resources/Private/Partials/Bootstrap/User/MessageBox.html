@@ -1,6 +1,6 @@
 {namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
 
-<div class="tx-typo3forum-message-box">
+<div class="tx-t3forum-message-box">
 	<div class="row-fluid">
 
 		<f:if condition="{messages.0} == {NULL}">
@@ -14,7 +14,7 @@
 							<div>
 								<mmf:user.avatar user="{message.feuser}" width="40"
 												 alt="{message.feuser.username}"
-												 class="tx-typo3forum-topic-show-post-user-icon img-polaroid img-rounded pull-left"/>
+												 class="tx-t3forum-topic-show-post-user-icon img-polaroid img-rounded pull-left"/>
 							</div>
 							<div>
 								{message.feuser.username}
