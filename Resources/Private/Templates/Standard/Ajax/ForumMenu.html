@@ -12,7 +12,7 @@
         <mmf:authentication.ifAccess object="{forum}" accessType="newTopic">
         <li>
             <f:link.action controller="Topic" action="new" arguments="{forum: forum}">
-                <i class="tx-typo3forum-icon-16-topic-new"></i> {f:translate(key:'Button_Topic_New')}
+                <i class="tx-t3forum-icon-16-topic-new"></i> {f:translate(key:'Button_Topic_New')}
             </f:link.action>
         </li>
         </mmf:authentication.ifAccess>
@@ -24,12 +24,12 @@
         <mmf:user.ifSubscribed object="{forum}">
         <f:then>
             <f:link.action controller="User" action="subscribe" arguments="{forum: forum, unsubscribe: 1}">
-                <i class="tx-typo3forum-icon-16-unsubscribe"></i> {f:translate(key:'Button_Unsubscribe')}
+                <i class="tx-t3forum-icon-16-unsubscribe"></i> {f:translate(key:'Button_Unsubscribe')}
             </f:link.action>
         </f:then>
         <f:else>
             <f:link.action controller="User" action="subscribe" arguments="{forum: forum}">
-               <i class="tx-typo3forum-icon-16-subscribe"></i> {f:translate(key:'Button_Subscribe')}
+               <i class="tx-t3forum-icon-16-subscribe"></i> {f:translate(key:'Button_Subscribe')}
             </f:link.action>
         </f:else>
         </mmf:user.ifSubscribed>
