@@ -29,7 +29,6 @@ namespace T3forum\T3forum\Configuration;
 
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
-use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ConfigurationBuilder implements SingletonInterface
