@@ -26,11 +26,11 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_access.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_access.';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_typo3forum_domain_model_forum_access',
-    'EXT:typo3_forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_forum_access.xml'
+    'EXT:t3forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_forum_access.xml'
 );
 
 if (version_compare(TYPO3_branch, '8.5', '<')) {
@@ -42,7 +42,7 @@ if (version_compare(TYPO3_branch, '8.5', '<')) {
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_access',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_access',
         'label' => 'operation',
         'type' => 'login_level',
         'tstamp' => 'tstamp',
@@ -56,7 +56,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Forum/Access.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Forum/Access.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'login_level,operation,negate,forum,affected_group'
@@ -148,7 +148,7 @@ return [
         ],
         'forum' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_forum',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_forum',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',

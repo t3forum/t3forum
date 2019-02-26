@@ -28,10 +28,10 @@
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_typo3forum_domain_model_user_userfield_value',
-    'EXT:typo3_forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_user_userfield_value.xml'
+    'EXT:t3forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_user_userfield_value.xml'
 );
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_userfield_value.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_userfield_value.';
 
 if (version_compare(TYPO3_branch, '8.5', '<')) {
     // die('Die Extension benötigt TYPO3 8.5.0 oder höher.');
@@ -42,7 +42,7 @@ if (version_compare(TYPO3_branch, '8.5', '<')) {
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_userfield_value',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_userfield_value',
         'label' => 'uid',
         'type' => 'user',
         'tstamp' => 'tstamp',
@@ -56,7 +56,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/User/Userfield/Value.png'
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/User/Userfield/Value.png'
     ],
     'interface' => [
         'showRecordFieldList' => 'user,userfield,value'

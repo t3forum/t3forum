@@ -27,15 +27,15 @@
  */
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'typo3_forum',
-    'description' => 'Forum extension',
+    'title' => 'TYPO3 Forum Extension',
+    'description' => 'Feature-rich forum extension for TYPO3 v8, based on EXT:typo3_forum (originally developed by Mittwald CM Service GmbH Co KG)',
     'category' => 'plugin',
     'author' => 'TYPO3 Forum Extension Team',
     'author_email' => '',
     'author_company' => '',
     'state' => 'stable',
     'uploadfolder' => 0,
-    'createDirs' => 'typo3temp/typo3_forum,typo3temp/typo3_forum/gravatar',
+    'createDirs' => 'typo3temp/t3forum,typo3temp/t3forum/gravatar',
     'clearCacheOnLoad' => 0,
     'version' => '8.7.1',
     'constraints' => [

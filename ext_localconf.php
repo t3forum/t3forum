@@ -96,7 +96,7 @@ $_EXTKEY = 't3forum';
 );
 
 /*
- * TCE-Main hook for clearing all typo3_forum caches
+ * TCE-Main hook for clearing all t3forum caches
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][] =
     T3forum\T3forum\Cache\CacheManager::class . '->clearAll';

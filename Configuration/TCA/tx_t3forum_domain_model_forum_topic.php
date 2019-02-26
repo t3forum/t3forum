@@ -28,10 +28,10 @@
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_typo3forum_domain_model_forum_topic',
-    'EXT:typo3_forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_forum_topic.xml'
+    'EXT:t3forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_forum_topic.xml'
 );
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic.';
 $modelNamespace = '\Mittwald\Typo3Forum\Domain\Model';
 
 if (version_compare(TYPO3_branch, '8.5', '<')) {
@@ -44,7 +44,7 @@ if (version_compare(TYPO3_branch, '8.5', '<')) {
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic',
         'type' => 'type',
         'label' => 'subject',
         'tstamp' => 'tstamp',
@@ -56,7 +56,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Forum/Topic.png'
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Forum/Topic.png'
     ],
     'interface' => [
         'showRecordFieldList' => 'type,subject,posts,author,subscribers,last_post,forum,target,question,criteria_options,solution,fav_subscribers,tags'
@@ -197,7 +197,7 @@ return [
             ]
         ],
         'forum' => [
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_forum',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_forum',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -225,7 +225,7 @@ return [
             ],
         ],
         'criteria_options' => [
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria_options',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria_options',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',

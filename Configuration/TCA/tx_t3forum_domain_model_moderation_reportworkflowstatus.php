@@ -26,7 +26,7 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_moderation_reportworkflowstatus.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_moderation_reportworkflowstatus.';
 
 if (version_compare(TYPO3_branch, '8.5', '<')) {
     // die('Die Extension benötigt TYPO3 8.5.0 oder höher.');
@@ -37,7 +37,7 @@ if (version_compare(TYPO3_branch, '8.5', '<')) {
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_moderation_reportworkflowstatus',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_moderation_reportworkflowstatus',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -48,7 +48,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Moderation/ReportWorkflowStatus.png'
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Moderation/ReportWorkflowStatus.png'
     ],
     'interface' => [
         'showRecordFieldList' => 'name,icon,followup_status,initial,final'

@@ -26,15 +26,15 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria.';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'delete' => 'deleted',
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Forum/Criteria.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Forum/Criteria.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'name,options,default_option',
@@ -44,7 +44,7 @@ return [
     ],
     'columns' => [
         'name' => [
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria.name',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria.name',
             'config' => [
                 'type' => 'text',
             ],

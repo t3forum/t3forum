@@ -26,16 +26,16 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_privatemessage.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_privatemessage.';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_privatemessage',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_privatemessage',
         'label' => 'uid',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/User/pm.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/User/pm.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'message, feuser, opponent, type, user_read, crdate'
@@ -97,7 +97,7 @@ return [
         ],
         'crdate' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tstamp',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tstamp',
             'config' => [
                 'type' => 'none',
                 'format' => 'date',

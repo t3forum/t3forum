@@ -26,16 +26,16 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria_options.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria_options.';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria_options',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_criteria_options',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'delete' => 'deleted',
         'sortby' => 'sorting',
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Forum/CriteriaOption.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Forum/CriteriaOption.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'name,criteria,sorting'

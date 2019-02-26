@@ -28,10 +28,10 @@
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_typo3forum_domain_model_forum_post',
-    'EXT:typo3_forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_forum_post.xml'
+    'EXT:t3forum/Resources/Private/Language/locallang_csh_tx_typo3forum_domain_model_forum_post.xml'
 );
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_post.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_post.';
 
 if (version_compare(TYPO3_branch, '8.5', '<')) {
     // die('Die Extension benötigt TYPO3 8.5.0 oder höher.');
@@ -42,7 +42,7 @@ if (version_compare(TYPO3_branch, '8.5', '<')) {
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_post',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_post',
         'label' => 'text',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -53,7 +53,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden'
         ],
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Forum/Post.png'
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Forum/Post.png'
     ],
     'interface' => [
         'showRecordFieldList' => 'text,author,topic,attachments, helpful_count, supporters'
@@ -163,7 +163,7 @@ return [
             ],
         ],
         'supporters' => [
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic.supporters',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_topic.supporters',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingleBox',

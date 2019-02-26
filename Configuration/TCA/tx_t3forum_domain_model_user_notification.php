@@ -26,11 +26,11 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_notification.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_notification.';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_notification',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_user_notification',
         'label' => 'uid',
         'label_alt' => 'feuser,crdate',
         'label_alt_force' => true,
@@ -39,7 +39,7 @@ return [
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY crdate DESC',
         'hideTable' => true,
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/User/notification.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/User/notification.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'feuser,post,tag,user_read,type,crdate',
@@ -104,7 +104,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_post', 'Mittwald\Typo3Forum\Domain\Model\Forum\Post'],
+                    ['LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_post', 'Mittwald\Typo3Forum\Domain\Model\Forum\Post'],
                     [$lllPath . 'tag', 'Mittwald\Typo3Forum\Domain\Model\Forum\Tag'],
                 ],
             ],

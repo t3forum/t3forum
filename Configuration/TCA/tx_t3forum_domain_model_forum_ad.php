@@ -26,15 +26,15 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_ad.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_ad.';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_ad',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_forum_ad',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'delete' => 'deleted',
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Forum/Ad.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Forum/Ad.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'name,alt_text,url,path,active,category,groups',

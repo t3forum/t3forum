@@ -26,11 +26,11 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-$lllPath = 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_stats_summary.';
+$lllPath = 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_stats_summary.';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_stats_summary',
+        'title' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang_db.xml:tx_typo3forum_domain_model_stats_summary',
         'label' => 'type',
         'label_alt' => 'tstamp',
         'label_alt_force' => true,
@@ -38,7 +38,7 @@ return [
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY tstamp DESC',
         'hideTable' => true,
-        'iconfile' => 'EXT:typo3_forum/Resources/Public/Icons/Stats/summary.png',
+        'iconfile' => 'EXT:t3forum/Resources/Public/Icons/Stats/summary.png',
     ],
     'interface' => [
         'showRecordFieldList' => 'type,amount,tstamp',
