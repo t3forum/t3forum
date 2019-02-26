@@ -35,5 +35,5 @@ class TextUserfield extends TyposcriptUserfield
      * The typoscript path that is to be used for rendering this field.
      * @var string
      */
-    protected $typoscriptPath = 'plugin.tx_typo3forum.userfields.text';
+    protected $typoscriptPath = 'plugin.tx_t3forum.userfields.text';
 }

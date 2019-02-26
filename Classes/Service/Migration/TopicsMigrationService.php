@@ -115,7 +115,7 @@ class TopicsMigrationService extends AbstractMigrationService
      */
     public function getNewTableName()
     {
-        return 'tx_typo3forum_domain_model_forum_topic';
+        return 'tx_t3forum_domain_model_forum_topic';
     }
 
     /**

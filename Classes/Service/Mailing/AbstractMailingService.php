@@ -33,7 +33,7 @@ use T3forum\T3forum\Service\AbstractService;
 abstract class AbstractMailingService extends AbstractService implements MailingServiceInterface
 {
     /**
-     * Whole TypoScript typo3_forum settings
+     * Whole TypoScript t3forum settings
      * @var array
      */
     protected $settings;

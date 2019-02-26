@@ -59,14 +59,14 @@ class ForumReadAdditionalFieldProvider implements AdditionalFieldProviderInterfa
 
         $additionalFields['ForumRead_forumPid'] = [
             'code' => '<input type="text" name="tx_scheduler[ForumRead_forumPid]" value="' . (int)$taskInfo['ForumRead_forumPid'] . '" />',
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang.xml:tx_typo3forum_scheduler_forumRead_forumPid',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang.xml:tx_t3forum_scheduler_forumRead_forumPid',
             'cshKey' => '',
             'cshLabel' => ''
         ];
 
         $additionalFields['ForumRead_userPid'] = [
             'code' => '<input type="text" name="tx_scheduler[ForumRead_userPid]" value="' . (int)$taskInfo['ForumRead_userPid'] . '" />',
-            'label' => 'LLL:EXT:typo3_forum/Resources/Private/Language/locallang.xml:tx_typo3forum_scheduler_forumRead_userPid',
+            'label' => 'LLL:EXT:t3forum/Resources/Private/Language/locallang.xml:tx_t3forum_scheduler_forumRead_userPid',
             'cshKey' => '',
             'cshLabel' => ''
         ];

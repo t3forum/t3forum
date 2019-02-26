@@ -172,7 +172,7 @@ class FrontendUserRepository extends AbstractRepository
     {
         $query = $this->createQuery();
         $query->setOrderings([
-            'tx_typo3forum_points' => QueryInterface::ORDER_DESCENDING,
+            'tx_t3forum_points' => QueryInterface::ORDER_DESCENDING,
             'username' => QueryInterface::ORDER_ASCENDING,
         ]);
         $query->setLimit($limit);

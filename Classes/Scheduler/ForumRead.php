@@ -87,12 +87,12 @@ class ForumRead extends AbstractTask
         $limit = 86400;
 
         $query = 'SELECT t.forum, COUNT(*) AS topic_amount
-					  FROM tx_typo3forum_domain_model_forum_topic AS t
+					  FROM tx_t3forum_domain_model_forum_topic AS t
 					  WHERE t.pid=' . (int)$this->getForumPid() . '
 					  GROUP BY t.forum';
         $forumRes = $GLOBALS['TYPO3_DB']->sql_query($query);
         while ($forumRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($forumRes)) {
-            $query = 'SELECT uid FROM tx_typo3forum_domain_model_forum_topic WHERE forum=' . $forumRow['forum'];
+            $query = 'SELECT uid FROM tx_t3forum_domain_model_forum_topic WHERE forum=' . $forumRow['forum'];
             $topicRes = $GLOBALS['TYPO3_DB']->sql_query($query);
             $topics = [];
             while ($topicRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($topicRes)) {
@@ -101,7 +101,7 @@ class ForumRead extends AbstractTask
 
             $query = 'SELECT fe.uid, COUNT(*) AS read_amount
 					  FROM fe_users AS fe
-					  LEFT JOIN tx_typo3forum_domain_model_user_readtopic AS rt ON rt.uid_local = fe.uid
+					  LEFT JOIN tx_t3forum_domain_model_user_readtopic AS rt ON rt.uid_local = fe.uid
 								AND rt.uid_foreign IN (' . implode(',', $topics) . ')
 					  WHERE fe.disable=0 AND fe.deleted=0 AND fe.tx_extbase_type="\T3forum\T3forum\Domain\Model\User\FrontendUser"
 						AND fe.pid=' . (int)$this->getUserPid() . ' AND fe.lastlogin > ' . (time() - $limit) . '
@@ -109,7 +109,7 @@ class ForumRead extends AbstractTask
             $userRes = $GLOBALS['TYPO3_DB']->sql_query($query);
             while ($userRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($userRes)) {
                 //First delete all entries for a user to resolve duplicate primaries
-                $query = 'DELETE FROM tx_typo3forum_domain_model_user_readforum
+                $query = 'DELETE FROM tx_t3forum_domain_model_user_readforum
 										WHERE uid_local=' . (int)$userRow['uid'] . '
 											 AND uid_foreign=' . (int)$forumRow['forum'];
                 $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -120,7 +120,7 @@ class ForumRead extends AbstractTask
                         'uid_foreign' => $forumRow['forum'],
 
                     ];
-                    $query = $GLOBALS['TYPO3_DB']->INSERTquery('tx_typo3forum_domain_model_user_readforum', $insert);
+                    $query = $GLOBALS['TYPO3_DB']->INSERTquery('tx_t3forum_domain_model_user_readforum', $insert);
                     $GLOBALS['TYPO3_DB']->sql_query($query);
                 }
             }

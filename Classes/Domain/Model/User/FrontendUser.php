@@ -634,7 +634,7 @@ class FrontendUser extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implemen
         // and you're fine (http://de.gravatar.com/site/implement/images/).
         if ($this->useGravatar) {
             $emailHash = md5(strtolower($this->email));
-            $temporaryFilename = 'typo3temp/typo3_forum/gravatar/' . $emailHash . '.jpg';
+            $temporaryFilename = 'typo3temp/t3forum/gravatar/' . $emailHash . '.jpg';
             if (!file_exists(PATH_site . $temporaryFilename)) {
                 $image = GeneralUtility::getUrl('https://secure.gravatar.com/avatar/' . $emailHash . '.jpg');
                 file_put_contents(PATH_site . $temporaryFilename, $image);

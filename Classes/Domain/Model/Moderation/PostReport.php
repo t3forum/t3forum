@@ -27,7 +27,7 @@ namespace T3forum\T3forum\Domain\Model\Moderation;
 
 /**
  * Models a post report. Reports are the central object of the moderation
- * component of the typo3_forum extension. Each user can report a forum post
+ * component of the t3forum extension. Each user can report a forum post
  * to the respective moderator group. In this case, a report object is
  * created.
  *

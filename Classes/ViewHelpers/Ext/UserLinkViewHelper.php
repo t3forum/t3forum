@@ -40,7 +40,7 @@ class UserLinkViewHelper extends CObjectViewHelper
     protected $configurationBuilder;
 
     /**
-     * Whole TypoScript typo3_forum settings
+     * Whole TypoScript t3forum settings
      *
      * @var array
      */

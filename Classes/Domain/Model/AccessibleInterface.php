@@ -31,7 +31,7 @@ use T3forum\T3forum\Domain\Model\Forum\Access;
 
 /**
  * Interface definition for objects that are submitted to the access control
- * mechanism of the typo3_forum.
+ * mechanism of the t3forum.
  */
 interface AccessibleInterface
 {

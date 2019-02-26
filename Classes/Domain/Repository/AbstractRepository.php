@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  *
- * Abstract base class for all typo3_forum repositories.
+ * Abstract base class for all t3forum repositories.
  *
  * @author     Martin Helmich <m.helmich@mittwald.de>
  * @version    $Id$

@@ -95,7 +95,7 @@ class Counter extends AbstractTask
         /** @var ConfigurationManagerInterface $configurationManager */
         $configurationManager = $objectManager->get(ConfigurationManagerInterface::class);
         $this->settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $this->settings = $this->settings['plugin.']['tx_typo3forum.']['settings.'];
+        $this->settings = $this->settings['plugin.']['tx_t3forum.']['settings.'];
     }
 
     /**
@@ -119,8 +119,8 @@ class Counter extends AbstractTask
     private function updateTopic()
     {
         $topicCount = [];
-        $query = 'SELECT COUNT(*) AS counter, p.topic FROM tx_typo3forum_domain_model_forum_post AS p
-				  INNER JOIN tx_typo3forum_domain_model_forum_topic AS t ON t.uid = p.topic
+        $query = 'SELECT COUNT(*) AS counter, p.topic FROM tx_t3forum_domain_model_forum_post AS p
+				  INNER JOIN tx_t3forum_domain_model_forum_topic AS t ON t.uid = p.topic
 				  WHERE p.pid=' . (int)$this->getForumPid() . ' AND p.deleted=0 AND t.deleted=0
 				  GROUP BY p.topic
 				  ORDER BY counter ASC';
@@ -132,7 +132,7 @@ class Counter extends AbstractTask
         $lastCounterArray = [];
         foreach ($topicCount as $topicUid => $postCount) {
             if ($lastCounter != $postCount) {
-                $query = 'UPDATE tx_typo3forum_domain_model_forum_topic SET post_count = ' . (int)$lastCounter . ' WHERE uid IN (' . implode(',', $lastCounterArray) . ')';
+                $query = 'UPDATE tx_t3forum_domain_model_forum_topic SET post_count = ' . (int)$lastCounter . ' WHERE uid IN (' . implode(',', $lastCounterArray) . ')';
                 $GLOBALS['TYPO3_DB']->sql_query($query);
                 $lastCounterArray = [];
             }
@@ -152,7 +152,7 @@ class Counter extends AbstractTask
 
         //Find any post_count
         $query = 'SELECT p.author, COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_forum_post AS p
+				  FROM tx_t3forum_domain_model_forum_post AS p
 				  WHERE p.deleted=0 AND p.hidden=0 AND p.author > 0 AND p.pid=' . $forumPid . '
 				  GROUP BY p.author';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -162,7 +162,7 @@ class Counter extends AbstractTask
 
         //Find any topic count
         $query = 'SELECT author, COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_forum_topic
+				  FROM tx_t3forum_domain_model_forum_topic
 				  WHERE deleted=0 AND hidden=0 AND author > 0 AND pid=' . $forumPid . '
 				  GROUP BY author';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -172,7 +172,7 @@ class Counter extends AbstractTask
 
         // Find any question topic count
         $query = 'SELECT author, COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_forum_topic
+				  FROM tx_t3forum_domain_model_forum_topic
 				  WHERE deleted=0 AND hidden=0 AND author > 0 AND pid=' . $forumPid . ' AND question=1
 				  GROUP BY author';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -182,8 +182,8 @@ class Counter extends AbstractTask
 
         // Find any favorite count
         $query = 'SELECT t.author, COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_user_topicfavsubscription AS s
-				  INNER JOIN tx_typo3forum_domain_model_forum_topic AS t ON t.uid = s.uid_foreign
+				  FROM tx_t3forum_domain_model_user_topicfavsubscription AS s
+				  INNER JOIN tx_t3forum_domain_model_forum_topic AS t ON t.uid = s.uid_foreign
 				  GROUP BY uid_local';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
@@ -192,8 +192,8 @@ class Counter extends AbstractTask
 
         //Supported Post User X got
         $query = 'SELECT p.author, COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_user_supportpost AS s
-				  INNER JOIN tx_typo3forum_domain_model_forum_post AS p ON p.uid = s.uid_foreign
+				  FROM tx_t3forum_domain_model_user_supportpost AS s
+				  INNER JOIN tx_t3forum_domain_model_forum_post AS p ON p.uid = s.uid_foreign
 				  GROUP BY p.author';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
@@ -202,7 +202,7 @@ class Counter extends AbstractTask
 
         //Supported Post User X set
         $query = 'SELECT s.uid_local, COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_user_supportpost AS s
+				  FROM tx_t3forum_domain_model_user_supportpost AS s
 				  GROUP BY uid_local';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
@@ -211,7 +211,7 @@ class Counter extends AbstractTask
 
         //Find all users with their current rank
         $class = mysqli_real_escape_string($GLOBALS['TYPO3_DB']->getDatabaseHandle(), FrontendUser::class);
-        $query = 'SELECT fe.uid, fe.tx_typo3forum_rank
+        $query = 'SELECT fe.uid, fe.tx_t3forum_rank
 				  FROM fe_users AS fe
 				  WHERE fe.disable=0 AND fe.deleted=0 AND fe.tx_extbase_type="' . $class . '"
 						AND fe.pid=' . (int)$this->getUserPid();
@@ -219,12 +219,12 @@ class Counter extends AbstractTask
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
 
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-            $userUpdate[$row['author']]['rank'] = $row['tx_typo3forum_rank'];
+            $userUpdate[$row['author']]['rank'] = $row['tx_t3forum_rank'];
         }
 
         //Find all ranks
         $query = 'SELECT uid, point_limit
-				  FROM  tx_typo3forum_domain_model_user_rank
+				  FROM  tx_t3forum_domain_model_user_rank
 				  WHERE deleted=0 AND pid=' . (int)$this->getUserPid() . '
 				  ORDER BY point_limit ASC';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -256,12 +256,12 @@ class Counter extends AbstractTask
             }
 
             $values = [
-                'tx_typo3forum_post_count' => (int)$array['post_count'],
-                'tx_typo3forum_topic_count' => (int)$array['topic_count'],
-                'tx_typo3forum_question_count' => (int)$array['question_count'],
-                'tx_typo3forum_helpful_count' => (int)$array['support_count'],
-                'tx_typo3forum_points' => (int)$points,
-                'tx_typo3forum_rank' => (int)$array['rank'],
+                'tx_t3forum_post_count' => (int)$array['post_count'],
+                'tx_t3forum_topic_count' => (int)$array['topic_count'],
+                'tx_t3forum_question_count' => (int)$array['question_count'],
+                'tx_t3forum_helpful_count' => (int)$array['support_count'],
+                'tx_t3forum_points' => (int)$points,
+                'tx_t3forum_rank' => (int)$array['rank'],
             ];
 
             $query = $GLOBALS['TYPO3_DB']->UPDATEquery('fe_users', 'uid=' . (int)$userUid, $values);
@@ -269,19 +269,19 @@ class Counter extends AbstractTask
         }
 
         //At last, update the rank count
-        $query = $GLOBALS['TYPO3_DB']->UPDATEquery('tx_typo3forum_domain_model_user_rank', '1=1', ['user_count' => 0]);
+        $query = $GLOBALS['TYPO3_DB']->UPDATEquery('tx_t3forum_domain_model_user_rank', '1=1', ['user_count' => 0]);
         $GLOBALS['TYPO3_DB']->sql_query($query);
         $class = mysqli_real_escape_string($GLOBALS['TYPO3_DB']->getDatabaseHandle(), FrontendUser::class);
 
-        $query = 'SELECT tx_typo3forum_rank, COUNT(*) AS counter
+        $query = 'SELECT tx_t3forum_rank, COUNT(*) AS counter
 				  FROM fe_users
 				  WHERE disable=0 AND deleted=0 AND tx_extbase_type="' . $class . '"
 				  		AND pid=' . (int)$this->getUserPid() . '
-				  GROUP BY tx_typo3forum_rank';
+				  GROUP BY tx_t3forum_rank';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
             $query = $GLOBALS['TYPO3_DB']->UPDATEquery(
-                'tx_typo3forum_domain_model_user_rank', 'uid=' . (int)$row['tx_typo3forum_rank'],
+                'tx_t3forum_domain_model_user_rank', 'uid=' . (int)$row['tx_t3forum_rank'],
                 ['user_count' => (int)$row['counter']]);
             $GLOBALS['TYPO3_DB']->sql_query($query);
         }

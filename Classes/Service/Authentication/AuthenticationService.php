@@ -51,7 +51,7 @@ class AuthenticationService extends AbstractService implements AuthenticationSer
     protected $frontendUserRepository = null;
 
     /**
-     * An instance of the typo3_forum cache class.
+     * An instance of the t3forum cache class.
      * @var Cache
      * @inject
      */

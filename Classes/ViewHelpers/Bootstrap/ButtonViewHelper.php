@@ -65,11 +65,11 @@ class ButtonViewHelper extends ActionViewHelper
     public function renderChildren()
     {
         if ($this->arguments['icon']) {
-            $content = '<i class="tx-typo3forum-icon-16-' . $this->arguments['icon'] . '"></i> ';
+            $content = '<i class="tx-t3forum-icon-16-' . $this->arguments['icon'] . '"></i> ';
         } else {
             $content = '';
         }
-        $content .= LocalizationUtility::translate($this->arguments['label'], 'typo3_forum');
+        $content .= LocalizationUtility::translate($this->arguments['label'], 't3forum');
         return $content;
     }
 }

@@ -161,8 +161,8 @@ class Notification extends AbstractTask
     private function checkPostNotifications()
     {
         $query = 'SELECT t.uid
-				  FROM tx_typo3forum_domain_model_forum_topic AS t
-				  INNER JOIN tx_typo3forum_domain_model_forum_post AS p ON p.uid = t.last_post
+				  FROM tx_t3forum_domain_model_forum_topic AS t
+				  INNER JOIN tx_t3forum_domain_model_forum_post AS p ON p.uid = t.last_post
 				  WHERE t.pid IN (' . $this->getForumPids() . ') AND t.deleted=0
 				  		AND p.crdate > ' . $this->getLastExecutedCron() . '
 				  GROUP BY t.uid
@@ -173,7 +173,7 @@ class Notification extends AbstractTask
         while ($topicRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($topicRes)) {
             $involvedUser = $this->getUserInvolvedInTopic($topicRow['uid']);
             $query = 'SELECT uid, author
-					  FROM tx_typo3forum_domain_model_forum_post
+					  FROM tx_t3forum_domain_model_forum_post
 					  WHERE topic=' . (int)$topicRow['uid'] . ' AND crdate > ' . $this->getLastExecutedCron() . '
 					  	 	AND deleted=0 AND pid IN (' . $this->getForumPids() . ')';
             $postRes = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -195,7 +195,7 @@ class Notification extends AbstractTask
                         'user_read' => (($this->getLastExecutedCron() == 0) ? 1 : 0)
 
                     ];
-                    $GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_typo3forum_domain_model_user_notification', $insert);
+                    $GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_t3forum_domain_model_user_notification', $insert);
                 }
             }
         }
@@ -207,10 +207,10 @@ class Notification extends AbstractTask
     private function checkTagsNotification()
     {
         $query = 'SELECT tg.uid AS tagUid, t.uid AS topicUid
-				 FROM tx_typo3forum_domain_model_forum_tag AS tg
-				 INNER JOIN tx_typo3forum_domain_model_forum_tag_topic AS mm ON mm.uid_foreign = tg.uid
-				 INNER JOIN tx_typo3forum_domain_model_forum_topic AS t ON t.uid = mm.uid_local
-				 INNER JOIN tx_typo3forum_domain_model_forum_post AS p ON p.uid = t.last_post
+				 FROM tx_t3forum_domain_model_forum_tag AS tg
+				 INNER JOIN tx_t3forum_domain_model_forum_tag_topic AS mm ON mm.uid_foreign = tg.uid
+				 INNER JOIN tx_t3forum_domain_model_forum_topic AS t ON t.uid = mm.uid_local
+				 INNER JOIN tx_t3forum_domain_model_forum_post AS p ON p.uid = t.last_post
 				 WHERE tg.deleted=0 AND t.deleted=0 AND tg.pid IN (' . $this->getForumPids() . ')
 				 	   AND p.crdate > ' . $this->getLastExecutedCron() . '
 				 ORDER BY t.last_post DESC';
@@ -219,8 +219,8 @@ class Notification extends AbstractTask
         while ($tagsRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($tagsRes)) {
             $subscribedTagUser = [];
             $query = 'SELECT fe.uid
-					  FROM tx_typo3forum_domain_model_forum_tag AS tg
-					  INNER JOIN tx_typo3forum_domain_model_forum_tag_user AS mm ON mm.uid_local = tg.uid
+					  FROM tx_t3forum_domain_model_forum_tag AS tg
+					  INNER JOIN tx_t3forum_domain_model_forum_tag_user AS mm ON mm.uid_local = tg.uid
 					  INNER JOIN fe_users AS fe ON fe.uid = mm.uid_foreign
 					  WHERE tg.uid=' . (int)$tagsRow['tagUid'];
             $userRes = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -229,7 +229,7 @@ class Notification extends AbstractTask
             }
 
             $query = 'SELECT *
-						  FROM tx_typo3forum_domain_model_forum_post AS p
+						  FROM tx_t3forum_domain_model_forum_post AS p
 						  WHERE p.topic=' . (int)$tagsRow['topicUid'] . ' AND p.deleted=0 AND p.author > 0
 						  		AND p.crdate > ' . (int)$this->getLastExecutedCron() . ' AND pid IN (' . $this->getForumPids() . ')';
             $postRes = $GLOBALS['TYPO3_DB']->sql_query($query);
@@ -249,7 +249,7 @@ class Notification extends AbstractTask
                         'user_read' => (($this->getLastExecutedCron() == 0) ? 1 : 0)
 
                     ];
-                    $GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_typo3forum_domain_model_user_notification', $insert);
+                    $GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_t3forum_domain_model_user_notification', $insert);
                 }
             }
         }
@@ -263,7 +263,7 @@ class Notification extends AbstractTask
     private function findLastCronExecutionDate()
     {
         $query = 'SELECT crdate
-				  FROM tx_typo3forum_domain_model_user_notification
+				  FROM tx_t3forum_domain_model_user_notification
 				  WHERE pid =' . $this->getNotificationPid() . '
 				  ORDER BY crdate DESC
 				  LIMIT 1';
@@ -281,7 +281,7 @@ class Notification extends AbstractTask
     {
         $user = [];
         $query = 'SELECT author, uid
-				  FROM tx_typo3forum_domain_model_forum_post
+				  FROM tx_t3forum_domain_model_forum_post
 				  WHERE pid IN (' . $this->getForumPids() . ') AND deleted=0 AND author > 0
 				  		AND topic=' . (int)$topicUid . '
 				  GROUP BY author';

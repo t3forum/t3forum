@@ -157,7 +157,7 @@ class Attachment extends AbstractEntity implements ConfigurableInterface
      */
     public function getAbsoluteFilename()
     {
-        $tca = $GLOBALS['TCA']['tx_typo3forum_domain_model_forum_attachment'];
+        $tca = $GLOBALS['TCA']['tx_t3forum_domain_model_forum_attachment'];
         $uploadPath = $tca['columns']['real_filename']['config']['uploadfolder'];
         return $uploadPath . $this->getRealFilename();
     }
@@ -223,11 +223,11 @@ class Attachment extends AbstractEntity implements ConfigurableInterface
     }
 
     /**
-     * Gets the whole TCA config of tx_typo3forum_domain_model_forum_attachment
-     * @return array The whole TCA config of tx_typo3forum_domain_model_forum_attachment
+     * Gets the whole TCA config of tx_t3forum_domain_model_forum_attachment
+     * @return array The whole TCA config of tx_t3forum_domain_model_forum_attachment
      */
     public function getTCAConfig()
     {
-        return $GLOBALS['TCA']['tx_typo3forum_domain_model_forum_attachment'];
+        return $GLOBALS['TCA']['tx_t3forum_domain_model_forum_attachment'];
     }
 }

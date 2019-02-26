@@ -107,14 +107,14 @@ class StatsSummary extends AbstractTask
         $results = [];
 
         $query = 'SELECT COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_forum_post
+				  FROM tx_t3forum_domain_model_forum_post
 				  WHERE deleted=0 AND pid IN (' . $this->getForumPids() . ');';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
         $results[] = (int)$row['counter'];
 
         $query = 'SELECT COUNT(*) AS counter
-				  FROM tx_typo3forum_domain_model_forum_topic
+				  FROM tx_t3forum_domain_model_forum_topic
 				  WHERE deleted=0 AND pid IN (' . $this->getForumPids() . ');';
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
@@ -135,7 +135,7 @@ class StatsSummary extends AbstractTask
                 'type' => (int)$typeUid,
                 'amount' => (int)$amount,
             ];
-            $query = $GLOBALS['TYPO3_DB']->INSERTquery('tx_typo3forum_domain_model_stats_summary', $values);
+            $query = $GLOBALS['TYPO3_DB']->INSERTquery('tx_t3forum_domain_model_stats_summary', $values);
             $GLOBALS['TYPO3_DB']->sql_query($query);
         }
 

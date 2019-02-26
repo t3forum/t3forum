@@ -47,7 +47,7 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
     protected $cache = null;
 
     /**
-     * Instance of the typo3_forum TypoScript reader class. This class is used
+     * Instance of the t3forum TypoScript reader class. This class is used
      * to read a bbcode editor's configuration from the typoscript setup.
      *
      * @var TypoScript
@@ -91,7 +91,7 @@ class BbCodeEditorViewHelper extends TextareaViewHelper
             'string',
             'Path to TS configuration',
             false,
-            'plugin.tx_typo3forum.settings.textParsing.editorPanel'
+            'plugin.tx_t3forum.settings.textParsing.editorPanel'
         );
     }
 

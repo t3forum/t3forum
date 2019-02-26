@@ -111,7 +111,7 @@ abstract class AbstractController extends ActionController
      * Calls a controller action. This method wraps the callActionMethod method of
      * the parent Tx_Extbase_MVC_Controller_ActionController class. It catches all
      * Exceptions that might be thrown inside one of the action methods.
-     * This method ONLY catches exceptions that belong to the typo3_forum extension.
+     * This method ONLY catches exceptions that belong to the t3forum extension.
      * All other exceptions are not caught.
      *
      * @throws AbstractException

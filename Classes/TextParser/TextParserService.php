@@ -50,7 +50,7 @@ class TextParserService extends AbstractService
     protected $objectManager;
 
     /**
-     * An instance of the typo3_forum typoscript reader. Is used to read the
+     * An instance of the t3forum typoscript reader. Is used to read the
      * text parser's typoscript configuration.
      *
      * @var TypoScript

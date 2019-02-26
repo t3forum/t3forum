@@ -97,8 +97,8 @@ class UserMigrationService extends AbstractMigrationService
     {
         return [
             'tx_mmforum_avatar' => 'image',
-            'tx_mmforum_user_sig' => 'tx_typo3forum_signature',
-            'tx_mmforum_skype' => 'tx_typo3forum_skype',
+            'tx_mmforum_user_sig' => 'tx_t3forum_signature',
+            'tx_mmforum_skype' => 'tx_t3forum_skype',
         ];
     }
 
@@ -108,8 +108,8 @@ class UserMigrationService extends AbstractMigrationService
     public function addFieldsDefinition()
     {
         return [
-            'tx_typo3forum_signature' => 'TEXT NULL',
-            'tx_typo3forum_skype' => 'VARCHAR(255) NULL',
+            'tx_t3forum_signature' => 'TEXT NULL',
+            'tx_t3forum_skype' => 'VARCHAR(255) NULL',
         ];
     }
 

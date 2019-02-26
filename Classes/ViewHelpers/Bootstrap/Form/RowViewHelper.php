@@ -70,7 +70,7 @@ class RowViewHelper extends AbstractTagBasedViewHelper
         $class = 'control-group';
 
         if ($this->arguments['llLabel']) {
-            $label = LocalizationUtility::translate($this->arguments['llLabel'], 'typo3_forum');
+            $label = LocalizationUtility::translate($this->arguments['llLabel'], 't3forum');
         } else {
             $label = $this->arguments['label'];
         }

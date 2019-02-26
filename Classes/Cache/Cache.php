@@ -34,7 +34,7 @@ use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
- * This class provides access to the TYPO3 caching framework to the typo3_forum components.
+ * This class provides access to the TYPO3 caching framework to the t3forum components.
  * Basically, this class is just a very thin wrapper around the TYPO3 caching framework.
  * It encapsulated creation and retrieval of the appropriate caches and can be very
  * easily obtained using dependency injection.

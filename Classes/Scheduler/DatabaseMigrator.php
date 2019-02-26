@@ -125,22 +125,22 @@ class DatabaseMigrator extends AbstractTask
     protected function migrateTables()
     {
         foreach ($this->legacyTableNames as $legacyTableName) {
-            $newTableName = str_replace('_mmforum_', '_typo3forum_', $legacyTableName);
-            // special case for tx_typo3forum_domain_model_moderation_reportworkflowstatus_followup which is too long for MySQL (>64 characters)
-            if ($newTableName === 'tx_typo3forum_domain_model_moderation_reportworkflowstatus_followup') {
-                $newTableName = 'tx_typo3forum_domain_model_moderation_reportworkflowstatus_mm';
+            $newTableName = str_replace('_mmforum_', '_t3forum_', $legacyTableName);
+            // special case for tx_t3forum_domain_model_moderation_reportworkflowstatus_followup which is too long for MySQL (>64 characters)
+            if ($newTableName === 'tx_t3forum_domain_model_moderation_reportworkflowstatus_followup') {
+                $newTableName = 'tx_t3forum_domain_model_moderation_reportworkflowstatus_mm';
             }
-            // special case for tx_typo3forum_domain_model_user_privatemessages which has been renamed to singluar
-            if ($newTableName === 'tx_typo3forum_domain_model_user_privatemessages') {
-                $newTableName = 'tx_typo3forum_domain_model_user_privatemessage';
+            // special case for tx_t3forum_domain_model_user_privatemessages which has been renamed to singluar
+            if ($newTableName === 'tx_t3forum_domain_model_user_privatemessages') {
+                $newTableName = 'tx_t3forum_domain_model_user_privatemessage';
             }
-            // special case for tx_typo3forum_domain_model_user_privatemessages_text which has been renamed to singluar
-            if ($newTableName === 'tx_typo3forum_domain_model_user_privatemessages_text') {
-                $newTableName = 'tx_typo3forum_domain_model_user_privatemessage_text';
+            // special case for tx_t3forum_domain_model_user_privatemessages_text which has been renamed to singluar
+            if ($newTableName === 'tx_t3forum_domain_model_user_privatemessages_text') {
+                $newTableName = 'tx_t3forum_domain_model_user_privatemessage_text';
             }
-            // special case for tx_typo3forum_domain_model_forum_ads which has been renamed to singluar
-            if ($newTableName === 'tx_typo3forum_domain_model_forum_ads') {
-                $newTableName = 'tx_typo3forum_domain_model_forum_ad';
+            // special case for tx_t3forum_domain_model_forum_ads which has been renamed to singluar
+            if ($newTableName === 'tx_t3forum_domain_model_forum_ads') {
+                $newTableName = 'tx_t3forum_domain_model_forum_ad';
             }
             if ($this->tableExists($legacyTableName)) {
                 if ($this->tableExists($newTableName)) {
@@ -167,7 +167,7 @@ class DatabaseMigrator extends AbstractTask
         $users = $this->databaseConnection->exec_SELECTgetRows('*', 'fe_users', '1=1');
         foreach ($users as $user) {
             foreach ($this->legacyFeUsersFields as $legacyFeUsersField) {
-                $newFeUsersField = str_replace('_mmforum_', '_typo3forum_', $legacyFeUsersField);
+                $newFeUsersField = str_replace('_mmforum_', '_t3forum_', $legacyFeUsersField);
                 if (isset($user[$legacyFeUsersField]) && isset($user[$newFeUsersField]) && !empty($user[$legacyFeUsersField])) {
                     $user[$newFeUsersField] = $user[$legacyFeUsersField];
                     $user[$legacyFeUsersField] = '';
@@ -185,7 +185,7 @@ class DatabaseMigrator extends AbstractTask
         $groups = $this->databaseConnection->exec_SELECTgetRows('*', 'fe_groups', '1=1');
         foreach ($groups as $group) {
             foreach ($this->legacyFeGroupsFields as $legacyFeGroupsField) {
-                $newFeGroupsField = str_replace('_mmforum_', '_typo3forum_', $legacyFeGroupsField);
+                $newFeGroupsField = str_replace('_mmforum_', '_t3forum_', $legacyFeGroupsField);
                 if (isset($group[$legacyFeGroupsField]) && isset($group[$newFeGroupsField]) && !empty($group[$legacyFeGroupsField])) {
                     $group[$newFeGroupsField] = $group[$legacyFeGroupsField];
                     $group[$legacyFeGroupsField] = '';
@@ -224,7 +224,7 @@ class DatabaseMigrator extends AbstractTask
         $contentElements = $this->databaseConnection->exec_SELECTgetRows('*', 'tt_content', '1=1');
         foreach ($contentElements as $contentElement) {
             foreach ($this->legacyTtContentListTypes as $legacyTtContentListType) {
-                $newTtContentListType = str_replace('mmforum_', 'typo3forum_', $legacyTtContentListType);
+                $newTtContentListType = str_replace('mmforum_', 't3forum_', $legacyTtContentListType);
                 if ($contentElement['list_type'] === $legacyTtContentListType) {
                     $contentElement['list_type'] = $newTtContentListType;
                     $this->databaseConnection->exec_UPDATEquery('tt_content', 'uid = ' . (int)$contentElement['uid'], $contentElement);

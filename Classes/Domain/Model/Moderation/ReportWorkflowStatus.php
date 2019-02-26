@@ -141,7 +141,7 @@ class ReportWorkflowStatus extends AbstractValueObject
 
     /**
      * Returns the site relative path of this status' icon. This method first
-     * looks in the configured upload directory (uploads/tx_typo3forum/workflowstatus
+     * looks in the configured upload directory (uploads/tx_t3forum/workflowstatus
      * by default) and the extensions' Resources/Public directory as fallback.
      *
      * @global array $TCA
@@ -158,7 +158,7 @@ class ReportWorkflowStatus extends AbstractValueObject
         $imageFilename = rtrim($imageDirectoryName, '/') . '/' . $this->icon;
 
         if (!file_exists(PATH_site . '/' . $imageFilename)) {
-            $imageDirectoryName = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('typo3_forum') . 'Resources/Public/Images/Icons/Moderation';
+            $imageDirectoryName = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('t3forum') . 'Resources/Public/Images/Icons/Moderation';
             $imageFilename = "$imageDirectoryName/{$this->icon}";
         }
 

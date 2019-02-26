@@ -94,7 +94,7 @@ class RootlineViewHelper extends AbstractTagBasedViewHelper
      */
     protected function renderNavigationNode($object)
     {
-        $extensionName = 'typo3forum';
+        $extensionName = 't3forum';
         $pluginName = 'pi1';
         if ($object instanceof Forum) {
             $controller = 'Forum';

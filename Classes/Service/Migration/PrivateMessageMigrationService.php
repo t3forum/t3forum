@@ -37,7 +37,7 @@ class PrivateMessageMigrationService extends AbstractMigrationService
     public function migrate()
     {
         $this->truncateNewTable();
-        $this->databaseConnection->exec_TRUNCATEquery('tx_typo3forum_domain_model_user_privatemessage_text');
+        $this->databaseConnection->exec_TRUNCATEquery('tx_t3forum_domain_model_user_privatemessage_text');
 
         if (($oldMessages = $this->getOldPrivateMessages())) {
             foreach ($oldMessages as $oldMessage) {
@@ -86,7 +86,7 @@ class PrivateMessageMigrationService extends AbstractMigrationService
      */
     public function getNewTableName()
     {
-        return 'tx_typo3forum_domain_model_user_privatemessage';
+        return 'tx_t3forum_domain_model_user_privatemessage';
     }
 
     /**
@@ -126,7 +126,7 @@ class PrivateMessageMigrationService extends AbstractMigrationService
     protected function persistPrivateMessageText($message, $pid)
     {
         $fields = ['pid' => $pid, 'message_text' => $message];
-        $this->databaseConnection->exec_INSERTquery('tx_typo3forum_domain_model_user_privatemessage_text', $fields);
+        $this->databaseConnection->exec_INSERTquery('tx_t3forum_domain_model_user_privatemessage_text', $fields);
 
         return $this->databaseConnection->sql_insert_id();
     }

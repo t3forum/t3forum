@@ -62,7 +62,7 @@ class AdRepository extends Repository
             $limit = 1;
         }
 
-        $sql = 'SELECT * FROM tx_typo3forum_domain_model_forum_ad
+        $sql = 'SELECT * FROM tx_t3forum_domain_model_forum_ad
 			   WHERE category IN (' . implode(',', $categories) . ') AND active=1
 			   ORDER BY RAND()
 			   LIMIT ' . $limit;

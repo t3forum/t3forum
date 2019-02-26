@@ -80,9 +80,9 @@ class LinkViewHelper extends AbstractViewHelper
         $uri = $uriBuilder->setTargetPageUid($this->settings['pids']['UserShow'])
             ->setArguments(
                 [
-                    'tx_typo3forum_pi1[user]' => $user->getUid(),
-                    'tx_typo3forum_pi1[controller]' => 'User',
-                    'tx_typo3forum_pi1[action]' => 'show'
+                    'tx_t3forum_pi1[user]' => $user->getUid(),
+                    'tx_t3forum_pi1[controller]' => 'User',
+                    'tx_t3forum_pi1[action]' => 'show'
                 ]
             )
             ->build();

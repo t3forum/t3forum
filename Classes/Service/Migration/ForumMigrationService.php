@@ -86,7 +86,7 @@ class ForumMigrationService extends AbstractMigrationService
      */
     public function getNewTableName()
     {
-        return 'tx_typo3forum_domain_model_forum_forum';
+        return 'tx_t3forum_domain_model_forum_forum';
     }
 
     /**
@@ -190,7 +190,7 @@ class ForumMigrationService extends AbstractMigrationService
         $acl['operation'] = $operation;
         $acl['l18n_diffsource'] = '';
         $acl['affected_group'] = (int)$acl['affected_group'];
-        $this->databaseConnection->exec_INSERTquery('tx_typo3forum_domain_model_forum_access', $acl);
+        $this->databaseConnection->exec_INSERTquery('tx_t3forum_domain_model_forum_access', $acl);
     }
 
     /**

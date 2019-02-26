@@ -143,7 +143,7 @@ class Forum extends AbstractEntity implements AccessibleInterface, Subscribeable
     protected $visibleChildren;
 
     /**
-     * An instance of the typo3_forum authentication service.
+     * An instance of the t3forum authentication service.
      * @var \T3forum\T3forum\Service\Authentication\AuthenticationServiceInterface
      * @inject
      */
