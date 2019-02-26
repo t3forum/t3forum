@@ -1,4 +1,4 @@
-{namespace mmf=Mittwald\Typo3Forum\ViewHelpers}
+{namespace mmf=T3forum\T3forum\ViewHelpers}
 <mmf:authentication.ifAccess object="{post.topic}" accessType="moderate">
 	<f:then>
 		<f:link.action controller="Post" action="edit" arguments="{post: post}">[<f:translate key="Button_Edit" />]</f:link.action>
